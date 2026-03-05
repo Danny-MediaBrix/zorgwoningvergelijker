@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 408 252" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(1.9785,0,0,1.9785,-50.203497,-162.071814)">
+        <text x="26.674px" y="110.867px" style="font-family:'PlusJakartaSans-SemiBold', 'Plus Jakarta Sans';font-weight:600;font-size:37.5px;fill:rgb(37,25,56);">zorg</text>
+        <text x="26.674px" y="155.451px" style="font-family:'PlusJakartaSans-SemiBold', 'Plus Jakarta Sans';font-weight:600;font-size:37.5px;fill:rgb(37,25,56);">w<tspan x="58.361px " y="155.451px ">o</tspan>ning</text>
+        <g transform="matrix(37.5,0,0,37.5,220.961288,200.034035)">
+        </g>
+        <text x="26.674px" y="200.034px" style="font-family:'PlusJakartaSans-ExtraBold', 'Plus Jakarta Sans';font-weight:800;font-size:37.5px;fill:rgb(37,25,56);">v<tspan x="48.124px " y="200.034px ">e</tspan>rgelijk<tspan x="183.574px " y="200.034px ">e</tspan>r</text>
+    </g>
+    <g transform="matrix(2.52873,1.459963,-1.100153,1.905521,-273.719288,-446.502993)">
+        <path d="M281,64.45L281,64.767C281,76.486 273.831,86 265,86C256.169,86 249,76.486 249,64.767L249,64.45C249,63.098 249.827,62 250.846,62L279.154,62C280.173,62 281,63.098 281,64.45Z" style="fill:rgb(88,58,133);"/>
+    </g>
+    <g transform="matrix(2.478338,1.025317,-1.025317,2.478338,-138.639834,-233.049912)">
+        <circle cx="197" cy="22" r="8" style="fill:rgb(250,212,174);"/>
+    </g>
+    <g transform="matrix(1.128286,1.619624,-1.769338,1.232581,114.935275,-419.196312)">
+        <path d="M288,18.927L288,34.073C288,34.584 287.546,35 286.987,35L263.013,35C262.454,35 262,34.584 262,34.073L262,18.927C262,18.416 262.454,18 263.013,18L286.987,18C287.546,18 288,18.416 288,18.927Z" style="fill:rgb(242,97,87);"/>
+    </g>
+</svg>

@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Vergelijk onafhankelijk meer dan 50 aanbieders van zorgwoningen en mantelzorgwoningen. Ontvang gratis offertes op maat. Het nr. 1 vergelijkingsplatform van Nederland.">
+  <meta name="robots" content="index, follow">
+  <title>Zorgwoningvergelijker.nl | Vergelijk Zorgwoningen &amp; Ontvang Gratis Offertes</title>
+  <link rel="canonical" href="https://www.zorgwoningvergelijker.nl/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: { 50:'#F0F7F4', 100:'#D1E8DB', 500:'#2D8F5E', 600:'#1B5E3B', 900:'#0F3D25' },
+            accent: '#E8833A',
+          },
+          fontFamily: {
+            heading: ['Outfit','sans-serif'],
+            body: ['Inter','sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"Zorgwoningvergelijker.nl",
+    "url":"https://www.zorgwoningvergelijker.nl",
+    "logo":"https://www.zorgwoningvergelijker.nl/logo.png",
+    "contactPoint":{"@type":"ContactPoint","telephone":"+31-800-2345678","contactType":"customer service","availableLanguage":"Dutch"}
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebSite",
+    "name":"Zorgwoningvergelijker.nl",
+    "url":"https://www.zorgwoningvergelijker.nl",
+    "potentialAction":{"@type":"SearchAction","target":"https://www.zorgwoningvergelijker.nl/zoeken?q={search_term_string}","query-input":"required name=search_term_string"}
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {"@type":"Question","name":"Wat kost het om zorgwoningen te vergelijken via dit platform?","acceptedAnswer":{"@type":"Answer","text":"Helemaal niets. Ons platform is 100% gratis voor particulieren. Wij worden betaald door aanbieders die graag in contact komen met geïnteresseerden."}},
+      {"@type":"Question","name":"Hoe onafhankelijk is Zorgwoningvergelijker.nl?","acceptedAnswer":{"@type":"Answer","text":"Wij zijn niet verbonden aan één specifieke aanbieder. Alle aanbieders op ons platform worden onafhankelijk beoordeeld. Onze rankings zijn gebaseerd op kwaliteit, reviews en prijs-kwaliteitverhouding."}},
+      {"@type":"Question","name":"Hoe snel ontvang ik offertes na mijn aanvraag?","acceptedAnswer":{"@type":"Answer","text":"De meeste aanbieders reageren binnen 24 uur op werkdagen. U ontvangt gemiddeld 2 tot 4 offertes per aanvraag, zodat u goed kunt vergelijken."}},
+      {"@type":"Question","name":"Heb ik een vergunning nodig voor een zorgwoning?","acceptedAnswer":{"@type":"Answer","text":"Dat hangt af van uw situatie. In veel gevallen kunt u een mantelzorgwoning vergunningsvrij plaatsen als deze kleiner is dan 100m², op eigen erf staat en er een mantelzorgrelatie is."}},
+      {"@type":"Question","name":"Kan ik een zorgwoning huren in plaats van kopen?","acceptedAnswer":{"@type":"Answer","text":"Ja, verschillende aanbieders bieden huurconstructies aan, soms in combinatie met WMO-vergoedingen van uw gemeente."}},
+      {"@type":"Question","name":"Welke zorgaanpassingen zijn mogelijk?","acceptedAnswer":{"@type":"Answer","text":"Denk aan drempelvrije toegang, een aangepaste badkamer, brede deuren voor rolstoelen, domotica en noodoproepsystemen. De meeste aanbieders bieden maatwerkopties."}}
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.zorgwoningvergelijker.nl/"}]}
+  </script>
+  <style>
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',sans-serif}
+    .font-heading{font-family:'Outfit',sans-serif}
+    .hero-pattern{background-image:radial-gradient(#2D8F5E 0.5px,transparent 0.5px);background-size:24px 24px;opacity:.04}
+    .counter-value{font-variant-numeric:tabular-nums}
+    .faq-content{max-height:0;overflow:hidden;transition:max-height .4s ease}
+    .faq-content.open{max-height:500px}
+    .province-path{fill:#2D8F5E;stroke:#fff;stroke-width:1.5;cursor:pointer;transition:fill .2s ease}
+    .province-path:hover{fill:#1B5E3B}
+    .province-path[data-active="false"]{fill:#D1D5DB}
+    .province-path[data-active="false"]:hover{fill:#9CA3AF}
+    .carousel-track{scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+    .carousel-track>*{scroll-snap-align:start}
+    .mega-menu{opacity:0;visibility:hidden;transform:translateY(8px);transition:all .25s ease}
+    .mega-trigger:hover .mega-menu,.mega-menu:hover{opacity:1;visibility:visible;transform:translateY(0)}
+    .underline-accent{text-decoration-color:#2D8F5E;text-underline-offset:4px;text-decoration-thickness:3px}
+    @media print{.no-print{display:none!important}}
+    .tooltip{position:absolute;background:#1B5E3B;color:#fff;padding:6px 12px;border-radius:8px;font-size:13px;pointer-events:none;opacity:0;transition:opacity .2s;white-space:nowrap;z-index:50}
+    .range-slider{-webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:9999px;background:#D1E8DB;outline:none}
+    .range-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:24px;height:24px;border-radius:50%;background:#1B5E3B;cursor:pointer;border:3px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+    .range-slider::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:#1B5E3B;cursor:pointer;border:3px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+  </style>
+</head>
+<body class="font-body text-[#1A1A1A] antialiased bg-white">
+
+  <!-- SECTIE 0: Topbar -->
+  <div class="no-print bg-brand-600 text-white text-sm">
+    <div class="max-w-7xl mx-auto px-4 py-2 flex flex-col sm:flex-row justify-between items-center gap-1">
+      <a href="tel:+31850041159" class="flex items-center gap-2 hover:underline">
+        <i data-lucide="phone" class="w-4 h-4"></i>
+        <span>Bel ons: 085 - 004 11 59</span>
+      </a>
+      <span class="hidden sm:inline">Ma-Vr 9:00-17:00 | Onafhankelijk &amp; gratis advies</span>
+    </div>
+  </div>
+
+  <!-- Navigatie -->
+  <header id="mainNav" class="no-print bg-white sticky top-0 z-50 transition-shadow duration-300">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-2 flex-shrink-0">
+        <i data-lucide="home" class="w-7 h-7 text-brand-600"></i>
+        <span class="font-heading text-xl md:text-2xl font-bold text-brand-600">Zorgwoningvergelijker.nl</span>
+      </a>
+      <!-- Desktop menu -->
+      <nav class="hidden lg:flex items-center gap-6 text-[15px] font-medium text-[#1A1A1A]" aria-label="Hoofdnavigatie">
+        <a href="#vergelijken" class="hover:text-brand-600 transition-colors py-2">Vergelijken</a>
+        <div class="relative mega-trigger">
+          <button class="flex items-center gap-1 hover:text-brand-600 transition-colors py-2">Zorgwoningen <i data-lucide="chevron-down" class="w-4 h-4"></i></button>
+          <div class="mega-menu absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-white rounded-2xl shadow-lg border border-gray-100 p-6 w-[560px]">
+            <div class="grid grid-cols-2 gap-4">
+              <a href="/zorgwoningen/mantelzorgwoning" class="flex items-center gap-3 p-3 rounded-xl hover:bg-brand-50 transition-colors">
+                <div class="w-10 h-10 rounded-lg bg-brand-50 flex items-center justify-center"><i data-lucide="home" class="w-5 h-5 text-brand-600"></i></div>
+                <div><div class="font-semibold text-sm">Mantelzorgwoning</div><div class="text-xs text-gray-500">Zelfstandig in de tuin</div></div>
+              </a>
+              <a href="/zorgwoningen/modulair" class="flex items-center gap-3 p-3 rounded-xl hover:bg-brand-50 transition-colors">
+                <div class="w-10 h-10 rounded-lg bg-brand-50 flex items-center justify-center"><i data-lucide="blocks" class="w-5 h-5 text-brand-600"></i></div>
+                <div><div class="font-semibold text-sm">Modulaire zorgwoning</div><div class="text-xs text-gray-500">Flexibel en prefab</div></div>
+              </a>
+              <a href="/zorgwoningen/tiny-house" class="flex items-center gap-3 p-3 rounded-xl hover:bg-brand-50 transition-colors">
+                <div class="w-10 h-10 rounded-lg bg-brand-50 flex items-center justify-center"><i data-lucide="tree-pine" class="w-5 h-5 text-brand-600"></i></div>
+                <div><div class="font-semibold text-sm">Tiny house zorgwoning</div><div class="text-xs text-gray-500">Compact en duurzaam</div></div>
+              </a>
+              <a href="/zorgwoningen/aanbouw" class="flex items-center gap-3 p-3 rounded-xl hover:bg-brand-50 transition-colors">
+                <div class="w-10 h-10 rounded-lg bg-brand-50 flex items-center justify-center"><i data-lucide="wrench" class="w-5 h-5 text-brand-600"></i></div>
+                <div><div class="font-semibold text-sm">Aanbouw / zorgunit</div><div class="text-xs text-gray-500">Aan bestaande woning</div></div>
+              </a>
+            </div>
+            <div class="mt-4 pt-4 border-t border-gray-100">
+              <a href="/zorgwoningen" class="text-brand-600 text-sm font-semibold hover:underline">Bekijk alle typen &rarr;</a>
+            </div>
+          </div>
+        </div>
+        <a href="#regios" class="hover:text-brand-600 transition-colors py-2">Regio&rsquo;s</a>
+        <a href="#kennisbank" class="hover:text-brand-600 transition-colors py-2">Kennisbank</a>
+        <a href="#over-ons" class="hover:text-brand-600 transition-colors py-2">Over ons</a>
+      </nav>
+      <!-- CTA + Hamburger -->
+      <div class="flex items-center gap-3">
+        <a href="#offertes" class="hidden sm:inline-flex items-center gap-2 bg-accent text-white font-semibold text-[15px] px-5 py-2.5 rounded-full hover:bg-orange-600 transition-all duration-300 shadow-sm hover:shadow-md">
+          Gratis Offertes <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+        <button id="menuToggle" class="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors" aria-label="Menu openen">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobiel menu -->
+  <div id="mobileMenu" class="no-print fixed inset-0 z-[60] pointer-events-none">
+    <div id="menuOverlay" class="absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-300"></div>
+    <div id="menuPanel" class="absolute top-0 right-0 h-full w-[300px] bg-white shadow-xl translate-x-full transition-transform duration-300 flex flex-col">
+      <div class="flex items-center justify-between p-4 border-b">
+        <span class="font-heading font-bold text-brand-600">Menu</span>
+        <button id="menuClose" class="p-2 rounded-lg hover:bg-gray-100" aria-label="Menu sluiten"><i data-lucide="x" class="w-6 h-6"></i></button>
+      </div>
+      <nav class="flex flex-col p-4 gap-1 text-[16px] font-medium overflow-y-auto" aria-label="Mobiel menu">
+        <a href="#vergelijken" class="py-3 px-3 rounded-lg hover:bg-brand-50 transition-colors">Vergelijken</a>
+        <a href="/zorgwoningen/mantelzorgwoning" class="py-3 px-3 rounded-lg hover:bg-brand-50 transition-colors">Mantelzorgwoning</a>
+        <a href="/zorgwoningen/modulair" class="py-3 px-3 rounded-lg hover:bg-brand-50 transition-colors">Modulaire zorgwoning</a>
+        <a href="/zorgwoningen/tiny-house" class="py-3 px-3 rounded-lg hover:bg-brand-50 transition-colors">Tiny house zorgwoning</a>
+        <a href="/zorgwoningen/aanbouw" class="py-3 px-3 rounded-lg hover:bg-brand-50 transition-colors">Aanbouw / zorgunit</a>
+        <a href="#regios" class="py-3 px-3 rounded-lg hover:bg-brand-50 transition-colors">Regio&rsquo;s</a>
+        <a href="#kennisbank" class="py-3 px-3 rounded-lg hover:bg-brand-50 transition-colors">Kennisbank</a>
+        <a href="#over-ons" class="py-3 px-3 rounded-lg hover:bg-brand-50 transition-colors">Over ons</a>
+        <div class="mt-4 pt-4 border-t">
+          <a href="#offertes" class="flex items-center justify-center gap-2 bg-accent text-white font-semibold py-3 rounded-full hover:bg-orange-600 transition-all">Gratis Offertes <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+        </div>
+        <div class="mt-3 text-center text-sm text-gray-500">
+          <a href="tel:+31850041159" class="hover:text-brand-600">085 - 004 11 59</a> &middot; Ma-Vr 9:00-17:00
+        </div>
+      </nav>
+    </div>
+  </div>
+
+  <main>
+    <!-- SECTIE 1: Hero -->
+    <section id="vergelijken" class="relative bg-brand-50 overflow-hidden">
+      <div class="hero-pattern absolute inset-0"></div>
+      <div class="relative max-w-7xl mx-auto px-4 py-12 md:py-20">
+        <div class="grid lg:grid-cols-[1.2fr_1fr] gap-10 lg:gap-16 items-center">
+          <!-- Linkerkolom -->
+          <div>
+            <div class="inline-flex items-center gap-2 bg-white text-brand-600 text-sm font-semibold px-4 py-1.5 rounded-full shadow-sm mb-6">
+              <i data-lucide="check-circle" class="w-4 h-4"></i> Nr. 1 vergelijkingssite voor zorgwoningen
+            </div>
+            <h1 class="font-heading text-[32px] md:text-[44px] lg:text-[48px] font-extrabold leading-tight mb-5">
+              Vind de <span class="text-brand-600 underline underline-accent">ideale</span> zorgwoning voor uw situatie
+            </h1>
+            <p class="text-lg text-gray-500 mb-8 max-w-xl">
+              Vergelijk onafhankelijk meer dan 50 aanbieders op prijs, kwaliteit en levertijd. Ontvang binnen 24 uur gratis offertes op maat.
+            </p>
+            <!-- Quick-filter formulier -->
+            <div class="bg-white rounded-2xl shadow-md p-5 md:p-6 mb-6">
+              <div class="grid sm:grid-cols-3 gap-4 mb-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1.5">Type woning</label>
+                  <select class="w-full h-12 px-4 rounded-xl border-2 border-brand-100 bg-white text-[15px] focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none transition-all">
+                    <option value="">Selecteer type</option>
+                    <option>Mantelzorgwoning</option>
+                    <option>Modulaire woning</option>
+                    <option>Tiny house</option>
+                    <option>Aanbouw / unit</option>
+                    <option>Weet ik nog niet</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1.5">Budget</label>
+                  <select class="w-full h-12 px-4 rounded-xl border-2 border-brand-100 bg-white text-[15px] focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none transition-all">
+                    <option value="">Selecteer budget</option>
+                    <option>Tot &euro;30.000</option>
+                    <option>&euro;30.000 - &euro;60.000</option>
+                    <option>&euro;60.000 - &euro;100.000</option>
+                    <option>&euro;100.000+</option>
+                    <option>Nog onbekend</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1.5">Provincie</label>
+                  <select class="w-full h-12 px-4 rounded-xl border-2 border-brand-100 bg-white text-[15px] focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none transition-all">
+                    <option value="">Heel Nederland</option>
+                    <option>Drenthe</option>
+                    <option>Flevoland</option>
+                    <option>Friesland</option>
+                    <option>Gelderland</option>
+                    <option>Groningen</option>
+                    <option>Limburg</option>
+                    <option>Noord-Brabant</option>
+                    <option>Noord-Holland</option>
+                    <option>Overijssel</option>
+                    <option>Utrecht</option>
+                    <option>Zuid-Holland</option>
+                    <option>Zeeland</option>
+                  </select>
+                </div>
+              </div>
+              <button class="w-full h-14 bg-accent hover:bg-orange-600 text-white font-bold text-lg rounded-full transition-all duration-300 shadow-sm hover:shadow-lg flex items-center justify-center gap-2">
+                Vergelijk Aanbieders <i data-lucide="arrow-right" class="w-5 h-5"></i>
+              </button>
+            </div>
+            <!-- Trust indicators -->
+            <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-500">
+              <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> 100% gratis &amp; vrijblijvend</span>
+              <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> Binnen 24 uur offertes</span>
+              <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> Al 1.200+ families geholpen</span>
+            </div>
+          </div>
+          <!-- Rechterkolom: visueel -->
+          <div class="hidden lg:block">
+            <div class="relative">
+              <!-- Gestapelde aanbieder-kaarten -->
+              <div class="relative w-full h-[420px]">
+                <div class="absolute top-4 left-4 w-[280px] bg-white rounded-2xl shadow-lg p-5 rotate-[-4deg] border border-gray-100">
+                  <div class="flex items-center gap-3 mb-3">
+                    <div class="w-12 h-12 rounded-xl bg-brand-50 flex items-center justify-center font-heading font-bold text-brand-600 text-lg">DC</div>
+                    <div><div class="font-semibold text-sm">Domuscura</div><div class="text-xs text-gray-500 flex items-center gap-1"><i data-lucide="star" class="w-3 h-3 text-yellow-400 fill-yellow-400"></i> 4.8</div></div>
+                  </div>
+                  <div class="flex gap-2 mb-3"><span class="text-xs bg-brand-50 text-brand-600 px-2 py-1 rounded-full">Mantelzorg</span><span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">Vergunningsvrij</span></div>
+                  <div class="text-sm text-gray-500">Vanaf &euro;38.000 &middot; 8 weken</div>
+                </div>
+                <div class="absolute top-24 left-16 w-[280px] bg-white rounded-2xl shadow-lg p-5 rotate-[2deg] border border-gray-100 z-10">
+                  <div class="flex items-center gap-3 mb-3">
+                    <div class="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center font-heading font-bold text-accent text-lg">MW</div>
+                    <div><div class="font-semibold text-sm">Mazowo</div><div class="text-xs text-gray-500 flex items-center gap-1"><i data-lucide="star" class="w-3 h-3 text-yellow-400 fill-yellow-400"></i> 4.7</div></div>
+                  </div>
+                  <div class="flex gap-2 mb-3"><span class="text-xs bg-brand-50 text-brand-600 px-2 py-1 rounded-full">Modulair</span><span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">Uitbreidbaar</span></div>
+                  <div class="text-sm text-gray-500">Vanaf &euro;45.000 &middot; 10 weken</div>
+                </div>
+                <div class="absolute top-48 left-8 w-[280px] bg-white rounded-2xl shadow-lg p-5 rotate-[-1deg] border border-gray-100 z-20">
+                  <div class="flex items-center gap-3 mb-3">
+                    <div class="w-12 h-12 rounded-xl bg-green-50 flex items-center justify-center font-heading font-bold text-brand-600 text-lg">GS</div>
+                    <div><div class="font-semibold text-sm">GoudStaete</div><div class="text-xs text-gray-500 flex items-center gap-1"><i data-lucide="star" class="w-3 h-3 text-yellow-400 fill-yellow-400"></i> 4.9</div></div>
+                  </div>
+                  <div class="flex gap-2 mb-3"><span class="text-xs bg-brand-50 text-brand-600 px-2 py-1 rounded-full">Tiny house</span><span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">Duurzaam</span></div>
+                  <div class="text-sm text-gray-500">Vanaf &euro;32.000 &middot; 6 weken</div>
+                </div>
+                <!-- Floating badges -->
+                <div class="absolute top-2 right-0 bg-white rounded-full shadow-md px-4 py-2 text-sm font-semibold flex items-center gap-2 z-30">
+                  <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i> 4.8/5 | 340+ reviews
+                </div>
+                <div class="absolute bottom-8 right-4 bg-brand-600 text-white rounded-full shadow-md px-4 py-2 text-sm font-semibold flex items-center gap-2 z-30">
+                  <i data-lucide="home" class="w-4 h-4"></i> 50+ aanbieders
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTIE 2: Social Proof Bar -->
+    <section class="bg-white py-12 border-y border-gray-100">
+      <div class="max-w-5xl mx-auto px-4">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8" id="statsBar">
+          <div class="text-center">
+            <div class="flex justify-center mb-2"><i data-lucide="home" class="w-7 h-7 text-brand-500"></i></div>
+            <div class="font-heading text-3xl md:text-4xl font-bold text-brand-600"><span class="counter-value" data-target="50">0</span>+</div>
+            <div class="text-sm text-gray-500 mt-1">Aanbieders vergeleken</div>
+          </div>
+          <div class="text-center md:border-l border-gray-200">
+            <div class="flex justify-center mb-2"><i data-lucide="users" class="w-7 h-7 text-brand-500"></i></div>
+            <div class="font-heading text-3xl md:text-4xl font-bold text-brand-600"><span class="counter-value" data-target="1200">0</span>+</div>
+            <div class="text-sm text-gray-500 mt-1">Families geholpen</div>
+          </div>
+          <div class="text-center md:border-l border-gray-200">
+            <div class="flex justify-center mb-2"><i data-lucide="star" class="w-7 h-7 text-brand-500"></i></div>
+            <div class="font-heading text-3xl md:text-4xl font-bold text-brand-600"><span class="counter-value" data-target="48" data-decimal="true">0</span>/5</div>
+            <div class="text-sm text-gray-500 mt-1">Gemiddelde beoordeling</div>
+          </div>
+          <div class="text-center md:border-l border-gray-200">
+            <div class="flex justify-center mb-2"><i data-lucide="clipboard-list" class="w-7 h-7 text-brand-500"></i></div>
+            <div class="font-heading text-3xl md:text-4xl font-bold text-brand-600"><span class="counter-value" data-target="3500">0</span>+</div>
+            <div class="text-sm text-gray-500 mt-1">Offertes aangevraagd</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTIE 3: Zo werkt het -->
+    <section class="bg-white py-16 md:py-24">
+      <div class="max-w-5xl mx-auto px-4">
+        <div class="text-center mb-14">
+          <h2 class="font-heading text-3xl md:text-4xl font-bold mb-3">In 3 stappen naar uw zorgwoning</h2>
+          <p class="text-gray-500 text-lg">Vergelijken was nog nooit zo eenvoudig</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8 md:gap-6 relative">
+          <!-- Verbindingslijn desktop -->
+          <div class="hidden md:block absolute top-14 left-[20%] right-[20%] h-0.5 border-t-2 border-dashed border-brand-100 z-0"></div>
+          <!-- Stap 1 -->
+          <div class="relative text-center z-10">
+            <div class="w-14 h-14 mx-auto rounded-full bg-brand-600 text-white flex items-center justify-center font-heading text-xl font-bold mb-5 shadow-md">1</div>
+            <div class="w-12 h-12 mx-auto mb-4 text-brand-500"><i data-lucide="search" class="w-10 h-10 mx-auto"></i></div>
+            <h3 class="font-heading text-xl font-bold mb-2">Vergelijk aanbieders</h3>
+            <p class="text-gray-500 text-[15px] max-w-xs mx-auto">Gebruik onze filters om aanbieders te vinden die passen bij uw wensen, budget en regio.</p>
+          </div>
+          <!-- Stap 2 -->
+          <div class="relative text-center z-10">
+            <div class="w-14 h-14 mx-auto rounded-full bg-brand-600 text-white flex items-center justify-center font-heading text-xl font-bold mb-5 shadow-md">2</div>
+            <div class="w-12 h-12 mx-auto mb-4 text-brand-500"><i data-lucide="file-text" class="w-10 h-10 mx-auto"></i></div>
+            <h3 class="font-heading text-xl font-bold mb-2">Ontvang gratis offertes</h3>
+            <p class="text-gray-500 text-[15px] max-w-xs mx-auto">Vraag met &eacute;&eacute;n formulier offertes aan bij meerdere aanbieders. Binnen 24 uur in uw inbox.</p>
+          </div>
+          <!-- Stap 3 -->
+          <div class="relative text-center z-10">
+            <div class="w-14 h-14 mx-auto rounded-full bg-brand-600 text-white flex items-center justify-center font-heading text-xl font-bold mb-5 shadow-md">3</div>
+            <div class="w-12 h-12 mx-auto mb-4 text-brand-500"><i data-lucide="house-plus" class="w-10 h-10 mx-auto"></i></div>
+            <h3 class="font-heading text-xl font-bold mb-2">Kies de beste match</h3>
+            <p class="text-gray-500 text-[15px] max-w-xs mx-auto">Vergelijk rustig de offertes en kies de aanbieder die het beste bij uw situatie past.</p>
+          </div>
+        </div>
+        <div class="text-center mt-12">
+          <a href="#vergelijken" class="inline-flex items-center gap-2 bg-accent hover:bg-orange-600 text-white font-bold text-lg px-8 py-4 rounded-full transition-all duration-300 shadow-sm hover:shadow-lg">
+            Start met vergelijken <i data-lucide="arrow-right" class="w-5 h-5"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTIE 4: Populaire Zorgwoningen -->
+    <section class="bg-brand-50 py-16 md:py-24">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="text-center mb-14">
+          <h2 class="font-heading text-3xl md:text-4xl font-bold mb-3">Welk type zorgwoning past bij u?</h2>
+          <p class="text-gray-500 text-lg">Ontdek de mogelijkheden per woningtype</p>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-6">
+          <!-- Kaart 1 -->
+          <article class="bg-white rounded-2xl shadow-sm hover:shadow-md border-2 border-transparent hover:border-brand-500 transition-all duration-300 overflow-hidden group">
+            <div class="h-44 bg-gradient-to-br from-brand-50 to-brand-100 flex items-center justify-center">
+              <i data-lucide="home" class="w-20 h-20 text-brand-500 opacity-60 group-hover:scale-110 transition-transform duration-300"></i>
+            </div>
+            <div class="p-6">
+              <h3 class="font-heading text-xl font-bold mb-2">Mantelzorgwoning</h3>
+              <p class="text-gray-500 text-[15px] mb-4">Een zelfstandige woning in de tuin voor uw naaste. Vaak vergunningsvrij te plaatsen.</p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="text-xs font-medium bg-brand-50 text-brand-600 px-3 py-1 rounded-full">Vanaf &euro;35.000</span>
+                <span class="text-xs font-medium bg-gray-100 text-gray-600 px-3 py-1 rounded-full">6-12 weken levertijd</span>
+                <span class="text-xs font-medium bg-gray-100 text-gray-600 px-3 py-1 rounded-full">Vergunningsvrij mogelijk</span>
+              </div>
+              <a href="/zorgwoningen/mantelzorgwoning" class="inline-flex items-center gap-1 text-brand-600 font-semibold text-[15px] hover:gap-2 transition-all">Bekijk aanbieders <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+            </div>
+          </article>
+          <!-- Kaart 2 -->
+          <article class="bg-white rounded-2xl shadow-sm hover:shadow-md border-2 border-transparent hover:border-brand-500 transition-all duration-300 overflow-hidden group">
+            <div class="h-44 bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center">
+              <i data-lucide="blocks" class="w-20 h-20 text-blue-400 opacity-60 group-hover:scale-110 transition-transform duration-300"></i>
+            </div>
+            <div class="p-6">
+              <h3 class="font-heading text-xl font-bold mb-2">Modulaire zorgwoning</h3>
+              <p class="text-gray-500 text-[15px] mb-4">Prefab woningen die snel geplaatst worden. Flexibel in grootte en indeling.</p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="text-xs font-medium bg-brand-50 text-brand-600 px-3 py-1 rounded-full">Vanaf &euro;45.000</span>
+                <span class="text-xs font-medium bg-gray-100 text-gray-600 px-3 py-1 rounded-full">8-10 weken</span>
+                <span class="text-xs font-medium bg-gray-100 text-gray-600 px-3 py-1 rounded-full">Uitbreidbaar</span>
+              </div>
+              <a href="/zorgwoningen/modulair" class="inline-flex items-center gap-1 text-brand-600 font-semibold text-[15px] hover:gap-2 transition-all">Bekijk aanbieders <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+            </div>
+          </article>
+          <!-- Kaart 3 -->
+          <article class="bg-white rounded-2xl shadow-sm hover:shadow-md border-2 border-transparent hover:border-brand-500 transition-all duration-300 overflow-hidden group">
+            <div class="h-44 bg-gradient-to-br from-amber-50 to-amber-100 flex items-center justify-center">
+              <i data-lucide="tree-pine" class="w-20 h-20 text-amber-500 opacity-60 group-hover:scale-110 transition-transform duration-300"></i>
+            </div>
+            <div class="p-6">
+              <h3 class="font-heading text-xl font-bold mb-2">Tiny house zorgwoning</h3>
+              <p class="text-gray-500 text-[15px] mb-4">Compact en betaalbaar wonen met alle zorgvoorzieningen. Duurzaam en modern.</p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="text-xs font-medium bg-brand-50 text-brand-600 px-3 py-1 rounded-full">Vanaf &euro;30.000</span>
+                <span class="text-xs font-medium bg-gray-100 text-gray-600 px-3 py-1 rounded-full">4-8 weken</span>
+                <span class="text-xs font-medium bg-gray-100 text-gray-600 px-3 py-1 rounded-full">Verplaatsbaar</span>
+              </div>
+              <a href="/zorgwoningen/tiny-house" class="inline-flex items-center gap-1 text-brand-600 font-semibold text-[15px] hover:gap-2 transition-all">Bekijk aanbieders <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+            </div>
+          </article>
+          <!-- Kaart 4 -->
+          <article class="bg-white rounded-2xl shadow-sm hover:shadow-md border-2 border-transparent hover:border-brand-500 transition-all duration-300 overflow-hidden group">
+            <div class="h-44 bg-gradient-to-br from-purple-50 to-purple-100 flex items-center justify-center">
+              <i data-lucide="wrench" class="w-20 h-20 text-purple-400 opacity-60 group-hover:scale-110 transition-transform duration-300"></i>
+            </div>
+            <div class="p-6">
+              <h3 class="font-heading text-xl font-bold mb-2">Aanbouw of zorgunit</h3>
+              <p class="text-gray-500 text-[15px] mb-4">Een aanbouw aan uw bestaande woning, speciaal ingericht voor zorg.</p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="text-xs font-medium bg-brand-50 text-brand-600 px-3 py-1 rounded-full">Vanaf &euro;25.000</span>
+                <span class="text-xs font-medium bg-gray-100 text-gray-600 px-3 py-1 rounded-full">6-10 weken</span>
+                <span class="text-xs font-medium bg-gray-100 text-gray-600 px-3 py-1 rounded-full">Aan bestaande woning</span>
+              </div>
+              <a href="/zorgwoningen/aanbouw" class="inline-flex items-center gap-1 text-brand-600 font-semibold text-[15px] hover:gap-2 transition-all">Bekijk aanbieders <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTIE 5: Uitgelichte Aanbieders -->
+    <section class="bg-white py-16 md:py-24">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="text-center mb-14">
+          <h2 class="font-heading text-3xl md:text-4xl font-bold mb-3">Bekende aanbieders op ons platform</h2>
+          <p class="text-gray-500 text-lg">Onafhankelijk geselecteerd op kwaliteit en betrouwbaarheid</p>
+        </div>
+        <div class="relative">
+          <div id="carousel" class="carousel-track flex gap-5 overflow-x-auto pb-4 px-1 -mx-1 scrollbar-hide" style="scrollbar-width:none">
+            <!-- Aanbieder 1 -->
+            <div class="flex-shrink-0 w-[280px] bg-white border border-gray-100 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all duration-300">
+              <div class="flex items-center gap-3 mb-3">
+                <div class="w-12 h-12 rounded-xl bg-brand-50 flex items-center justify-center font-heading font-bold text-brand-600">DC</div>
+                <div>
+                  <div class="font-semibold">Domuscura</div>
+                  <div class="flex items-center gap-1 text-sm text-gray-500"><i data-lucide="star" class="w-3.5 h-3.5 text-yellow-400 fill-yellow-400"></i> 4.8</div>
+                </div>
+              </div>
+              <p class="text-sm text-gray-500 mb-3">Specialist in mantelzorgwoningen</p>
+              <div class="flex flex-wrap gap-1.5 mb-4">
+                <span class="text-xs bg-brand-50 text-brand-600 px-2.5 py-1 rounded-full">Mantelzorg</span>
+                <span class="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full">Vergunningsvrij</span>
+              </div>
+              <a href="#" class="text-brand-600 text-sm font-semibold hover:underline">Bekijk profiel &rarr;</a>
+            </div>
+            <!-- Aanbieder 2 -->
+            <div class="flex-shrink-0 w-[280px] bg-white border border-gray-100 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all duration-300">
+              <div class="flex items-center gap-3 mb-3">
+                <div class="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center font-heading font-bold text-accent">MZ</div>
+                <div>
+                  <div class="font-semibold">Mazowo</div>
+                  <div class="flex items-center gap-1 text-sm text-gray-500"><i data-lucide="star" class="w-3.5 h-3.5 text-yellow-400 fill-yellow-400"></i> 4.7</div>
+                </div>
+              </div>
+              <p class="text-sm text-gray-500 mb-3">Modulaire woningen op maat</p>
+              <div class="flex flex-wrap gap-1.5 mb-4">
+                <span class="text-xs bg-brand-50 text-brand-600 px-2.5 py-1 rounded-full">Modulair</span>
+                <span class="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full">Maatwerk</span>
+              </div>
+              <a href="#" class="text-brand-600 text-sm font-semibold hover:underline">Bekijk profiel &rarr;</a>
+            </div>
+            <!-- Aanbieder 3 -->
+            <div class="flex-shrink-0 w-[280px] bg-white border border-gray-100 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all duration-300">
+              <div class="flex items-center gap-3 mb-3">
+                <div class="w-12 h-12 rounded-xl bg-yellow-50 flex items-center justify-center font-heading font-bold text-yellow-600">GS</div>
+                <div>
+                  <div class="font-semibold">GoudStaete</div>
+                  <div class="flex items-center gap-1 text-sm text-gray-500"><i data-lucide="star" class="w-3.5 h-3.5 text-yellow-400 fill-yellow-400"></i> 4.9</div>
+                </div>
+              </div>
+              <p class="text-sm text-gray-500 mb-3">Luxe zorgwoningen in elke stijl</p>
+              <div class="flex flex-wrap gap-1.5 mb-4">
+                <span class="text-xs bg-brand-50 text-brand-600 px-2.5 py-1 rounded-full">Luxe</span>
+                <span class="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full">Maatwerk</span>
+              </div>
+              <a href="#" class="text-brand-600 text-sm font-semibold hover:underline">Bekijk profiel &rarr;</a>
+            </div>
+            <!-- Aanbieder 4 -->
+            <div class="flex-shrink-0 w-[280px] bg-white border border-gray-100 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all duration-300">
+              <div class="flex items-center gap-3 mb-3">
+                <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center font-heading font-bold text-blue-600">SU</div>
+                <div>
+                  <div class="font-semibold">Stock Units</div>
+                  <div class="flex items-center gap-1 text-sm text-gray-500"><i data-lucide="star" class="w-3.5 h-3.5 text-yellow-400 fill-yellow-400"></i> 4.6</div>
+                </div>
+              </div>
+              <p class="text-sm text-gray-500 mb-3">Snelle levering uit voorraad</p>
+              <div class="flex flex-wrap gap-1.5 mb-4">
+                <span class="text-xs bg-brand-50 text-brand-600 px-2.5 py-1 rounded-full">Snel leverbaar</span>
+                <span class="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full">Modulair</span>
+              </div>
+              <a href="#" class="text-brand-600 text-sm font-semibold hover:underline">Bekijk profiel &rarr;</a>
+            </div>
+            <!-- Aanbieder 5 -->
+            <div class="flex-shrink-0 w-[280px] bg-white border border-gray-100 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all duration-300">
+              <div class="flex items-center gap-3 mb-3">
+                <div class="w-12 h-12 rounded-xl bg-purple-50 flex items-center justify-center font-heading font-bold text-purple-600">CO</div>
+                <div>
+                  <div class="font-semibold">Concuro</div>
+                  <div class="flex items-center gap-1 text-sm text-gray-500"><i data-lucide="star" class="w-3.5 h-3.5 text-yellow-400 fill-yellow-400"></i> 4.5</div>
+                </div>
+              </div>
+              <p class="text-sm text-gray-500 mb-3">Betaalbare zorgoplossingen</p>
+              <div class="flex flex-wrap gap-1.5 mb-4">
+                <span class="text-xs bg-brand-50 text-brand-600 px-2.5 py-1 rounded-full">Betaalbaar</span>
+                <span class="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full">Huur mogelijk</span>
+              </div>
+              <a href="#" class="text-brand-600 text-sm font-semibold hover:underline">Bekijk profiel &rarr;</a>
+            </div>
+            <!-- Aanbieder 6 -->
+            <div class="flex-shrink-0 w-[280px] bg-white border border-gray-100 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all duration-300">
+              <div class="flex items-center gap-3 mb-3">
+                <div class="w-12 h-12 rounded-xl bg-green-50 flex items-center justify-center font-heading font-bold text-green-700">GH</div>
+                <div>
+                  <div class="font-semibold">Geldersche Houtbouw</div>
+                  <div class="flex items-center gap-1 text-sm text-gray-500"><i data-lucide="star" class="w-3.5 h-3.5 text-yellow-400 fill-yellow-400"></i> 4.7</div>
+                </div>
+              </div>
+              <p class="text-sm text-gray-500 mb-3">Duurzame houtbouw zorgwoningen</p>
+              <div class="flex flex-wrap gap-1.5 mb-4">
+                <span class="text-xs bg-brand-50 text-brand-600 px-2.5 py-1 rounded-full">Houtbouw</span>
+                <span class="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full">Duurzaam</span>
+              </div>
+              <a href="#" class="text-brand-600 text-sm font-semibold hover:underline">Bekijk profiel &rarr;</a>
+            </div>
+          </div>
+          <!-- Carousel controls -->
+          <button id="carouselPrev" class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center hover:bg-gray-50 transition-colors z-10 hidden md:flex" aria-label="Vorige">
+            <i data-lucide="chevron-left" class="w-5 h-5 text-gray-600"></i>
+          </button>
+          <button id="carouselNext" class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center hover:bg-gray-50 transition-colors z-10 hidden md:flex" aria-label="Volgende">
+            <i data-lucide="chevron-right" class="w-5 h-5 text-gray-600"></i>
+          </button>
+        </div>
+        <div class="text-center mt-8">
+          <a href="/aanbieders" class="inline-flex items-center gap-1 text-brand-600 font-semibold hover:gap-2 transition-all">Bekijk alle 50+ aanbieders <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTIE 6: Kostenwijzer -->
+    <section class="bg-brand-50 py-16 md:py-24">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="text-center mb-14">
+          <h2 class="font-heading text-3xl md:text-4xl font-bold mb-3">Wat kost een zorgwoning?</h2>
+          <p class="text-gray-500 text-lg">Krijg direct een indicatie</p>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-10 items-start">
+          <!-- Linkerkolom -->
+          <div>
+            <p class="text-gray-600 text-[15px] leading-relaxed mb-6">
+              De kosten van een zorgwoning vari&euml;ren van &euro;25.000 voor een eenvoudige unit tot meer dan &euro;150.000 voor een luxe maatwerk woning. De prijs hangt af van het type, de grootte, afwerking en zorgaanpassingen.
+            </p>
+            <ul class="space-y-3 mb-6">
+              <li class="flex items-start gap-3 text-[15px] text-gray-600"><i data-lucide="check-circle" class="w-5 h-5 text-brand-500 mt-0.5 flex-shrink-0"></i> Aanschaf of huur van de woning</li>
+              <li class="flex items-start gap-3 text-[15px] text-gray-600"><i data-lucide="check-circle" class="w-5 h-5 text-brand-500 mt-0.5 flex-shrink-0"></i> Fundering en aansluiting op nutsvoorzieningen</li>
+              <li class="flex items-start gap-3 text-[15px] text-gray-600"><i data-lucide="check-circle" class="w-5 h-5 text-brand-500 mt-0.5 flex-shrink-0"></i> Vergunningskosten (indien van toepassing)</li>
+              <li class="flex items-start gap-3 text-[15px] text-gray-600"><i data-lucide="check-circle" class="w-5 h-5 text-brand-500 mt-0.5 flex-shrink-0"></i> Eventuele zorgaanpassingen</li>
+            </ul>
+            <a href="/kennisbank/kosten" class="inline-flex items-center gap-1 text-brand-600 font-semibold hover:gap-2 transition-all">Lees onze complete kostengids <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+          </div>
+          <!-- Rechterkolom: Prijsindicator -->
+          <div class="bg-white rounded-2xl shadow-md p-6 md:p-8">
+            <h3 class="font-heading text-xl font-bold mb-6">Snelle prijsindicatie</h3>
+            <div class="space-y-5">
+              <div>
+                <label class="flex justify-between text-sm font-medium text-gray-700 mb-2">
+                  <span>Oppervlakte</span>
+                  <span id="areaLabel" class="text-brand-600 font-semibold">50 m&sup2;</span>
+                </label>
+                <input type="range" id="areaSlider" min="20" max="100" value="50" class="range-slider w-full">
+                <div class="flex justify-between text-xs text-gray-400 mt-1"><span>20 m&sup2;</span><span>100 m&sup2;</span></div>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Afwerkingsniveau</label>
+                <select id="finishLevel" class="w-full h-12 px-4 rounded-xl border-2 border-gray-200 bg-white text-[15px] focus:border-brand-500 outline-none transition-all">
+                  <option value="800">Basis</option>
+                  <option value="1100" selected>Standaard</option>
+                  <option value="1500">Luxe</option>
+                </select>
+              </div>
+              <div class="flex items-center justify-between">
+                <label class="text-sm font-medium text-gray-700">Zorgaanpassingen meenemen?</label>
+                <button id="careToggle" class="relative w-12 h-7 rounded-full bg-gray-200 transition-colors duration-300 flex-shrink-0" role="switch" aria-checked="false">
+                  <span class="absolute top-0.5 left-0.5 w-6 h-6 bg-white rounded-full shadow transition-transform duration-300"></span>
+                </button>
+              </div>
+              <div class="bg-brand-50 rounded-xl p-5 text-center">
+                <div class="text-sm text-gray-500 mb-1">Geschatte kosten</div>
+                <div id="priceResult" class="font-heading text-2xl md:text-3xl font-bold text-brand-600">&euro; 46.750 - &euro; 63.250</div>
+                <div class="text-xs text-gray-400 mt-2">Dit is een indicatie. Vraag offertes aan voor exacte prijzen.</div>
+              </div>
+              <a href="#offertes" class="flex items-center justify-center gap-2 w-full h-14 bg-accent hover:bg-orange-600 text-white font-bold text-lg rounded-full transition-all duration-300 shadow-sm hover:shadow-lg">
+                Ontvang exacte offertes <i data-lucide="arrow-right" class="w-5 h-5"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTIE 7: Reviews -->
+    <section class="bg-white py-16 md:py-24">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="text-center mb-14">
+          <h2 class="font-heading text-3xl md:text-4xl font-bold mb-3">Wat anderen over ons zeggen</h2>
+          <p class="text-gray-500 text-lg">Ervaringen van families die wij hebben geholpen</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-6">
+          <!-- Review 1 -->
+          <article class="bg-gray-50 rounded-2xl p-6 relative">
+            <div class="text-5xl text-brand-100 font-serif absolute top-4 right-6">&ldquo;</div>
+            <div class="flex gap-0.5 mb-4">
+              <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+              <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+              <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+              <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+              <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+            </div>
+            <p class="text-gray-600 text-[15px] leading-relaxed mb-5">&ldquo;Dankzij Zorgwoningvergelijker hebben we binnen twee weken drie goede offertes ontvangen. Het scheelde ons enorm veel tijd en stress.&rdquo;</p>
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-brand-600 text-white flex items-center justify-center font-semibold text-sm">DV</div>
+              <div>
+                <div class="font-semibold text-sm">Familie De Vries</div>
+                <div class="text-xs text-gray-500">Mantelzorgwoning voor moeder &middot; Arnhem</div>
+              </div>
+            </div>
+          </article>
+          <!-- Review 2 -->
+          <article class="bg-gray-50 rounded-2xl p-6 relative">
+            <div class="text-5xl text-brand-100 font-serif absolute top-4 right-6">&ldquo;</div>
+            <div class="flex gap-0.5 mb-4">
+              <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+              <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+              <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+              <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+              <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+            </div>
+            <p class="text-gray-600 text-[15px] leading-relaxed mb-5">&ldquo;Ik wist niet waar ik moest beginnen. Via deze site kreeg ik overzicht en kon ik rustig vergelijken. Heel fijn in zo&rsquo;n moeilijke periode.&rdquo;</p>
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-accent text-white flex items-center justify-center font-semibold text-sm">MK</div>
+              <div>
+                <div class="font-semibold text-sm">Marion K.</div>
+                <div class="text-xs text-gray-500">Zorgwoning voor echtgenoot &middot; Utrecht</div>
+              </div>
+            </div>
+          </article>
+          <!-- Review 3 -->
+          <article class="bg-gray-50 rounded-2xl p-6 relative">
+            <div class="text-5xl text-brand-100 font-serif absolute top-4 right-6">&ldquo;</div>
+            <div class="flex gap-0.5 mb-4">
+              <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+              <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+              <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+              <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+              <i data-lucide="star" class="w-5 h-5 text-gray-200 fill-gray-200"></i>
+            </div>
+            <p class="text-gray-600 text-[15px] leading-relaxed mb-5">&ldquo;Prettig dat je niet zelf alle aanbieders hoeft af te bellen. E&eacute;n aanvraag en je krijgt meerdere opties. Aanrader!&rdquo;</p>
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-brand-500 text-white flex items-center justify-center font-semibold text-sm">PA</div>
+              <div>
+                <div class="font-semibold text-sm">Peter en Ans</div>
+                <div class="text-xs text-gray-500">Modulaire zorgwoning &middot; Breda</div>
+              </div>
+            </div>
+          </article>
+        </div>
+        <div class="text-center mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="/reviews" class="text-brand-600 font-semibold hover:underline">Bekijk alle reviews &rarr;</a>
+          <div class="flex items-center gap-2 bg-gray-50 px-4 py-2 rounded-full">
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+            <span class="text-sm font-semibold">4.8/5</span>
+            <span class="text-sm text-gray-500">op basis van 340+ reviews</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTIE 8: Kennisbank -->
+    <section id="kennisbank" class="bg-brand-50 py-16 md:py-24">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="text-center mb-14">
+          <h2 class="font-heading text-3xl md:text-4xl font-bold mb-3">Alles wat u moet weten over zorgwoningen</h2>
+          <p class="text-gray-500 text-lg">Onze kennisbank helpt u een weloverwogen keuze te maken</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-6">
+          <!-- Artikel 1 -->
+          <article class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 group">
+            <div class="h-40 bg-gradient-to-br from-brand-50 to-green-100 flex items-center justify-center">
+              <i data-lucide="calculator" class="w-16 h-16 text-brand-500 opacity-50 group-hover:scale-110 transition-transform duration-300"></i>
+            </div>
+            <div class="p-5">
+              <span class="inline-block text-xs font-semibold bg-brand-50 text-brand-600 px-3 py-1 rounded-full mb-3">Kosten</span>
+              <h3 class="font-heading text-lg font-bold mb-2 group-hover:text-brand-600 transition-colors">Wat kost een mantelzorgwoning in 2026? Compleet overzicht</h3>
+              <p class="text-gray-500 text-sm mb-3">Van aanschaf tot plaatsing: alle kosten op een rij...</p>
+              <span class="text-xs text-gray-400 flex items-center gap-1"><i data-lucide="book-open" class="w-3.5 h-3.5"></i> 8 min leestijd</span>
+            </div>
+          </article>
+          <!-- Artikel 2 -->
+          <article class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 group">
+            <div class="h-40 bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center">
+              <i data-lucide="stamp" class="w-16 h-16 text-blue-400 opacity-50 group-hover:scale-110 transition-transform duration-300"></i>
+            </div>
+            <div class="p-5">
+              <span class="inline-block text-xs font-semibold bg-blue-50 text-blue-600 px-3 py-1 rounded-full mb-3">Vergunningen</span>
+              <h3 class="font-heading text-lg font-bold mb-2 group-hover:text-brand-600 transition-colors">Vergunningsvrij een zorgwoning plaatsen: dit zijn de regels</h3>
+              <p class="text-gray-500 text-sm mb-3">Wanneer mag het vergunningsvrij en wanneer niet?...</p>
+              <span class="text-xs text-gray-400 flex items-center gap-1"><i data-lucide="book-open" class="w-3.5 h-3.5"></i> 6 min leestijd</span>
+            </div>
+          </article>
+          <!-- Artikel 3 -->
+          <article class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 group">
+            <div class="h-40 bg-gradient-to-br from-amber-50 to-amber-100 flex items-center justify-center">
+              <i data-lucide="landmark" class="w-16 h-16 text-amber-500 opacity-50 group-hover:scale-110 transition-transform duration-300"></i>
+            </div>
+            <div class="p-5">
+              <span class="inline-block text-xs font-semibold bg-amber-50 text-amber-600 px-3 py-1 rounded-full mb-3">WMO &amp; Subsidies</span>
+              <h3 class="font-heading text-lg font-bold mb-2 group-hover:text-brand-600 transition-colors">WMO-vergoeding voor zorgwoningen: waar heeft u recht op?</h3>
+              <p class="text-gray-500 text-sm mb-3">Gemeenten bieden verschillende vormen van ondersteuning...</p>
+              <span class="text-xs text-gray-400 flex items-center gap-1"><i data-lucide="book-open" class="w-3.5 h-3.5"></i> 7 min leestijd</span>
+            </div>
+          </article>
+        </div>
+        <div class="text-center mt-10">
+          <a href="/kennisbank" class="inline-flex items-center gap-2 border-2 border-brand-600 text-brand-600 font-bold text-[15px] px-6 py-3 rounded-full hover:bg-brand-600 hover:text-white transition-all duration-300">
+            Naar de kennisbank <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTIE 9: Regiokaart -->
+    <section id="regios" class="bg-white py-16 md:py-24">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="text-center mb-14">
+          <h2 class="font-heading text-3xl md:text-4xl font-bold mb-3">Vind aanbieders bij u in de buurt</h2>
+          <p class="text-gray-500 text-lg">Selecteer uw provincie voor lokale aanbieders</p>
+        </div>
+        <div class="grid lg:grid-cols-[1fr_1fr] gap-10 items-start">
+          <!-- SVG Kaart -->
+          <div class="relative flex justify-center" id="mapContainer">
+            <div class="tooltip" id="mapTooltip"></div>
+            <svg viewBox="0 0 500 620" class="w-full max-w-[380px]" id="nlMap" aria-label="Kaart van Nederland met provincies">
+              <!-- Groningen -->
+              <path id="groningen" data-name="Groningen" data-count="8" data-active="true" class="province-path"
+                d="M310,55 L370,40 L410,45 L420,70 L415,100 L380,115 L340,110 L310,100 Z"/>
+              <!-- Friesland -->
+              <path id="friesland" data-name="Friesland" data-count="6" data-active="true" class="province-path"
+                d="M160,50 L220,35 L280,40 L310,55 L310,100 L340,110 L300,125 L240,115 L200,105 L170,100 L155,80 Z"/>
+              <!-- Drenthe -->
+              <path id="drenthe" data-name="Drenthe" data-count="5" data-active="true" class="province-path"
+                d="M300,125 L340,110 L380,115 L415,100 L425,135 L420,175 L370,190 L310,180 L290,155 Z"/>
+              <!-- Overijssel -->
+              <path id="overijssel" data-name="Overijssel" data-count="7" data-active="true" class="province-path"
+                d="M290,155 L310,180 L370,190 L420,175 L435,220 L410,260 L350,265 L300,250 L270,220 L265,190 Z"/>
+              <!-- Flevoland -->
+              <path id="flevoland" data-name="Flevoland" data-count="4" data-active="true" class="province-path"
+                d="M195,140 L240,130 L270,155 L265,190 L270,220 L240,235 L205,220 L190,190 L185,160 Z"/>
+              <!-- Gelderland -->
+              <path id="gelderland" data-name="Gelderland" data-count="11" data-active="true" class="province-path"
+                d="M240,235 L270,220 L300,250 L350,265 L410,260 L420,300 L400,330 L350,345 L290,340 L250,320 L220,290 L215,260 Z"/>
+              <!-- Utrecht -->
+              <path id="utrecht" data-name="Utrecht" data-count="9" data-active="true" class="province-path"
+                d="M170,225 L205,220 L240,235 L215,260 L220,290 L195,300 L165,285 L155,255 Z"/>
+              <!-- Noord-Holland -->
+              <path id="noord-holland" data-name="Noord-Holland" data-count="12" data-active="true" class="province-path"
+                d="M100,40 L135,35 L155,50 L160,50 L155,80 L170,100 L175,130 L195,140 L185,160 L170,225 L155,255 L130,240 L110,200 L95,170 L85,130 L80,90 L90,60 Z"/>
+              <!-- Zuid-Holland -->
+              <path id="zuid-holland" data-name="Zuid-Holland" data-count="15" data-active="true" class="province-path"
+                d="M85,250 L130,240 L155,255 L165,285 L195,300 L185,330 L160,350 L120,345 L90,330 L70,300 L75,270 Z"/>
+              <!-- Zeeland -->
+              <path id="zeeland" data-name="Zeeland" data-count="3" data-active="true" class="province-path"
+                d="M45,340 L90,330 L120,345 L130,370 L115,400 L90,415 L55,405 L35,380 L40,355 Z"/>
+              <!-- Noord-Brabant -->
+              <path id="noord-brabant" data-name="Noord-Brabant" data-count="10" data-active="true" class="province-path"
+                d="M120,345 L160,350 L185,330 L195,300 L220,290 L250,320 L290,340 L350,345 L360,375 L340,400 L280,415 L200,420 L145,405 L130,370 Z"/>
+              <!-- Limburg -->
+              <path id="limburg" data-name="Limburg" data-count="7" data-active="true" class="province-path"
+                d="M350,345 L400,330 L420,350 L415,395 L400,440 L380,490 L360,530 L340,540 L330,500 L335,450 L340,400 L360,375 Z"/>
+            </svg>
+          </div>
+          <!-- Provincelijst -->
+          <div>
+            <h3 class="font-heading text-xl font-bold mb-5">Populaire regio&rsquo;s</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <a href="/regio/zuid-holland" class="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-brand-50 hover:border-brand-500 border-2 border-transparent transition-all group">
+                <span class="font-medium group-hover:text-brand-600">Zuid-Holland</span>
+                <span class="text-sm text-gray-500 bg-white px-2.5 py-1 rounded-full">15 aanbieders</span>
+              </a>
+              <a href="/regio/noord-holland" class="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-brand-50 hover:border-brand-500 border-2 border-transparent transition-all group">
+                <span class="font-medium group-hover:text-brand-600">Noord-Holland</span>
+                <span class="text-sm text-gray-500 bg-white px-2.5 py-1 rounded-full">12 aanbieders</span>
+              </a>
+              <a href="/regio/gelderland" class="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-brand-50 hover:border-brand-500 border-2 border-transparent transition-all group">
+                <span class="font-medium group-hover:text-brand-600">Gelderland</span>
+                <span class="text-sm text-gray-500 bg-white px-2.5 py-1 rounded-full">11 aanbieders</span>
+              </a>
+              <a href="/regio/noord-brabant" class="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-brand-50 hover:border-brand-500 border-2 border-transparent transition-all group">
+                <span class="font-medium group-hover:text-brand-600">Noord-Brabant</span>
+                <span class="text-sm text-gray-500 bg-white px-2.5 py-1 rounded-full">10 aanbieders</span>
+              </a>
+              <a href="/regio/utrecht" class="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-brand-50 hover:border-brand-500 border-2 border-transparent transition-all group">
+                <span class="font-medium group-hover:text-brand-600">Utrecht</span>
+                <span class="text-sm text-gray-500 bg-white px-2.5 py-1 rounded-full">9 aanbieders</span>
+              </a>
+              <a href="/regio/groningen" class="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-brand-50 hover:border-brand-500 border-2 border-transparent transition-all group">
+                <span class="font-medium group-hover:text-brand-600">Groningen</span>
+                <span class="text-sm text-gray-500 bg-white px-2.5 py-1 rounded-full">8 aanbieders</span>
+              </a>
+              <a href="/regio/overijssel" class="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-brand-50 hover:border-brand-500 border-2 border-transparent transition-all group">
+                <span class="font-medium group-hover:text-brand-600">Overijssel</span>
+                <span class="text-sm text-gray-500 bg-white px-2.5 py-1 rounded-full">7 aanbieders</span>
+              </a>
+              <a href="/regio/limburg" class="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-brand-50 hover:border-brand-500 border-2 border-transparent transition-all group">
+                <span class="font-medium group-hover:text-brand-600">Limburg</span>
+                <span class="text-sm text-gray-500 bg-white px-2.5 py-1 rounded-full">7 aanbieders</span>
+              </a>
+              <a href="/regio/friesland" class="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-brand-50 hover:border-brand-500 border-2 border-transparent transition-all group">
+                <span class="font-medium group-hover:text-brand-600">Friesland</span>
+                <span class="text-sm text-gray-500 bg-white px-2.5 py-1 rounded-full">6 aanbieders</span>
+              </a>
+              <a href="/regio/drenthe" class="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-brand-50 hover:border-brand-500 border-2 border-transparent transition-all group">
+                <span class="font-medium group-hover:text-brand-600">Drenthe</span>
+                <span class="text-sm text-gray-500 bg-white px-2.5 py-1 rounded-full">5 aanbieders</span>
+              </a>
+              <a href="/regio/flevoland" class="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-brand-50 hover:border-brand-500 border-2 border-transparent transition-all group">
+                <span class="font-medium group-hover:text-brand-600">Flevoland</span>
+                <span class="text-sm text-gray-500 bg-white px-2.5 py-1 rounded-full">4 aanbieders</span>
+              </a>
+              <a href="/regio/zeeland" class="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-brand-50 hover:border-brand-500 border-2 border-transparent transition-all group">
+                <span class="font-medium group-hover:text-brand-600">Zeeland</span>
+                <span class="text-sm text-gray-500 bg-white px-2.5 py-1 rounded-full">3 aanbieders</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTIE 10: CTA Banner -->
+    <section id="offertes" class="no-print bg-gradient-to-r from-brand-600 to-brand-500 py-16 md:py-20">
+      <div class="max-w-3xl mx-auto px-4 text-center text-white">
+        <h2 class="font-heading text-3xl md:text-4xl font-bold mb-4">Klaar om zorgwoningen te vergelijken?</h2>
+        <p class="text-lg text-white/80 mb-8 max-w-xl mx-auto">Ontvang binnen 24 uur gratis en vrijblijvend offertes van betrouwbare aanbieders.</p>
+        <div class="flex flex-col items-center gap-4">
+          <div class="flex -space-x-2 mb-2">
+            <div class="w-9 h-9 rounded-full bg-brand-900 border-2 border-white flex items-center justify-center text-xs font-semibold text-white">DV</div>
+            <div class="w-9 h-9 rounded-full bg-accent border-2 border-white flex items-center justify-center text-xs font-semibold text-white">MK</div>
+            <div class="w-9 h-9 rounded-full bg-brand-500 border-2 border-white flex items-center justify-center text-xs font-semibold text-white">PA</div>
+            <div class="w-9 h-9 rounded-full bg-yellow-500 border-2 border-white flex items-center justify-center text-xs font-semibold text-white">JB</div>
+          </div>
+          <a href="#vergelijken" class="inline-flex items-center gap-2 bg-accent hover:bg-orange-600 text-white font-bold text-lg px-10 py-4 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl">
+            Vraag Gratis Offertes Aan <i data-lucide="arrow-right" class="w-5 h-5"></i>
+          </a>
+          <div class="flex flex-wrap justify-center gap-x-5 gap-y-1 text-sm text-white/70 mt-2">
+            <span class="flex items-center gap-1"><i data-lucide="check" class="w-4 h-4"></i> Gratis</span>
+            <span class="flex items-center gap-1"><i data-lucide="check" class="w-4 h-4"></i> Vrijblijvend</span>
+            <span class="flex items-center gap-1"><i data-lucide="check" class="w-4 h-4"></i> Binnen 24 uur reactie</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTIE 11: FAQ -->
+    <section class="bg-brand-50 py-16 md:py-24">
+      <div class="max-w-3xl mx-auto px-4">
+        <div class="text-center mb-14">
+          <h2 class="font-heading text-3xl md:text-4xl font-bold mb-3">Veelgestelde vragen</h2>
+          <p class="text-gray-500 text-lg">Alles wat u wilt weten over zorgwoningen vergelijken</p>
+        </div>
+        <div class="space-y-3" id="faqList">
+          <div class="bg-white rounded-2xl shadow-sm">
+            <button class="faq-toggle w-full flex items-center justify-between p-5 md:p-6 text-left gap-4" aria-expanded="false">
+              <span class="font-semibold text-[15px] md:text-base">Wat kost het om zorgwoningen te vergelijken via dit platform?</span>
+              <i data-lucide="plus" class="w-5 h-5 flex-shrink-0 text-gray-400 transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content px-5 md:px-6">
+              <p class="pb-5 md:pb-6 text-gray-600 text-[15px] leading-relaxed">Helemaal niets. Ons platform is 100% gratis voor particulieren. Wij worden betaald door aanbieders die graag in contact komen met ge&iuml;nteresseerden.</p>
+            </div>
+          </div>
+          <div class="bg-white rounded-2xl shadow-sm">
+            <button class="faq-toggle w-full flex items-center justify-between p-5 md:p-6 text-left gap-4" aria-expanded="false">
+              <span class="font-semibold text-[15px] md:text-base">Hoe onafhankelijk is Zorgwoningvergelijker.nl?</span>
+              <i data-lucide="plus" class="w-5 h-5 flex-shrink-0 text-gray-400 transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content px-5 md:px-6">
+              <p class="pb-5 md:pb-6 text-gray-600 text-[15px] leading-relaxed">Wij zijn niet verbonden aan &eacute;&eacute;n specifieke aanbieder. Alle aanbieders op ons platform worden onafhankelijk beoordeeld. Onze rankings zijn gebaseerd op kwaliteit, reviews en prijs-kwaliteitverhouding.</p>
+            </div>
+          </div>
+          <div class="bg-white rounded-2xl shadow-sm">
+            <button class="faq-toggle w-full flex items-center justify-between p-5 md:p-6 text-left gap-4" aria-expanded="false">
+              <span class="font-semibold text-[15px] md:text-base">Hoe snel ontvang ik offertes na mijn aanvraag?</span>
+              <i data-lucide="plus" class="w-5 h-5 flex-shrink-0 text-gray-400 transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content px-5 md:px-6">
+              <p class="pb-5 md:pb-6 text-gray-600 text-[15px] leading-relaxed">De meeste aanbieders reageren binnen 24 uur op werkdagen. U ontvangt gemiddeld 2 tot 4 offertes per aanvraag, zodat u goed kunt vergelijken.</p>
+            </div>
+          </div>
+          <div class="bg-white rounded-2xl shadow-sm">
+            <button class="faq-toggle w-full flex items-center justify-between p-5 md:p-6 text-left gap-4" aria-expanded="false">
+              <span class="font-semibold text-[15px] md:text-base">Heb ik een vergunning nodig voor een zorgwoning?</span>
+              <i data-lucide="plus" class="w-5 h-5 flex-shrink-0 text-gray-400 transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content px-5 md:px-6">
+              <p class="pb-5 md:pb-6 text-gray-600 text-[15px] leading-relaxed">Dat hangt af van uw situatie. In veel gevallen kunt u een mantelzorgwoning vergunningsvrij plaatsen als deze kleiner is dan 100m&sup2;, op eigen erf staat en er een mantelzorgrelatie is. Lees onze <a href="/kennisbank/vergunningen" class="text-brand-600 underline hover:no-underline">complete vergunningsgids</a> voor meer informatie.</p>
+            </div>
+          </div>
+          <div class="bg-white rounded-2xl shadow-sm">
+            <button class="faq-toggle w-full flex items-center justify-between p-5 md:p-6 text-left gap-4" aria-expanded="false">
+              <span class="font-semibold text-[15px] md:text-base">Kan ik een zorgwoning huren in plaats van kopen?</span>
+              <i data-lucide="plus" class="w-5 h-5 flex-shrink-0 text-gray-400 transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content px-5 md:px-6">
+              <p class="pb-5 md:pb-6 text-gray-600 text-[15px] leading-relaxed">Ja, verschillende aanbieders bieden huurconstructies aan, soms in combinatie met WMO-vergoedingen van uw gemeente. Bij het vergelijken kunt u filteren op koop of huur.</p>
+            </div>
+          </div>
+          <div class="bg-white rounded-2xl shadow-sm">
+            <button class="faq-toggle w-full flex items-center justify-between p-5 md:p-6 text-left gap-4" aria-expanded="false">
+              <span class="font-semibold text-[15px] md:text-base">Welke zorgaanpassingen zijn mogelijk?</span>
+              <i data-lucide="plus" class="w-5 h-5 flex-shrink-0 text-gray-400 transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content px-5 md:px-6">
+              <p class="pb-5 md:pb-6 text-gray-600 text-[15px] leading-relaxed">Denk aan drempelvrije toegang, een aangepaste badkamer, brede deuren voor rolstoelen, domotica en noodoproepsystemen. De meeste aanbieders bieden maatwerkopties.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTIE 12: Voor Aanbieders -->
+    <section class="bg-brand-600 py-10 md:py-12">
+      <div class="max-w-5xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-6 text-white">
+        <div>
+          <h2 class="font-heading text-xl md:text-2xl font-bold mb-1">Bent u aanbieder van zorgwoningen?</h2>
+          <p class="text-white/70 text-[15px]">Sluit u aan bij ons platform en bereik duizenden potenti&euml;le klanten.</p>
+        </div>
+        <a href="/aanbieders/aanmelden" class="inline-flex items-center gap-2 border-2 border-white text-white font-semibold px-6 py-3 rounded-full hover:bg-white hover:text-brand-600 transition-all duration-300 flex-shrink-0">
+          Word partner <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- SECTIE 13: Footer -->
+  <footer id="over-ons" class="bg-brand-900 text-white">
+    <div class="max-w-6xl mx-auto px-4 py-12 md:py-16">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
+        <!-- Kolom 1 -->
+        <div>
+          <div class="flex items-center gap-2 mb-4">
+            <i data-lucide="home" class="w-6 h-6"></i>
+            <span class="font-heading text-lg font-bold">Zorgwoningvergelijker.nl</span>
+          </div>
+          <p class="text-sm text-white/60 leading-relaxed mb-5">Het onafhankelijke vergelijkingsplatform voor zorgwoningen in Nederland. Wij helpen u de juiste keuze te maken.</p>
+          <div class="flex gap-3">
+            <a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+            <a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors" aria-label="Facebook"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+          </div>
+        </div>
+        <!-- Kolom 2 -->
+        <div>
+          <h4 class="font-heading font-bold mb-4">Zorgwoningen</h4>
+          <ul class="space-y-2.5 text-sm text-white/60">
+            <li><a href="/zorgwoningen/mantelzorgwoning" class="hover:text-white transition-colors">Mantelzorgwoning</a></li>
+            <li><a href="/zorgwoningen/modulair" class="hover:text-white transition-colors">Modulaire zorgwoning</a></li>
+            <li><a href="/zorgwoningen/tiny-house" class="hover:text-white transition-colors">Tiny house zorgwoning</a></li>
+            <li><a href="/zorgwoningen/aanbouw" class="hover:text-white transition-colors">Aanbouw &amp; zorgunit</a></li>
+            <li><a href="/aanbieders" class="hover:text-white transition-colors">Alle aanbieders</a></li>
+          </ul>
+        </div>
+        <!-- Kolom 3 -->
+        <div>
+          <h4 class="font-heading font-bold mb-4">Informatie</h4>
+          <ul class="space-y-2.5 text-sm text-white/60">
+            <li><a href="/kennisbank" class="hover:text-white transition-colors">Kennisbank</a></li>
+            <li><a href="/kennisbank/kosten" class="hover:text-white transition-colors">Kosten &amp; financiering</a></li>
+            <li><a href="/kennisbank/vergunningen" class="hover:text-white transition-colors">Vergunningen</a></li>
+            <li><a href="/kennisbank/wmo-subsidies" class="hover:text-white transition-colors">WMO &amp; subsidies</a></li>
+            <li><a href="#faqList" class="hover:text-white transition-colors">Veelgestelde vragen</a></li>
+          </ul>
+        </div>
+        <!-- Kolom 4 -->
+        <div>
+          <h4 class="font-heading font-bold mb-4">Contact</h4>
+          <ul class="space-y-2.5 text-sm text-white/60">
+            <li class="flex items-center gap-2"><i data-lucide="phone" class="w-4 h-4"></i> <a href="tel:+31850041159" class="hover:text-white transition-colors">085 - 004 11 59</a></li>
+            <li class="flex items-center gap-2"><i data-lucide="mail" class="w-4 h-4"></i> <a href="mailto:info@zorgwoningvergelijker.nl" class="hover:text-white transition-colors">info@zorgwoningvergelijker.nl</a></li>
+            <li class="flex items-center gap-2"><i data-lucide="clock" class="w-4 h-4"></i> Ma-Vr 9:00-17:00</li>
+            <li class="flex items-center gap-2"><i data-lucide="building" class="w-4 h-4"></i> KvK: 91234567</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-white/10">
+      <div class="max-w-6xl mx-auto px-4 py-5 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-white/40">
+        <span>&copy; 2026 Zorgwoningvergelijker.nl | Alle rechten voorbehouden</span>
+        <div class="flex flex-wrap gap-4">
+          <a href="/privacy" class="hover:text-white transition-colors">Privacybeleid</a>
+          <a href="/voorwaarden" class="hover:text-white transition-colors">Algemene voorwaarden</a>
+          <a href="/cookies" class="hover:text-white transition-colors">Cookiebeleid</a>
+          <a href="/sitemap" class="hover:text-white transition-colors">Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize Lucide icons
+      lucide.createIcons();
+
+      // --- Sticky nav shadow ---
+      var nav = document.getElementById('mainNav');
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 10) {
+          nav.classList.add('shadow-md');
+        } else {
+          nav.classList.remove('shadow-md');
+        }
+      });
+
+      // --- Mobile menu ---
+      var menuToggle = document.getElementById('menuToggle');
+      var menuClose = document.getElementById('menuClose');
+      var mobileMenu = document.getElementById('mobileMenu');
+      var menuOverlay = document.getElementById('menuOverlay');
+      var menuPanel = document.getElementById('menuPanel');
+
+      function openMenu() {
+        mobileMenu.classList.add('pointer-events-auto');
+        mobileMenu.classList.remove('pointer-events-none');
+        menuOverlay.classList.add('opacity-100');
+        menuOverlay.classList.remove('opacity-0');
+        menuPanel.classList.remove('translate-x-full');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeMenu() {
+        menuPanel.classList.add('translate-x-full');
+        menuOverlay.classList.remove('opacity-100');
+        menuOverlay.classList.add('opacity-0');
+        setTimeout(function() {
+          mobileMenu.classList.remove('pointer-events-auto');
+          mobileMenu.classList.add('pointer-events-none');
+        }, 300);
+        document.body.style.overflow = '';
+      }
+      menuToggle.addEventListener('click', openMenu);
+      menuClose.addEventListener('click', closeMenu);
+      menuOverlay.addEventListener('click', closeMenu);
+
+      // Close mobile menu on link click
+      mobileMenu.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', closeMenu);
+      });
+
+      // --- Counter animation ---
+      var countersAnimated = false;
+      var statsBar = document.getElementById('statsBar');
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting && !countersAnimated) {
+            countersAnimated = true;
+            document.querySelectorAll('.counter-value').forEach(function(el) {
+              var target = parseInt(el.getAttribute('data-target'));
+              var isDecimal = el.getAttribute('data-decimal') === 'true';
+              var duration = 2000;
+              var start = 0;
+              var startTime = null;
+              function animate(timestamp) {
+                if (!startTime) startTime = timestamp;
+                var progress = Math.min((timestamp - startTime) / duration, 1);
+                var eased = 1 - Math.pow(1 - progress, 3);
+                var current = Math.floor(eased * target);
+                if (isDecimal) {
+                  el.textContent = (current / 10).toFixed(1);
+                } else {
+                  el.textContent = current.toLocaleString('nl-NL');
+                }
+                if (progress < 1) {
+                  requestAnimationFrame(animate);
+                } else {
+                  if (isDecimal) {
+                    el.textContent = (target / 10).toFixed(1);
+                  } else {
+                    el.textContent = target.toLocaleString('nl-NL');
+                  }
+                }
+              }
+              requestAnimationFrame(animate);
+            });
+          }
+        });
+      }, { threshold: 0.3 });
+      observer.observe(statsBar);
+
+      // --- Price calculator ---
+      var areaSlider = document.getElementById('areaSlider');
+      var areaLabel = document.getElementById('areaLabel');
+      var finishLevel = document.getElementById('finishLevel');
+      var careToggle = document.getElementById('careToggle');
+      var priceResult = document.getElementById('priceResult');
+      var careEnabled = false;
+
+      careToggle.addEventListener('click', function() {
+        careEnabled = !careEnabled;
+        this.setAttribute('aria-checked', careEnabled);
+        if (careEnabled) {
+          this.classList.remove('bg-gray-200');
+          this.classList.add('bg-brand-600');
+          this.querySelector('span').classList.add('translate-x-5');
+        } else {
+          this.classList.add('bg-gray-200');
+          this.classList.remove('bg-brand-600');
+          this.querySelector('span').classList.remove('translate-x-5');
+        }
+        updatePrice();
+      });
+
+      function updatePrice() {
+        var area = parseInt(areaSlider.value);
+        var pricePerM2 = parseInt(finishLevel.value);
+        var base = area * pricePerM2;
+        if (careEnabled) base = base * 1.15;
+        var low = Math.round(base * 0.85 / 250) * 250;
+        var high = Math.round(base * 1.15 / 250) * 250;
+        areaLabel.textContent = area + ' m\u00B2';
+        priceResult.textContent = '\u20AC ' + low.toLocaleString('nl-NL') + ' \u2014 \u20AC ' + high.toLocaleString('nl-NL');
+      }
+
+      areaSlider.addEventListener('input', updatePrice);
+      finishLevel.addEventListener('change', updatePrice);
+      updatePrice();
+
+      // --- FAQ accordion ---
+      document.querySelectorAll('.faq-toggle').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var content = this.nextElementSibling;
+          var icon = this.querySelector('[data-lucide]');
+          var isOpen = content.classList.contains('open');
+
+          // Close all
+          document.querySelectorAll('.faq-content').forEach(function(c) { c.classList.remove('open'); });
+          document.querySelectorAll('.faq-toggle').forEach(function(b) {
+            b.setAttribute('aria-expanded', 'false');
+            var ic = b.querySelector('[data-lucide]');
+            if (ic) { ic.style.transform = ''; }
+          });
+
+          if (!isOpen) {
+            content.classList.add('open');
+            this.setAttribute('aria-expanded', 'true');
+            if (icon) icon.style.transform = 'rotate(45deg)';
+          }
+        });
+      });
+
+      // --- Carousel ---
+      var carousel = document.getElementById('carousel');
+      var prevBtn = document.getElementById('carouselPrev');
+      var nextBtn = document.getElementById('carouselNext');
+      var scrollAmount = 300;
+
+      prevBtn.addEventListener('click', function() {
+        carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+      });
+      nextBtn.addEventListener('click', function() {
+        carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      });
+
+      // --- Province map tooltip ---
+      var mapContainer = document.getElementById('mapContainer');
+      var tooltip = document.getElementById('mapTooltip');
+      var provinces = document.querySelectorAll('.province-path');
+
+      provinces.forEach(function(p) {
+        p.addEventListener('mouseenter', function(e) {
+          var name = this.getAttribute('data-name');
+          var count = this.getAttribute('data-count');
+          tooltip.textContent = name + ' \u2014 ' + count + ' aanbieders';
+          tooltip.style.opacity = '1';
+        });
+        p.addEventListener('mousemove', function(e) {
+          var rect = mapContainer.getBoundingClientRect();
+          tooltip.style.left = (e.clientX - rect.left + 12) + 'px';
+          tooltip.style.top = (e.clientY - rect.top - 36) + 'px';
+        });
+        p.addEventListener('mouseleave', function() {
+          tooltip.style.opacity = '0';
+        });
+        p.addEventListener('click', function() {
+          var slug = this.id;
+          console.log('Navigate to:', '/regio/' + slug);
+          window.location.href = '/regio/' + slug;
+        });
+      });
+
+      // --- Smooth scroll for anchor links ---
+      document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+        anchor.addEventListener('click', function(e) {
+          var target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

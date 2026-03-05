@@ -1,26 +1,381 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    @apply text-dark bg-page font-sans;
+  }
+
+  h1, h2, h3, h4, h5 {
+    @apply text-dark font-heading font-bold tracking-tight;
+  }
+
+  ::selection {
+    background-color: rgba(88, 58, 133, 0.12);
+    color: #351F54;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  /* ============ FLOW BUTTON ============ */
+  .flow-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 9999px;
+    transform: translate(-50%, -50%);
+    /* Hover-out: reverse shrink */
+    transition: width 500ms cubic-bezier(0.4, 0, 0.2, 1),
+                height 500ms cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 300ms ease 200ms;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .group:hover .flow-circle {
+    width: max(300px, 250%);
+    height: max(300px, 250%);
+    opacity: 1;
+    /* Hover-in: smooth expand */
+    transition: width 600ms cubic-bezier(0.4, 0, 0.2, 1),
+                height 600ms cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 200ms ease;
+  }
+
+  /* Arrow entering from left */
+  .flow-arrow-in {
+    position: absolute;
+    left: -1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    transition: left 700ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .group:hover .flow-arrow-in {
+    left: 1.25rem;
+  }
+
+  .group:hover .flow-arrow-in-sm {
+    left: 0.75rem;
+  }
+
+  /* Arrow exiting to right */
+  .flow-arrow-out {
+    transition: transform 700ms cubic-bezier(0.34, 1.56, 0.64, 1),
+                opacity 300ms ease;
+  }
+
+  .group:hover .flow-arrow-out {
+    transform: translateX(200%);
+    opacity: 0;
+  }
+
+  /* Text shifts right on hover */
+  .flow-text {
+    transition: transform 700ms ease-out;
+  }
+
+  .group:hover .flow-text {
+    transform: translateX(1rem);
+  }
+
+  .group:hover .flow-text-sm {
+    transform: translateX(1.25rem);
+  }
+
+  /* ============ SECTION SYSTEM ============ */
+  .section-padding {
+    @apply py-20 md:py-28;
+  }
+
+  .section-header {
+    @apply text-center mb-16;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-display font-heading font-bold text-dark mb-4 tracking-tight;
+  }
+
+  .section-subtitle {
+    @apply text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed;
+  }
+
+  /* Section backgrounds — clean, warm, flat */
+  .section-white {
+    @apply bg-white relative;
+  }
+
+  .section-gray {
+    position: relative;
+    background-color: #F5F3EF;
+  }
+
+  .section-warm {
+    position: relative;
+    background-color: #FBF8F3;
+  }
+
+  .section-brand {
+    background-color: #583A85;
+    @apply text-white;
+  }
+
+  .section-brand-light {
+    position: relative;
+    background-color: #F5F0FA;
+  }
+
+  /* ============ WAVE DECORATIONS ============ */
+  /*
+   * Solid-color waves that bridge section backgrounds.
+   * Each wave carries the color of the NEXT (or PREVIOUS) section
+   * so the transition feels organic and seamless.
+   *
+   * wave-to-X   = placed at BOTTOM of current section, fills with color X
+   * wave-from-X = placed at TOP of current section, fills with color X
+   */
+
+  /* --- Base pseudo-element shared styles --- */
+  .wave-to-white, .wave-to-gray, .wave-to-warm, .wave-to-dark,
+  .wave-from-white, .wave-from-gray, .wave-from-warm, .wave-from-dark {
+    position: relative;
+  }
+
+  /* Bottom waves — transition INTO the next section */
+  .wave-to-white::after,
+  .wave-to-gray::after,
+  .wave-to-warm::after,
+  .wave-to-dark::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 48px;
+    pointer-events: none;
+    z-index: 2;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+  }
+  .wave-to-white::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 48' preserveAspectRatio='none'%3E%3Cpath d='M0 48V16Q360 0 720 24Q1080 48 1440 12V48H0Z' fill='%23FFFFFF'/%3E%3C/svg%3E");
+  }
+  .wave-to-gray::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 48' preserveAspectRatio='none'%3E%3Cpath d='M0 48V16Q360 0 720 24Q1080 48 1440 12V48H0Z' fill='%23F5F3EF'/%3E%3C/svg%3E");
+  }
+  .wave-to-warm::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 48' preserveAspectRatio='none'%3E%3Cpath d='M0 48V16Q360 0 720 24Q1080 48 1440 12V48H0Z' fill='%23FBF8F3'/%3E%3C/svg%3E");
+  }
+  .wave-to-dark::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 48' preserveAspectRatio='none'%3E%3Cpath d='M0 48V16Q360 0 720 24Q1080 48 1440 12V48H0Z' fill='%232D1B4E'/%3E%3C/svg%3E");
+  }
+
+  /* Top waves — transition FROM the previous section */
+  .wave-from-white::before,
+  .wave-from-gray::before,
+  .wave-from-warm::before,
+  .wave-from-dark::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    height: 48px;
+    pointer-events: none;
+    z-index: 2;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+  }
+  .wave-from-white::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 48' preserveAspectRatio='none'%3E%3Cpath d='M0 0V32Q360 48 720 24Q1080 0 1440 36V0H0Z' fill='%23FFFFFF'/%3E%3C/svg%3E");
+  }
+  .wave-from-gray::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 48' preserveAspectRatio='none'%3E%3Cpath d='M0 0V32Q360 48 720 24Q1080 0 1440 36V0H0Z' fill='%23F5F3EF'/%3E%3C/svg%3E");
+  }
+  .wave-from-warm::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 48' preserveAspectRatio='none'%3E%3Cpath d='M0 0V32Q360 48 720 24Q1080 0 1440 36V0H0Z' fill='%23FBF8F3'/%3E%3C/svg%3E");
+  }
+  .wave-from-dark::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 48' preserveAspectRatio='none'%3E%3Cpath d='M0 0V32Q360 48 720 24Q1080 0 1440 36V0H0Z' fill='%232D1B4E'/%3E%3C/svg%3E");
+  }
+
+  /* Legacy compat — keep old classes working, map to new system */
+  .section-wave-top {
+    position: relative;
+  }
+  .section-wave-top::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    height: 48px;
+    pointer-events: none;
+    z-index: 2;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 48' preserveAspectRatio='none'%3E%3Cpath d='M0 0V32Q360 48 720 24Q1080 0 1440 36V0H0Z' fill='%23FFFFFF'/%3E%3C/svg%3E");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+  }
+  .section-wave-bottom {
+    position: relative;
+  }
+  .section-wave-bottom::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 48px;
+    pointer-events: none;
+    z-index: 2;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 48' preserveAspectRatio='none'%3E%3Cpath d='M0 48V16Q360 0 720 24Q1080 48 1440 12V48H0Z' fill='%23FFFFFF'/%3E%3C/svg%3E");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+  }
+
+  /* ============ CARD SYSTEM ============ */
+  .card-base {
+    @apply bg-white rounded-2xl shadow-card border border-gray-200/80;
+  }
+
+  .card-interactive {
+    @apply card-base hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 ease-premium cursor-pointer;
+  }
+
+  /* ============ PREMIUM DIVIDER ============ */
+  .divider-gradient {
+    @apply h-px bg-gray-200;
+  }
+
+  /* ============ PROSE OCCASIONS (SEO content) ============ */
+  .prose-occasions h2 {
+    @apply font-heading font-semibold text-heading-3 text-dark mt-8 mb-3 tracking-tight;
+  }
+
+  .prose-occasions p {
+    @apply text-body text-gray-600 leading-relaxed;
+  }
+
+  .prose-occasions ul {
+    @apply list-disc pl-5 space-y-1.5 text-body text-gray-600;
+  }
+
+  .prose-occasions strong {
+    @apply font-semibold text-dark;
+  }
+
+  .prose-occasions a {
+    @apply text-primary font-medium hover:underline;
+  }
+}
+
+/* ============ RANGE SLIDER ============ */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 9999px;
+  background: #E5E7EB;
+  outline: none;
+  transition: background 0.15s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #583A85;
+  cursor: pointer;
+  border: 3px solid white;
+  box-shadow: 0 2px 8px rgba(88,58,133,0.3), 0 1px 3px rgba(0,0,0,0.1);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 2px 12px rgba(88,58,133,0.4), 0 1px 3px rgba(0,0,0,0.1);
+}
+
+input[type="range"]::-webkit-slider-thumb:active {
+  transform: scale(0.95);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #583A85;
+  cursor: pointer;
+  border: 3px solid white;
+  box-shadow: 0 2px 8px rgba(88,58,133,0.3), 0 1px 3px rgba(0,0,0,0.1);
+}
+
+input[type="range"]:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 3px rgba(88,58,133,0.25), 0 2px 8px rgba(88,58,133,0.3);
+}
+
+/* ============ SCROLLBAR ============ */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ============ STICKY COLUMN SHADOW ============ */
+.sticky-shadow-r {
+  box-shadow: 4px 0 8px -3px rgba(0, 0, 0, 0.06);
+}
+
+/* ============ PRICE DISPLAY ============ */
+.price-amount {
+  font-family: var(--font-heading), "Plus Jakarta Sans", system-ui, sans-serif;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* ============ SOLID BORDER ============ */
+.gradient-border {
+  position: relative;
+  border-radius: 1.125rem;
+  border: 2px solid #583A85;
+}
+.gradient-border > * {
+  border-radius: calc(1.125rem - 2px);
+}
+
+/* ============ SOLID BACKGROUNDS ============ */
+.glass {
+  background: white;
+}
+
+.glass-dark {
+  background: #251938;
 }

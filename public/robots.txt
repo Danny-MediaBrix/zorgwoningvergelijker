@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /configurator
+
+Sitemap: https://zorgwoningvergelijker.nl/sitemap.xml
