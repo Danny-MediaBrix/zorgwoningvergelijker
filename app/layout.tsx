@@ -65,6 +65,13 @@ const organizationSchema = {
   url: "https://zorgwoningvergelijker.nl",
   description:
     "Het nr. 1 vergelijkingsplatform voor modulaire woningen in Nederland. Vergelijk aanbieders, configureer je woning en ontvang gratis offertes.",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Vanadiumweg 11A",
+    postalCode: "3812 PX",
+    addressLocality: "Amersfoort",
+    addressCountry: "NL",
+  },
   sameAs: [
     "https://www.linkedin.com/company/zorgwoningvergelijker",
   ],

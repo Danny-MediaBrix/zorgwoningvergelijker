@@ -1,6 +1,11 @@
 User-agent: *
 Allow: /
 Disallow: /api/
-Disallow: /configurator
+Disallow: /portal
+Disallow: /admin
+Disallow: /inloggen
+Disallow: /registreren
+Disallow: /wachtwoord-vergeten
+Disallow: /wachtwoord-reset
 
 Sitemap: https://zorgwoningvergelijker.nl/sitemap.xml
