@@ -112,25 +112,23 @@ export async function POST(request: NextRequest) {
 
     const { naam, email, onderwerp } = parsed.data;
 
-    if (!process.env.SMTP_HOST) {
+    // Fire-and-forget: e-mails blokkeren response niet
+    if (process.env.SMTP_HOST) {
+      const transporter = getTransporter();
+      Promise.allSettled([
+        transporter.sendMail({
+          from: FROM,
+          to: PLATFORM_EMAIL,
+          replyTo: `${naam} <${email}>`,
+          subject: `Contactformulier: ${onderwerp}`,
+          html: buildContactEmailHtml(parsed.data),
+        }).then(() => console.log(`[Contact] Admin email sent: ${naam} (${email}) — ${onderwerp}`))
+          .catch((err) => console.error(`[Contact] Admin email failed:`, err)),
+        sendEmail(email, { type: "contact_bevestiging", naam, onderwerp }),
+      ]);
+    } else {
       console.log(`[Contact] Skipping email (no SMTP configured): ${naam} — ${onderwerp}`);
-      return NextResponse.json({ success: true }, { status: 201 });
     }
-
-    const transporter = getTransporter();
-
-    await transporter.sendMail({
-      from: FROM,
-      to: PLATFORM_EMAIL,
-      replyTo: `${naam} <${email}>`,
-      subject: `Contactformulier: ${onderwerp}`,
-      html: buildContactEmailHtml(parsed.data),
-    });
-
-    console.log(`[Contact] Email sent: ${naam} (${email}) — ${onderwerp}`);
-
-    // Fire-and-forget: bevestigingsmail naar gebruiker
-    sendEmail(email, { type: "contact_bevestiging", naam, onderwerp });
 
     return NextResponse.json({ success: true }, { status: 201 });
   } catch (error) {
