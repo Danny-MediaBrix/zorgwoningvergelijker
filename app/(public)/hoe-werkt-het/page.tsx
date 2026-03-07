@@ -206,6 +206,7 @@ export default function HoeWerktHetPage() {
                         width={832}
                         height={704}
                         className="w-full h-auto object-cover aspect-[4/3]"
+                        sizes="(max-width: 768px) 100vw, 42vw"
                       />
                     </div>
                   </div>

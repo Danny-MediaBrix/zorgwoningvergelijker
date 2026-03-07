@@ -75,13 +75,13 @@ const artikelContent: Record<string, string> = {
         <li><strong>Kies standaardafmetingen:</strong> maatwerk is duurder dan een standaardmodel. Een model van 6 x 3 meter (op wielen) is meestal het voordeligst.</li>
         <li><strong>Doe de afwerking zelf:</strong> koop een casco en werk de binnenkant zelf af. Dit bespaart al snel &euro;10.000 tot &euro;20.000.</li>
         <li><strong>Vergelijk meerdere aanbieders:</strong> prijzen kunnen sterk verschillen voor vergelijkbare kwaliteit. Via Zorgwoningvergelijker vraag je eenvoudig offertes aan bij meerdere gespecialiseerde bouwers.</li>
-        <li><strong>Overweeg een tweedehands tiny house:</strong> een occasion tiny house kost gemiddeld 15 tot 30% minder dan nieuwbouw en is direct beschikbaar.</li>
+        <li><strong>Overweeg een tweedehands tiny house:</strong> een <a href="/occasions/tiny-house" class="text-primary font-medium hover:underline">occasion tiny house</a> kost gemiddeld 15 tot 30% minder dan nieuwbouw en is direct beschikbaar.</li>
         <li><strong>Informeer naar <a href="/kennisbank/subsidie-mantelzorgwoning" class="text-primary font-medium hover:underline">subsidies</a>:</strong> sommige gemeenten bieden subsidies of startersleningen aan voor duurzame woningbouw. De ISDE-regeling vergoedt &euro;1.000 tot &euro;3.000 voor een warmtepomp.</li>
       </ul>
 
       <h2>Financiering van een tiny house</h2>
       <p>
-        Een tiny house financieren is anders dan een reguliere woning. Niet elke bank verstrekt een hypotheek voor een tiny house, maar er zijn steeds meer mogelijkheden:
+        Een <a href="/tiny-house" class="text-primary font-medium hover:underline">tiny house</a> financieren is anders dan een reguliere woning. Niet elke bank verstrekt een hypotheek voor een tiny house, maar er zijn steeds meer mogelijkheden:
       </p>
       <ul>
         <li><strong>Hypotheek:</strong> voor een vast geplaatste tiny house op eigen grond kun je bij sommige banken een hypotheek afsluiten. Voorwaarde is vaak een kwaliteitskeurmerk en een minimale levensduur van 25 jaar.</li>
@@ -110,7 +110,7 @@ const artikelContent: Record<string, string> = {
   "subsidie-mantelzorgwoning": `
       <h2>Bestaat er subsidie voor een mantelzorgwoning?</h2>
       <p>
-        Er bestaat in Nederland <strong>geen landelijke subsidie</strong> specifiek voor mantelzorgwoningen. De rijksoverheid heeft geen regeling die de aanschaf of plaatsing van een mantelzorgwoning rechtstreeks subsidieert. Toch zijn er wel degelijk financiele mogelijkheden die de kosten aanzienlijk kunnen drukken. Via de Wmo, gemeentelijke regelingen en fiscale voordelen kun je in de praktijk duizenden euro's besparen.
+        Er bestaat in Nederland <strong>geen landelijke subsidie</strong> specifiek voor <a href="/mantelzorgwoning" class="text-primary font-medium hover:underline">mantelzorgwoningen</a>. De rijksoverheid heeft geen regeling die de aanschaf of plaatsing van een mantelzorgwoning rechtstreeks subsidieert. Toch zijn er wel degelijk financiele mogelijkheden die de kosten aanzienlijk kunnen drukken. Via de Wmo, gemeentelijke regelingen en fiscale voordelen kun je in de praktijk duizenden euro's besparen.
       </p>
       <p>
         In dit artikel lees je welke regelingen er wel bestaan, hoe je ze aanvraagt en waar je als eerste moet aankloppen. We behandelen de Wmo-vergoeding, gemeentelijke subsidies, het persoonsgebonden budget en fiscale voordelen.
@@ -207,12 +207,12 @@ const artikelContent: Record<string, string> = {
 
       <h3>Hoe financier je een mantelzorgwoning?</h3>
       <p>
-        De meest gebruikte opties zijn een Wmo-vergoeding, hypotheekverhoging, persoonlijke lening of huur. Combineren van meerdere regelingen is vaak mogelijk en levert de laagste kosten op.
+        De meest gebruikte opties zijn een Wmo-vergoeding, hypotheekverhoging, persoonlijke lening of huur. Combineren van meerdere regelingen is vaak mogelijk en levert de laagste kosten op. Lees meer in ons artikel over <a href="/kennisbank/mantelzorgwoning-financieren" class="text-primary font-medium hover:underline">mantelzorgwoning financieren</a>.
       </p>
 
       <h3>Wat kost een mantelzorgwoning per maand?</h3>
       <p>
-        Bij huur betaal je circa 500 tot 900 euro per maand. Bij aanschaf zijn de maandelijkse lasten afhankelijk van de financieringsvorm: bij een hypotheekverhoging van 50.000 euro betaal je circa 200 tot 350 euro per maand.
+        Bij huur betaal je circa 500 tot 900 euro per maand. Bij aanschaf zijn de maandelijkse lasten afhankelijk van de financieringsvorm: bij een hypotheekverhoging van 50.000 euro betaal je circa 200 tot 350 euro per maand. Bekijk ons <a href="/kennisbank/mantelzorgwoning-prijzen" class="text-primary font-medium hover:underline">volledig prijzenoverzicht</a> voor meer informatie.
       </p>
 
       <h3>Welke gemeente geeft subsidie voor een mantelzorgwoning?</h3>
@@ -252,7 +252,7 @@ const artikelContent: Record<string, string> = {
 
       <h2>Regels buiten de bebouwde kom</h2>
       <p>
-        In het buitengebied gelden vaak <strong>strengere regels</strong>. Veel gemeenten hanteren in hun bestemmingsplan een maximale oppervlakte voor bijgebouwen die lager ligt dan 150 m². In agrarisch gebied kan het bestemmingsplan extra beperkingen opleggen. Bovendien gelden in sommige gebieden landschappelijke eisen die invloed hebben op de plaatsing en het uiterlijk van de mantelzorgwoning.
+        In het buitengebied gelden vaak <strong>strengere regels</strong>. Veel gemeenten hanteren in hun bestemmingsplan een maximale oppervlakte voor bijgebouwen die lager ligt dan 150 m². In agrarisch gebied kan het bestemmingsplan extra beperkingen opleggen. Bovendien gelden in sommige gebieden landschappelijke eisen die invloed hebben op de plaatsing en het uiterlijk van de mantelzorgwoning. Lees meer in ons artikel over <a href="/kennisbank/regels-mantelzorgwoning-buitengebied" class="text-primary font-medium hover:underline">regels in het buitengebied</a>.
       </p>
       <p>
         Check altijd het bestemmingsplan van je perceel via <strong>ruimtelijkeplannen.nl</strong> of neem contact op met je gemeente. In het buitengebied is een vooroverleg met de gemeente vrijwel altijd aan te raden.
@@ -272,7 +272,7 @@ const artikelContent: Record<string, string> = {
         <li><strong>Rolstoeltoegankelijk:</strong> reken op minimaal 50 m² voor 1 persoon. Bredere deuren, draaicirkels en een aangepaste badkamer vragen meer ruimte.</li>
       </ul>
       <p>
-        Het is verstandig om niet het maximale oppervlak te benutten als dat niet nodig is. Een kleinere mantelzorgwoning is goedkoper in aanschaf, sneller te plaatsen en eenvoudiger te verwijderen wanneer de zorgrelatie eindigt.
+        Het is verstandig om niet het maximale oppervlak te benutten als dat niet nodig is. Een kleinere mantelzorgwoning is goedkoper in aanschaf, sneller te plaatsen en eenvoudiger te verwijderen wanneer de zorgrelatie eindigt. Bekijk onze <a href="/kennisbank/mantelzorgwoning-prijzen" class="text-primary font-medium hover:underline">prijzen per m²</a> voor een compleet overzicht.
       </p>
 
       <h2>Kan een mantelzorgwoning groter dan 100 m²?</h2>
@@ -367,7 +367,7 @@ const artikelContent: Record<string, string> = {
 
       <h2>Huren of kopen</h2>
       <p>
-        Niet iedereen kiest voor aanschaf. Huren is een alternatief dat vooral interessant is wanneer de zorgbehoefte tijdelijk is of wanneer het budget voor aanschaf ontbreekt.
+        Niet iedereen kiest voor aanschaf. Huren is een alternatief dat vooral interessant is wanneer de zorgbehoefte tijdelijk is of wanneer het budget voor aanschaf ontbreekt. Je kunt ook een <a href="/occasions/mantelzorgwoning" class="text-primary font-medium hover:underline">tweedehands mantelzorgwoning</a> kopen voor een lagere prijs.
       </p>
       <ul>
         <li><strong>Huur:</strong> 500 tot 900 euro per maand, vaak inclusief plaatsing en verwijdering na afloop. Bij een huurperiode van 5 jaar betaal je 30.000 tot 54.000 euro.</li>
@@ -407,7 +407,7 @@ const artikelContent: Record<string, string> = {
 
       <h3>Is een mantelzorgwoning goedkoper dan een verzorgingshuis?</h3>
       <p>
-        Ja, aanzienlijk. Een plek in een verzorgingshuis kost gemiddeld 2.000 tot 3.500 euro per maand (eigen bijdrage via het CAK). Bij een eigen mantelzorgwoning zijn de totale maandlasten doorgaans lager, zeker bij aanschaf.
+        Ja, aanzienlijk. Een plek in een verzorgingshuis kost gemiddeld 2.000 tot 3.500 euro per maand (eigen bijdrage via het CAK). Bij een eigen <a href="/mantelzorgwoning" class="text-primary font-medium hover:underline">mantelzorgwoning</a> zijn de totale maandlasten doorgaans lager, zeker bij aanschaf.
       </p>
 
       <h3>Wat is de prijs per m² van een mantelzorgwoning?</h3>
@@ -470,7 +470,7 @@ const artikelContent: Record<string, string> = {
 
       <h2>Wat kost een mantelzorgwoning?</h2>
       <p>
-        De kosten voor een mantelzorgwoning liggen gemiddeld tussen de <strong>50.000 en 150.000 euro</strong>. Een compact model van 35 m² begint rond de 45.000 euro, terwijl een luxe uitvoering van 80 m² kan oplopen tot 140.000 euro. Daarbovenop komen kosten voor fundering (3.000 tot 8.000 euro), transport (2.500 tot 5.500 euro) en nutsaansluitingen (3.000 tot 7.000 euro).
+        De kosten voor een mantelzorgwoning liggen gemiddeld tussen de <strong>50.000 en 150.000 euro</strong>. Een compact model van 35 m² begint rond de 45.000 euro, terwijl een luxe uitvoering van 80 m² kan oplopen tot 140.000 euro. Daarbovenop komen kosten voor fundering (3.000 tot 8.000 euro), transport (2.500 tot 5.500 euro) en nutsaansluitingen (3.000 tot 7.000 euro). Lees meer over het <a href="/kennisbank/mantelzorgwoning-financieren" class="text-primary font-medium hover:underline">financieren van een mantelzorgwoning</a>.
       </p>
       <p>
         Huren is ook een optie, met prijzen vanaf 500 tot 900 euro per maand. Via de Wmo kun je bij de gemeente een (gedeeltelijke) vergoeding aanvragen. Lees meer in ons artikel over <a href="/kennisbank/mantelzorgwoning-prijzen">mantelzorgwoning prijzen</a>.
@@ -542,7 +542,7 @@ const artikelContent: Record<string, string> = {
 
       <h2>Meldingsplicht bij de gemeente</h2>
       <p>
-        Vergunningsvrij betekent niet dat je de gemeente nergens van op de hoogte hoeft te stellen. Veel gemeenten hanteren een <strong>meldingsplicht</strong> voor mantelzorgwoningen. Bij deze melding toon je aan dat er een zorgrelatie is en dat de woning aan de eisen voldoet. De gemeente registreert de mantelzorgwoning en kan achteraf controleren.
+        Vergunningsvrij betekent niet dat je de gemeente nergens van op de hoogte hoeft te stellen. Veel gemeenten hanteren een <strong>meldingsplicht</strong> voor mantelzorgwoningen. Bij deze melding toon je aan dat er een zorgrelatie is en dat de woning aan de eisen voldoet. De gemeente registreert de mantelzorgwoning en kan achteraf controleren. Meer informatie vind je in ons artikel over <a href="/kennisbank/mantelzorgwoning-regels" class="text-primary font-medium hover:underline">alle regels voor mantelzorgwoningen</a>.
       </p>
       <p>
         Neem altijd contact op met het Wmo-loket of de afdeling Vergunningen van je gemeente voordat je een mantelzorgwoning bestelt.
@@ -569,7 +569,7 @@ const artikelContent: Record<string, string> = {
 
       <h2>Ontwikkelingen 2026: verruiming regels</h2>
       <p>
-        Minister Keijzer heeft een wetsvoorstel ingediend om het vergunningsvrij bouwen van mantelzorgwoningen te verruimen. De verwachte wijzigingen:
+        Minister Keijzer heeft een wetsvoorstel ingediend om het vergunningsvrij bouwen van <a href="/mantelzorgwoning" class="text-primary font-medium hover:underline">mantelzorgwoningen</a> te verruimen. De verwachte wijzigingen:
       </p>
       <ul>
         <li>Vergunningsvrij bouwen wordt een <strong>landelijk recht</strong> dat gemeenten niet meer mogen inperken</li>
@@ -632,7 +632,7 @@ const artikelContent: Record<string, string> = {
 
       <h2>Kosten van een mantelzorgwoning in de tuin</h2>
       <p>
-        De totale kosten voor een mantelzorgwoning in de tuin bestaan uit meerdere componenten:
+        De totale <a href="/kennisbank/mantelzorgwoning-prijzen" class="text-primary font-medium hover:underline">kosten voor een mantelzorgwoning</a> in de tuin bestaan uit meerdere componenten:
       </p>
       <ul>
         <li><strong>Aanschaf woning:</strong> 50.000 tot 120.000 euro, afhankelijk van grootte en afwerking</li>
@@ -677,7 +677,7 @@ const artikelContent: Record<string, string> = {
 
       <h3>Kun je een mantelzorgwoning in de tuin huren?</h3>
       <p>
-        Ja, diverse aanbieders verhuren mantelzorgwoningen vanaf 500 tot 900 euro per maand. Plaatsing en verwijdering zijn vaak inbegrepen. Dit is een goede optie als de zorgbehoefte tijdelijk is.
+        Ja, diverse aanbieders verhuren mantelzorgwoningen vanaf 500 tot 900 euro per maand. Plaatsing en verwijdering zijn vaak inbegrepen. Dit is een goede optie als de zorgbehoefte tijdelijk is. Bekijk het aanbod van <a href="/aanbieders" class="text-primary font-medium hover:underline">aanbieders in jouw regio</a>.
       </p>
     `,
   "regels-mantelzorgwoning-buitengebied": `
@@ -686,7 +686,7 @@ const artikelContent: Record<string, string> = {
         Ja, maar in het buitengebied gelden <strong>strengere regels</strong> dan binnen de bebouwde kom. Het bestemmingsplan speelt een cruciale rol: op grond met een <a href="/kennisbank/mantelzorgwoning-op-agrarische-grond" class="text-primary font-medium hover:underline">agrarische</a> of natuurbestemming is vergunningsvrij bouwen vaak niet mogelijk. In de meeste gevallen heb je een omgevingsvergunning of een ontheffing van het bestemmingsplan nodig.
       </p>
       <p>
-        De exacte regels verschillen per gemeente. Sommige gemeenten in landelijke gebieden hebben specifiek beleid ontwikkeld voor mantelzorgwoningen in het buitengebied. Neem altijd als eerste stap contact op met je gemeente.
+        De exacte regels verschillen per gemeente. Sommige gemeenten in landelijke gebieden hebben specifiek beleid ontwikkeld voor <a href="/mantelzorgwoning" class="text-primary font-medium hover:underline">mantelzorgwoningen</a> in het buitengebied. Neem altijd als eerste stap contact op met je gemeente.
       </p>
 
       <h2>Wanneer geldt vergunningsvrij bouwen niet?</h2>
@@ -739,7 +739,7 @@ const artikelContent: Record<string, string> = {
 
       <h3>Moet een mantelzorgwoning in het buitengebied verplaatsbaar zijn?</h3>
       <p>
-        Veel gemeenten eisen dat de mantelzorgwoning verplaatsbaar is, zodat deze na het einde van de zorgrelatie verwijderd kan worden. Een prefab of modulaire woning voldoet hier doorgaans aan.
+        Veel gemeenten eisen dat de mantelzorgwoning verplaatsbaar is, zodat deze na het einde van de zorgrelatie verwijderd kan worden. Een <a href="/prefab-woning" class="text-primary font-medium hover:underline">prefab</a> of modulaire woning voldoet hier doorgaans aan.
       </p>
     `,
   "mantelzorgwoning-na-overlijden": `
@@ -781,7 +781,7 @@ const artikelContent: Record<string, string> = {
 
       <h2>Financiele gevolgen</h2>
       <p>
-        Het einde van de mantelzorgrelatie heeft ook financiele gevolgen:
+        Het einde van de mantelzorgrelatie heeft ook financiele gevolgen. Lees meer over de <a href="/kennisbank/mantelzorgwoning-belasting" class="text-primary font-medium hover:underline">fiscale gevolgen van een mantelzorgwoning</a>.
       </p>
       <ul>
         <li><strong>WOZ-waarde:</strong> als de mantelzorgwoning wordt verwijderd, kan de WOZ-waarde van het perceel dalen. Dit verlaagt de ozb-aanslag.</li>
@@ -812,7 +812,7 @@ const artikelContent: Record<string, string> = {
         Op agrarische grond is het plaatsen van een mantelzorgwoning <strong>niet <a href="/kennisbank/mantelzorgwoning-vergunningsvrij" class="text-primary font-medium hover:underline">vergunningsvrij</a></strong> mogelijk. Het bestemmingsplan staat op agrarische grond in principe geen woonfunctie toe, behalve voor de bedrijfswoning van de agrariër. Voor een mantelzorgwoning heb je een omgevingsvergunning of ontheffing van het bestemmingsplan nodig.
       </p>
       <p>
-        Toch zijn er wel degelijk mogelijkheden. Veel gemeenten in landelijke gebieden hebben beleid ontwikkeld om mantelzorgwoningen op agrarische percelen toe te staan, mits aan specifieke voorwaarden wordt voldaan.
+        Toch zijn er wel degelijk mogelijkheden. Veel gemeenten in landelijke gebieden hebben beleid ontwikkeld om mantelzorgwoningen op agrarische percelen toe te staan, mits aan specifieke voorwaarden wordt voldaan. Lees ook over de <a href="/kennisbank/regels-mantelzorgwoning-buitengebied" class="text-primary font-medium hover:underline">algemene regels in het buitengebied</a>.
       </p>
 
       <h2>Waarom geldt vergunningsvrij bouwen niet op agrarische grond?</h2>
@@ -862,7 +862,7 @@ const artikelContent: Record<string, string> = {
 
       <h3>Mag een mantelzorgwoning op agrarische grond permanent blijven staan?</h3>
       <p>
-        Meestal niet. De meeste gemeenten verlenen een tijdelijke vergunning die gekoppeld is aan de mantelzorgrelatie. Na het einde van de zorg moet de woning verwijderd worden.
+        Meestal niet. De meeste gemeenten verlenen een tijdelijke vergunning die gekoppeld is aan de mantelzorgrelatie. Na het einde van de zorg moet de woning verwijderd worden. Lees wat je kunt doen in ons artikel over <a href="/kennisbank/mantelzorgwoning-na-overlijden" class="text-primary font-medium hover:underline">mantelzorgwoning na overlijden</a>.
       </p>
     `,
   "voor-en-nadelen-mantelzorgwoning": `
@@ -954,13 +954,13 @@ const artikelContent: Record<string, string> = {
 
       <h3>Kun je een mantelzorgwoning verkopen als je hem niet meer nodig hebt?</h3>
       <p>
-        Ja. Een modulaire of prefab mantelzorgwoning is goed verkoopbaar. De restwaarde ligt doorgaans tussen de 40 en 70% van de oorspronkelijke aanschafprijs. Op ons occasions-overzicht worden regelmatig tweedehands mantelzorgwoningen aangeboden.
+        Ja. Een modulaire of prefab mantelzorgwoning is goed verkoopbaar. De restwaarde ligt doorgaans tussen de 40 en 70% van de oorspronkelijke aanschafprijs. Op ons <a href="/occasions/mantelzorgwoning" class="text-primary font-medium hover:underline">occasions-overzicht</a> worden regelmatig tweedehands mantelzorgwoningen aangeboden.
       </p>
     `,
   "mantelzorgwoning-regels": `
       <h2>De belangrijkste regels op een rij</h2>
       <p>
-        De regels voor mantelzorgwoningen zijn vastgelegd in het Besluit bouwwerken leefomgeving (Bbl) en de Omgevingswet. Sinds 2024 mogen gemeenten eigen regels vaststellen, maar de landelijke richtlijnen vormen het uitgangspunt. In 2026 werkt het kabinet aan een wetsvoorstel om vergunningsvrij bouwen weer <strong>landelijk uniform</strong> te regelen.
+        De regels voor <a href="/mantelzorgwoning" class="text-primary font-medium hover:underline">mantelzorgwoningen</a> zijn vastgelegd in het Besluit bouwwerken leefomgeving (Bbl) en de Omgevingswet. Sinds 2024 mogen gemeenten eigen regels vaststellen, maar de landelijke richtlijnen vormen het uitgangspunt. In 2026 werkt het kabinet aan een wetsvoorstel om vergunningsvrij bouwen weer <strong>landelijk uniform</strong> te regelen.
       </p>
       <p>
         Hieronder vind je alle regels die nu gelden, van afmetingen tot zorgrelatie.
@@ -1066,7 +1066,7 @@ const artikelContent: Record<string, string> = {
   "schenkbelasting-mantelzorgwoning": `
       <h2>Wanneer betaal je schenkbelasting over een mantelzorgwoning?</h2>
       <p>
-        Als je ouders een mantelzorgwoning betalen die op <strong>jouw grond</strong> wordt geplaatst, kan de Belastingdienst dit beschouwen als een schenking. De redenering: je ouders betalen de woning, maar omdat deze op jouw perceel staat, word jij door natrekking eigenaar. De waarde van de woning is dan een schenking van je ouders aan jou.
+        Als je ouders een <a href="/mantelzorgwoning" class="text-primary font-medium hover:underline">mantelzorgwoning</a> betalen die op <strong>jouw grond</strong> wordt geplaatst, kan de Belastingdienst dit beschouwen als een schenking. De redenering: je ouders betalen de woning, maar omdat deze op jouw perceel staat, word jij door natrekking eigenaar. De waarde van de woning is dan een schenking van je ouders aan jou.
       </p>
       <p>
         Dit kan een forse belastingclaim opleveren. Bij een mantelzorgwoning van 80.000 euro en een jaarlijkse vrijstelling van circa 6.600 euro (ouder-kind, 2026) betaal je over het meerdere <strong>10 tot 20% schenkbelasting</strong>, afhankelijk van de relatie en het bedrag.
@@ -1104,9 +1104,12 @@ const artikelContent: Record<string, string> = {
       <h2>Andere aandachtspunten bij de notaris</h2>
       <ul>
         <li><strong>Gebruikersvergoeding:</strong> overweeg om een symbolische gebruikersvergoeding vast te leggen voor het gebruik van de grond door je ouders</li>
-        <li><strong>Einde opstalrecht:</strong> leg vast wat er gebeurt met het opstalrecht wanneer de zorgrelatie eindigt (verwijdering, verkoop, overdracht)</li>
+        <li><strong>Einde opstalrecht:</strong> leg vast wat er gebeurt met het opstalrecht wanneer de zorgrelatie eindigt (verwijdering, verkoop, overdracht). Lees meer over <a href="/kennisbank/mantelzorgwoning-na-overlijden" class="text-primary font-medium hover:underline">wat er na overlijden met een mantelzorgwoning</a> gebeurt.</li>
         <li><strong>Erfrecht:</strong> het opstalrecht valt bij overlijden in de nalatenschap van je ouders. Maak hierover afspraken in een testament</li>
       </ul>
+      <p>
+        Lees meer over de bredere <a href="/kennisbank/mantelzorgwoning-belasting" class="text-primary font-medium hover:underline">fiscale gevolgen van een mantelzorgwoning</a> in ons overzichtsartikel.
+      </p>
 
       <h2>Veelgestelde vragen</h2>
       <h3>Is een opstalrecht verplicht bij een mantelzorgwoning?</h3>
@@ -1127,7 +1130,7 @@ const artikelContent: Record<string, string> = {
   "mantelzorgwoning-eigen-huisnummer": `
       <h2>Heeft een mantelzorgwoning een eigen huisnummer?</h2>
       <p>
-        Een vergunningsvrije mantelzorgwoning heeft <strong>niet standaard een eigen huisnummer</strong>. De woning wordt beschouwd als bijgebouw bij de hoofdwoning en deelt het adres. Maar je kunt bij de gemeente een apart huisnummer aanvragen als de woning over eigen voorzieningen beschikt.
+        Een <a href="/kennisbank/mantelzorgwoning-vergunningsvrij" class="text-primary font-medium hover:underline">vergunningsvrije</a> mantelzorgwoning heeft <strong>niet standaard een eigen huisnummer</strong>. De woning wordt beschouwd als bijgebouw bij de hoofdwoning en deelt het adres. Maar je kunt bij de gemeente een apart huisnummer aanvragen als de woning over eigen voorzieningen beschikt.
       </p>
       <p>
         De Wet basisregistratie adressen en gebouwen (BAG) bepaalt dat een verblijfsobject met een <strong>eigen toegang, keuken, badkamer en toilet</strong> recht heeft op een eigen adres. Veel mantelzorgwoningen voldoen hieraan.
@@ -1180,18 +1183,18 @@ const artikelContent: Record<string, string> = {
 
       <h3>Heeft een eigen huisnummer gevolgen voor mijn AOW?</h3>
       <p>
-        Ja. Met een eigen adres wordt de bewoner als alleenstaand huishouden beschouwd. Dit kan leiden tot een hogere AOW-uitkering (alleenstaanden-norm) en hogere zorgtoeslag.
+        Ja. Met een eigen adres wordt de bewoner als alleenstaand huishouden beschouwd. Dit kan leiden tot een hogere AOW-uitkering (alleenstaanden-norm) en hogere zorgtoeslag. Lees meer over alle <a href="/kennisbank/mantelzorgwoning-belasting" class="text-primary font-medium hover:underline">fiscale gevolgen van een mantelzorgwoning</a>.
       </p>
 
       <h3>Kan de gemeente een eigen huisnummer weigeren?</h3>
       <p>
-        De gemeente kan weigeren als de mantelzorgwoning niet als zelfstandig verblijfsobject kwalificeert, bijvoorbeeld als er geen eigen keuken of badkamer aanwezig is. In dat geval deelt de woning het adres van de hoofdwoning.
+        De gemeente kan weigeren als de mantelzorgwoning niet als zelfstandig verblijfsobject kwalificeert, bijvoorbeeld als er geen eigen keuken of badkamer aanwezig is. In dat geval deelt de woning het adres van de <a href="/mantelzorgwoning" class="text-primary font-medium hover:underline">hoofdwoning</a>.
       </p>
     `,
   "mantelzorgwoning-belasting": `
       <h2>Welke belastingen spelen bij een mantelzorgwoning?</h2>
       <p>
-        Een mantelzorgwoning heeft gevolgen voor meerdere belastingen: <strong>inkomstenbelasting, onroerendezaakbelasting, schenkbelasting en toeslagen</strong>. De exacte gevolgen hangen af van wie de woning betaalt, op wiens grond deze staat en of er een eigen huisnummer is.
+        Een <a href="/mantelzorgwoning" class="text-primary font-medium hover:underline">mantelzorgwoning</a> heeft gevolgen voor meerdere belastingen: <strong>inkomstenbelasting, onroerendezaakbelasting, schenkbelasting en toeslagen</strong>. De exacte gevolgen hangen af van wie de woning betaalt, op wiens grond deze staat en of er een eigen huisnummer is.
       </p>
       <p>
         Hieronder behandelen we alle fiscale aandachtspunten zodat je niet voor verrassingen komt te staan.
@@ -1264,7 +1267,7 @@ const artikelContent: Record<string, string> = {
   "mantelzorgwoning-financieren": `
       <h2>Hoe financier je een mantelzorgwoning?</h2>
       <p>
-        Er zijn meerdere manieren om een mantelzorgwoning te financieren. De beste optie hangt af van je persoonlijke situatie: heb je overwaarde op je huis, spaargeld beschikbaar, of geef je de voorkeur aan huur? Hieronder behandelen we alle mogelijkheden.
+        Er zijn meerdere manieren om een <a href="/mantelzorgwoning" class="text-primary font-medium hover:underline">mantelzorgwoning</a> te financieren. De beste optie hangt af van je persoonlijke situatie: heb je overwaarde op je huis, spaargeld beschikbaar, of geef je de voorkeur aan huur? Hieronder behandelen we alle mogelijkheden.
       </p>
 
       <h2>Hypotheek verhogen</h2>
@@ -1383,7 +1386,7 @@ const artikelContent: Record<string, string> = {
       <ul>
         <li><strong>Beperkte ruimte:</strong> compact wonen vraagt om een minimalistische levensstijl. Niet geschikt voor grote gezinnen.</li>
         <li><strong>Locatie vinden:</strong> niet overal mag een tiny house geplaatst worden. Je hebt een locatie nodig waar het bestemmingsplan dit toelaat.</li>
-        <li><strong>Vergunningen:</strong> voor permanente bewoning is vrijwel altijd een omgevingsvergunning nodig.</li>
+        <li><strong>Vergunningen:</strong> voor permanente bewoning is vrijwel altijd een omgevingsvergunning nodig. Lees meer in ons artikel over <a href="/kennisbank/tiny-house-regels" class="text-primary font-medium hover:underline">tiny house regels</a>.</li>
         <li><strong>Financiering:</strong> niet alle banken verstrekken een hypotheek voor een tiny house. Een persoonlijke lening of eigen spaargeld is vaak nodig.</li>
       </ul>
 
@@ -1435,7 +1438,7 @@ const artikelContent: Record<string, string> = {
       </p>
       <ul>
         <li><strong>Tiny house dorpen:</strong> steeds meer gemeenten wijzen speciale kavels aan voor tiny houses. Hier is het bestemmingsplan al aangepast.</li>
-        <li><strong>Eigen grond:</strong> als je eigen grond hebt met een woonbestemming, kun je een vergunning aanvragen voor een tiny house.</li>
+        <li><strong>Eigen grond:</strong> als je eigen grond hebt met een woonbestemming, kun je een vergunning aanvragen voor een <a href="/tiny-house" class="text-primary font-medium hover:underline">tiny house</a>.</li>
         <li><strong>Huurkavels:</strong> diverse aanbieders en gemeenten bieden kavels te huur aan voor tiny houses, met huurprijzen van 250 tot 500 euro per maand.</li>
         <li><strong>Achtertuin:</strong> een tiny house in de achtertuin is mogelijk als mantelzorgwoning (vergunningsvrij onder voorwaarden) of met een vergunning.</li>
       </ul>
@@ -1484,7 +1487,7 @@ const artikelContent: Record<string, string> = {
 
       <h3>Hoe vind je een locatie voor een tiny house?</h3>
       <p>
-        Via tiny house dorpen (gemeentelijke initiatieven), huurkavels, eigen grond met woonbestemming, of als mantelzorgwoning in de achtertuin. Steeds meer gemeenten bieden mogelijkheden voor tiny house bewoning.
+        Via tiny house dorpen (gemeentelijke initiatieven), huurkavels, eigen grond met woonbestemming, of als mantelzorgwoning in de achtertuin. Steeds meer gemeenten bieden mogelijkheden voor tiny house bewoning. Bekijk het aanbod via <a href="/occasions/tiny-house" class="text-primary font-medium hover:underline">tweedehands tiny houses</a>.
       </p>
 
       <h3>Moet een tiny house op wielen ook aan het bouwbesluit voldoen?</h3>
@@ -1495,7 +1498,7 @@ const artikelContent: Record<string, string> = {
   "hoe-groot-is-een-tiny-house": `
       <h2>Standaard afmetingen van een tiny house</h2>
       <p>
-        Een tiny house heeft doorgaans een woonoppervlakte van <strong>15 tot 50 vierkante meter</strong>. Er is geen wettelijke definitie van "tiny", maar in de praktijk wordt alles onder 50 m² als tiny house beschouwd. De meest populaire maten liggen tussen de 20 en 35 m².
+        Een <a href="/tiny-house" class="text-primary font-medium hover:underline">tiny house</a> heeft doorgaans een woonoppervlakte van <strong>15 tot 50 vierkante meter</strong>. Er is geen wettelijke definitie van "tiny", maar in de praktijk wordt alles onder 50 m² als tiny house beschouwd. De meest populaire maten liggen tussen de 20 en 35 m².
       </p>
       <p>
         De afmetingen hangen sterk af van het type: een tiny house op wielen is beperkt in breedte door transportregels, terwijl een vast tiny house dezelfde breedte kan hebben als een reguliere woning.
@@ -1531,7 +1534,7 @@ const artikelContent: Record<string, string> = {
 
       <h2>Minimale afmetingen volgens het bouwbesluit</h2>
       <p>
-        Het Besluit bouwwerken leefomgeving (Bbl) stelt minimale eisen aan de grootte van een woning:
+        Het Besluit bouwwerken leefomgeving (Bbl) stelt minimale eisen aan de grootte van een woning. Meer over de bijbehorende regels lees je in ons artikel over <a href="/kennisbank/tiny-house-regels" class="text-primary font-medium hover:underline">tiny house regels</a>:
       </p>
       <ul>
         <li><strong>Verblijfsruimte:</strong> minimaal 18 m² (exclusief badkamer en toilet)</li>
@@ -1574,7 +1577,7 @@ const artikelContent: Record<string, string> = {
 
       <h3>Hoeveel weegt een tiny house op wielen?</h3>
       <p>
-        Een tiny house op wielen weegt doorgaans 2.500 tot 3.500 kg. Voor wegtransport met een BE-rijbewijs geldt een maximum van 3.500 kg. Zwaardere modellen vereisen een speciaal transport.
+        Een tiny house op wielen weegt doorgaans 2.500 tot 3.500 kg. Voor wegtransport met een BE-rijbewijs geldt een maximum van 3.500 kg. Zwaardere modellen vereisen een speciaal transport. Bekijk ook <a href="/kennisbank/hoeveel-kost-een-tiny-house" class="text-primary font-medium hover:underline">wat een tiny house kost</a> voor een compleet overzicht.
       </p>
     `,
 };
@@ -1650,7 +1653,7 @@ export default async function ArtikelPage({ params }: ArtikelPageProps) {
       url: "https://zorgwoningvergelijker.nl",
       logo: {
         "@type": "ImageObject",
-        url: "https://zorgwoningvergelijker.nl/images/logo.png",
+        url: "https://zorgwoningvergelijker.nl/icon.svg",
       },
     },
     mainEntityOfPage: {
@@ -1662,12 +1665,41 @@ export default async function ArtikelPage({ params }: ArtikelPageProps) {
     timeRequired: `PT${artikel.leestijd}M`,
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://zorgwoningvergelijker.nl",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Kennisbank",
+        item: "https://zorgwoningvergelijker.nl/kennisbank",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: artikel.titel,
+        item: artikelUrl,
+      },
+    ],
+  };
+
   return (
     <>
       {/* JSON-LD Structured Data */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
       {/* Breadcrumb */}

@@ -42,6 +42,7 @@ export default function KennisbankPreview() {
                     width={600}
                     height={338}
                     className="w-full aspect-[16/9] object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                 ) : (
                   <div className="h-36 bg-primary-50 flex items-center justify-center">

@@ -201,9 +201,9 @@ export default function Header() {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 4, scale: 0.98 }}
                     transition={{ duration: 0.15, ease: [0.16, 1, 0.3, 1] }}
-                    className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[700px] bg-white shadow-xl rounded-2xl border border-gray-200/80 p-6"
+                    className="absolute top-full left-0 mt-3 w-[min(700px,calc(100vw-2rem))] bg-white shadow-xl rounded-2xl border border-gray-200/80 p-6"
                   >
-                    <div className="grid grid-cols-5 gap-6">
+                    <div className="grid grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-6">
                       {woningtypen.map((group) => (
                         <div key={group.category}>
                           <h3 className="text-[0.65rem] font-bold text-primary uppercase tracking-[0.08em] mb-2.5">
@@ -280,9 +280,9 @@ export default function Header() {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 4, scale: 0.98 }}
                     transition={{ duration: 0.15, ease: [0.16, 1, 0.3, 1] }}
-                    className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[700px] bg-white shadow-xl rounded-2xl border border-gray-200/80 p-6"
+                    className="absolute top-full left-0 mt-3 w-[min(700px,calc(100vw-2rem))] bg-white shadow-xl rounded-2xl border border-gray-200/80 p-6"
                   >
-                    <div className="grid grid-cols-5 gap-6">
+                    <div className="grid grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-6">
                       {woningtypen.map((group) => (
                         <div key={group.category}>
                           <h3 className="text-[0.65rem] font-bold text-primary uppercase tracking-[0.08em] mb-2.5">

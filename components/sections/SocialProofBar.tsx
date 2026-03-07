@@ -84,7 +84,9 @@ export default function SocialProofBar() {
         <ScrollReveal preset="fade-up">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4 lg:gap-6">
             {stats.map((stat, i) => (
-              <StatItem key={i} stat={stat} isVisible={isVisible} />
+              <div key={i} className={i === stats.length - 1 ? "col-span-2 md:col-span-1 max-w-[200px] mx-auto md:max-w-none" : undefined}>
+                <StatItem stat={stat} isVisible={isVisible} />
+              </div>
             ))}
           </div>
         </ScrollReveal>
@@ -100,10 +102,11 @@ export default function SocialProofBar() {
                   alt={item.alt}
                   width={96}
                   height={96}
-                  className="w-10 h-10 object-contain flex-shrink-0 drop-shadow-sm"
+                  className="w-8 h-8 sm:w-10 sm:h-10 object-contain flex-shrink-0 drop-shadow-sm"
+                  sizes="40px"
                 />
                 <div className="min-w-0">
-                  <div className="font-semibold text-body-sm text-dark truncate">{item.label}</div>
+                  <div className="font-semibold text-caption sm:text-body-sm text-dark">{item.label}</div>
                   <div className="text-caption text-gray-600 hidden sm:block">{item.description}</div>
                 </div>
               </div>
@@ -133,6 +136,7 @@ function StatItem({
         width={160}
         height={160}
         className="w-20 h-20 object-contain mx-auto mb-4 drop-shadow"
+        sizes="80px"
       />
       <div className="text-2xl md:text-[1.75rem] font-extrabold text-primary font-heading tabular-nums tracking-tight leading-none">
         {stat.prefix || ""}{count}{stat.suffix}

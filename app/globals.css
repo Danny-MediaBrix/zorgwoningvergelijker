@@ -41,25 +41,23 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 0;
-    height: 0;
+    width: max(300px, 250%);
+    height: max(300px, 250%);
     border-radius: 9999px;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scale(0);
     /* Hover-out: reverse shrink */
-    transition: width 500ms cubic-bezier(0.4, 0, 0.2, 1),
-                height 500ms cubic-bezier(0.4, 0, 0.2, 1),
+    transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1),
                 opacity 300ms ease 200ms;
     opacity: 0;
     pointer-events: none;
+    will-change: transform, opacity;
   }
 
   .group:hover .flow-circle {
-    width: max(300px, 250%);
-    height: max(300px, 250%);
+    transform: translate(-50%, -50%) scale(1);
     opacity: 1;
     /* Hover-in: smooth expand */
-    transition: width 600ms cubic-bezier(0.4, 0, 0.2, 1),
-                height 600ms cubic-bezier(0.4, 0, 0.2, 1),
+    transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1),
                 opacity 200ms ease;
   }
 

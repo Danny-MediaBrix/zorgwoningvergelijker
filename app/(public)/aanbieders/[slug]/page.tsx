@@ -73,14 +73,14 @@ export default async function AanbiederPage({
   params,
 }: AanbiederPageProps) {
   const { slug } = await params;
-  const aanbieder = await getAanbiederBySlug(slug);
+  const [aanbieder, allAanbieders] = await Promise.all([
+    getAanbiederBySlug(slug),
+    getAllAanbieders(),
+  ]);
 
   if (!aanbieder) {
     notFound();
   }
-
-  // Top 3 by rating
-  const allAanbieders = await getAllAanbieders();
   const featuredSlugs = new Set(
     [...allAanbieders]
       .sort((a, b) => b.beoordeling - a.beoordeling)

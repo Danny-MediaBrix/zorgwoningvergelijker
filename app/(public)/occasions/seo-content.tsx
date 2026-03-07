@@ -17,7 +17,7 @@ export const woningtypeSeoContent: Record<string, OccasionsSeoContent> = {
         <p>
           De prijzen voor een occasion tiny house liggen tussen <strong>€15.000 en €80.000</strong>,
           afhankelijk van leeftijd, afmetingen en afwerkingsniveau. Een nieuw tiny house kost
-          al snel €55.000 tot €100.000. Bij een tweedehands model bespaar je dus duizenden
+          al snel €55.000 tot €100.000. Bekijk ons <Link href="/kennisbank/hoeveel-kost-een-tiny-house" className="text-primary font-medium hover:underline">volledige prijsoverzicht</Link>. Bij een tweedehands model bespaar je dus duizenden
           euro&apos;s zonder in te leveren op woonkwaliteit. Modellen van 1 tot 3 jaar oud zijn
           het populairst: ze zijn ingelopen, eventuele kinderziektes zijn verholpen en de
           waardedaling is al achter de rug.
@@ -28,7 +28,7 @@ export const woningtypeSeoContent: Record<string, OccasionsSeoContent> = {
           <li><strong>Vocht en schimmel</strong>:Controleer alle hoeken, raamkozijnen en de onderzijde van het dak. Vochtschade is het meest voorkomende probleem bij tweedehands tiny houses.</li>
           <li><strong>Constructie en isolatie</strong>:Vraag naar het type isolatiemateriaal en de dikte. Een goed geïsoleerd tiny house bespaart flink op stookkosten.</li>
           <li><strong>Leidingen en installaties</strong>:Laat de waterpomp, boiler, accu&apos;s en elektrische installatie controleren. Vervangingskosten lopen snel op.</li>
-          <li><strong>Vergunningen</strong>:Niet elke gemeente staat een tiny house toe. Check vooraf bij je gemeente of je een omgevingsvergunning nodig hebt voor de beoogde locatie.</li>
+          <li><strong>Vergunningen</strong>:Niet elke gemeente staat een tiny house toe. Check vooraf bij je gemeente of je een <Link href="/kennisbank/tiny-house-regels" className="text-primary font-medium hover:underline">omgevingsvergunning</Link> nodig hebt voor de beoogde locatie.</li>
           <li><strong>Transport</strong>:Een tiny house op wielen is eenvoudiger te verplaatsen, maar reken op €1.500 tot €4.000 transportkosten afhankelijk van de afstand.</li>
         </ul>
 
@@ -43,7 +43,7 @@ export const woningtypeSeoContent: Record<string, OccasionsSeoContent> = {
         <p>
           <strong>Wil je tiny houses vergelijken op prijs, afmeting en staat?</strong> Gebruik
           de filters op deze pagina om het aanbod te verfijnen, of start
-          de <a href="/configurator">configurator</a> om jouw ideale tiny house samen te stellen.
+          de <a href="/configurator">configurator</a> om jouw ideale <Link href="/tiny-house" className="text-primary font-medium hover:underline">tiny house</Link> samen te stellen.
         </p>
       </>
     ),
@@ -83,6 +83,7 @@ export const woningtypeSeoContent: Record<string, OccasionsSeoContent> = {
           Ter vergelijking: een nieuwe micro-woning kost €50.000 tot €160.000. De prijs
           hangt af van de oppervlakte, het bouwjaar en de mate van afwerking. Volledig
           uitgeruste modellen met keuken, badkamer en slaapruimte vind je al vanaf €35.000.
+          Vergelijk ze in de <Link href="/configurator" className="text-primary font-medium hover:underline">configurator</Link>.
         </p>
 
         <h2>Micro-woning vs. tiny house: het verschil</h2>
@@ -98,7 +99,7 @@ export const woningtypeSeoContent: Record<string, OccasionsSeoContent> = {
         <ul>
           <li><strong>Fundering</strong>:Check of de micro-woning geschikt is voor de fundering op jouw perceel. Een betonplaat, schroefpalen of poeren zijn gangbare opties.</li>
           <li><strong>Isolatiewaarde</strong>:Vraag naar de Rc-waarde van vloer, wanden en dak. Voor permanent wonen geldt minimaal Rc 3,5 voor wanden.</li>
-          <li><strong>Vergunning</strong>:Micro-woningen vallen onder de bouwregelgeving. Informeer bij je gemeente naar de mogelijkheden binnen het bestemmingsplan.</li>
+          <li><strong>Vergunning</strong>:Micro-woningen vallen onder de <Link href="/kennisbank/mantelzorgwoning-regels" className="text-primary font-medium hover:underline">bouwregelgeving</Link>. Informeer bij je gemeente naar de mogelijkheden binnen het bestemmingsplan.</li>
           <li><strong>Aansluitingen</strong>:Controleer of de woning voorbereid is op aansluiting van water, elektra en riolering.</li>
         </ul>
 
@@ -139,7 +140,7 @@ export const woningtypeSeoContent: Record<string, OccasionsSeoContent> = {
         <h2>Wat kost een tweedehands mantelzorgwoning?</h2>
         <p>
           De gemiddelde prijs voor een occasion mantelzorgwoning ligt tussen
-          de <strong>€25.000 en €80.000</strong>. Een nieuwe mantelzorgwoning kost €65.000
+          de <strong>€25.000 en €80.000</strong>. Bekijk een <Link href="/kennisbank/mantelzorgwoning-prijzen" className="text-primary font-medium hover:underline">volledig overzicht van mantelzorgwoning prijzen</Link>. Een nieuwe mantelzorgwoning kost €65.000
           tot €150.000. Het prijsverschil wordt bepaald door de leeftijd, het formaat
           (maximaal 100 m² volgens regelgeving) en de aanwezige zorgaanpassingen zoals
           drempelloze toegang, steunbeugels en brede deuropeningen.
@@ -147,7 +148,7 @@ export const woningtypeSeoContent: Record<string, OccasionsSeoContent> = {
 
         <h2>Regelgeving en vergunningen</h2>
         <p>
-          Een mantelzorgwoning mag je zonder omgevingsvergunning in de tuin plaatsen
+          Een mantelzorgwoning mag je <Link href="/kennisbank/mantelzorgwoning-vergunningsvrij" className="text-primary font-medium hover:underline">zonder omgevingsvergunning</Link> <Link href="/kennisbank/mantelzorgwoning-in-tuin" className="text-primary font-medium hover:underline">in de tuin</Link> plaatsen
           als het voldoet aan de <strong>voorwaarden van het Besluit bouwwerken leefomgeving</strong>:
           maximaal 100 m², gelijkvloers, en bedoeld voor een persoon met een aantoonbare
           zorgbehoefte. Zodra de zorgrelatie eindigt, moet de woning worden verwijderd of
@@ -199,7 +200,7 @@ export const woningtypeSeoContent: Record<string, OccasionsSeoContent> = {
         <p>
           Een kangoeroewoning bestaat uit <strong>twee zelfstandige wooneenheden</strong> die
           aan elkaar gebouwd of verbonden zijn, elk met een eigen ingang, keuken en badkamer.
-          Dit concept is ideaal voor mantelzorgsituaties: je woont dichtbij je familielid
+          Dit concept is ideaal voor <Link href="/kennisbank/wat-is-een-mantelzorgwoning" className="text-primary font-medium hover:underline">mantelzorgsituaties</Link>: je woont dichtbij je familielid
           maar behoudt volledige privacy. De modulaire variant wordt als losse unit aan een
           bestaande woning gekoppeld.
         </p>
@@ -216,13 +217,13 @@ export const woningtypeSeoContent: Record<string, OccasionsSeoContent> = {
         <h2>Waar let je op?</h2>
         <ul>
           <li><strong>Aansluitmogelijkheden</strong>:Controleer of de unit past bij de indeling van de bestaande woning. Meet de beschikbare ruimte nauwkeurig op.</li>
-          <li><strong>Vergunning</strong>:Een kangoeroewoning vereist doorgaans een omgevingsvergunning. Informeer vooraf bij je gemeente.</li>
+          <li><strong>Vergunning</strong>:Een kangoeroewoning vereist doorgaans een <Link href="/kennisbank/mantelzorgwoning-regels" className="text-primary font-medium hover:underline">omgevingsvergunning</Link>. Informeer vooraf bij je gemeente.</li>
           <li><strong>Zelfstandigheid</strong>:Beide units moeten een eigen toegang, keuken, badkamer en woonruimte hebben om als kangoeroewoning te gelden.</li>
           <li><strong>Toegankelijkheid</strong>:Voor zorgdoeleinden is een gelijkvloerse indeling met brede deuren en drempelloze toegang essentieel.</li>
         </ul>
 
         <p>
-          <strong>Op zoek naar een kangoeroewoning?</strong> Gebruik de filters op deze
+          <strong>Op zoek naar een <Link href="/kangoeroewoning" className="text-primary font-medium hover:underline">kangoeroewoning</Link>?</strong> Gebruik de filters op deze
           pagina of bekijk de mogelijkheden via onze <a href="/configurator">configurator</a>.
         </p>
       </>
@@ -267,7 +268,7 @@ export const woningtypeSeoContent: Record<string, OccasionsSeoContent> = {
         <h2>Met of zonder staanplaats</h2>
         <p>
           Een belangrijk onderscheid is of het chalet <strong>met of zonder staanplaats</strong> wordt
-          verkocht. Bij een chalet met staanplaats op een vakantiepark betaal je naast de
+          verkocht. Bij een chalet met staanplaats op een vakantiepark — vergelijkbaar met een <Link href="/vakantiebungalow" className="text-primary font-medium hover:underline">vakantiebungalow</Link> — betaal je naast de
           aanschafprijs jaarlijkse parklasten (€2.500 tot €6.000). Een chalet zonder
           staanplaats is goedkoper, maar je hebt zelf een locatie nodig en moet
           transportkosten inrekenen.
@@ -283,7 +284,7 @@ export const woningtypeSeoContent: Record<string, OccasionsSeoContent> = {
 
         <p>
           <strong>Wil je chalets vergelijken op prijs en specificaties?</strong> Gebruik de
-          filters hierboven of bekijk alle <a href="/chalet">informatie over chalets</a>.
+          filters hierboven, start de <Link href="/configurator" className="text-primary font-medium hover:underline">configurator</Link> of bekijk alle <a href="/chalet">informatie over chalets</a>.
         </p>
       </>
     ),
@@ -311,7 +312,7 @@ export const woningtypeSeoContent: Record<string, OccasionsSeoContent> = {
           Een tweedehands lodge combineert de <strong>sfeer van een vakantiehuis</strong> met
           het comfort van een volwaardige woning. Occasion lodges zijn beschikbaar vanaf
           €30.000 en bieden direct woongenot, vaak op aantrekkelijke locaties bij
-          vakantieparken in heel Nederland.
+          vakantieparken in heel Nederland, vergelijkbaar met een <Link href="/vakantiebungalow" className="text-primary font-medium hover:underline">vakantiebungalow</Link>.
         </p>
 
         <h2>Wat kost een tweedehands lodge?</h2>
@@ -341,7 +342,7 @@ export const woningtypeSeoContent: Record<string, OccasionsSeoContent> = {
 
         <p>
           <strong>Een lodge vergelijken met andere woningtypen?</strong> Bekijk
-          ons <a href="/lodge">overzicht van lodges</a> of gebruik de filters hierboven.
+          ons <a href="/lodge">overzicht van lodges</a>, gebruik de filters hierboven of start de <Link href="/configurator" className="text-primary font-medium hover:underline">configurator</Link>.
         </p>
       </>
     ),
@@ -386,7 +387,8 @@ export const woningtypeSeoContent: Record<string, OccasionsSeoContent> = {
           Bij een vakantiebungalow op een park heb je vaak de keuze: <strong>zelf
           gebruiken, verhuren of combineren</strong>. Verhuur kan een deel van de vaste
           lasten dekken. Let wel op het verhuurreglement van het park en eventuele
-          verplichtingen om deel te nemen aan een verhuurpool.
+          verplichtingen om deel te nemen aan een verhuurpool. Overweeg ook een <Link href="/lodge" className="text-primary font-medium hover:underline">lodge</Link> als
+          alternatief voor meer woonruimte.
         </p>
 
         <h2>Waar let je op bij aankoop?</h2>
@@ -399,7 +401,7 @@ export const woningtypeSeoContent: Record<string, OccasionsSeoContent> = {
 
         <p>
           <strong>Op zoek naar de ideale vakantiebungalow?</strong> Filter het aanbod
-          op prijs en locatie hierboven, of bekijk
+          op prijs en locatie hierboven, start de <Link href="/configurator" className="text-primary font-medium hover:underline">configurator</Link> of bekijk
           alle <a href="/vakantiebungalow">informatie over vakantiebungalows</a>.
         </p>
       </>
@@ -446,6 +448,7 @@ export const woningtypeSeoContent: Record<string, OccasionsSeoContent> = {
           gecontroleerde omstandigheden. Dat betekent een constante kwaliteit, betere
           isolatiewaarden en minder bouwfouten dan traditionele bouw. Bij een
           tweedehands exemplaar profiteer je van deze kwaliteit tegen een lagere prijs.
+          Vergelijk ook de <Link href="/systeemwoning" className="text-primary font-medium hover:underline">systeemwoning</Link> als alternatief modulair woningtype.
         </p>
 
         <h2>Checklist bij aankoop</h2>
@@ -453,12 +456,12 @@ export const woningtypeSeoContent: Record<string, OccasionsSeoContent> = {
           <li><strong>Bouwbesluit-conformiteit</strong>:Controleer of de woning voldoet aan het huidige Bouwbesluit. Oudere modellen voldoen niet altijd aan de laatste isolatie-eisen.</li>
           <li><strong>Fundering</strong>:Prefab woningen vereisen een geschikte fundering. Laat vooraf een grondonderzoek uitvoeren op je perceel.</li>
           <li><strong>Demontage en transport</strong>:Niet alle prefab woningen zijn eenvoudig te verplaatsen. Informeer naar de mogelijkheid en kosten van demontage.</li>
-          <li><strong>Vergunning</strong>:Een prefab woning is een volwaardige woning en vereist altijd een omgevingsvergunning op de nieuwe locatie.</li>
+          <li><strong>Vergunning</strong>:Een prefab woning is een volwaardige woning en vereist altijd een <Link href="/kennisbank/tiny-house-regels" className="text-primary font-medium hover:underline">omgevingsvergunning</Link> op de nieuwe locatie.</li>
         </ul>
 
         <p>
           <strong>Wil je prefab woningen vergelijken?</strong> Gebruik de filters op deze
-          pagina of bekijk alle <a href="/prefab-woning">informatie over prefab woningen</a>.
+          pagina, start de <Link href="/configurator" className="text-primary font-medium hover:underline">configurator</Link> of bekijk alle <a href="/prefab-woning">informatie over prefab woningen</a>.
         </p>
       </>
     ),
@@ -504,6 +507,7 @@ export const woningtypeSeoContent: Record<string, OccasionsSeoContent> = {
           wonen</strong>. Ze voldoen aan het Bouwbesluit, zijn goed geïsoleerd en hebben
           een volledige keuken en badkamer. Het &apos;flex&apos;-aspect verwijst naar de
           mogelijkheid om de woning te verplaatsen, niet naar een tijdelijke woonduur.
+          Vergelijk ook een <Link href="/woonunit" className="text-primary font-medium hover:underline">woonunit</Link> of <Link href="/containerwoning" className="text-primary font-medium hover:underline">containerwoning</Link> als vergelijkbare verplaatsbare woonoplossing.
         </p>
 
         <h2>Aandachtspunten bij aankoop</h2>
@@ -516,7 +520,7 @@ export const woningtypeSeoContent: Record<string, OccasionsSeoContent> = {
 
         <p>
           <strong>Flexwoningen vergelijken?</strong> Bekijk het aanbod via de filters
-          hierboven of lees meer op onze <a href="/flexwoning">flexwoning-pagina</a>.
+          hierboven, start de <Link href="/configurator" className="text-primary font-medium hover:underline">configurator</Link> of lees meer op onze <a href="/flexwoning">flexwoning-pagina</a>.
         </p>
       </>
     ),
@@ -562,7 +566,7 @@ export const woningtypeSeoContent: Record<string, OccasionsSeoContent> = {
           15 m²) en de <strong>40-foot container</strong> (circa 30 m²). Meerdere containers
           kunnen worden samengevoegd tot een grotere woning. Een 20-foot container is
           geschikt als studio of werkruimte, terwijl een 40-foot container genoeg ruimte
-          biedt voor een complete woning met aparte slaapkamer.
+          biedt voor een complete woning met aparte slaapkamer. Vergelijk ook een <Link href="/woonunit" className="text-primary font-medium hover:underline">woonunit</Link> voor een vergelijkbare compacte woonoplossing.
         </p>
 
         <h2>Waar moet je op letten?</h2>
@@ -570,12 +574,12 @@ export const woningtypeSeoContent: Record<string, OccasionsSeoContent> = {
           <li><strong>Isolatie</strong>:Containers zijn van staal en worden zonder isolatie extreem warm of koud. Controleer of de woning goed geïsoleerd is (minimaal 10 cm wandisolatie).</li>
           <li><strong>Condensatie</strong>:Stalen wanden zijn gevoelig voor condensvorming. Goede ventilatie en dampschermen zijn essentieel.</li>
           <li><strong>Roest</strong>:Inspecteer de buitenkant op roestplekken, vooral aan de onderzijde en bij laspunten.</li>
-          <li><strong>Vergunning</strong>:Een containerwoning vereist een omgevingsvergunning. Niet alle gemeenten staan containerwoningen toe in het bestemmingsplan.</li>
+          <li><strong>Vergunning</strong>:Een containerwoning vereist een <Link href="/kennisbank/tiny-house-regels" className="text-primary font-medium hover:underline">omgevingsvergunning</Link>. Niet alle gemeenten staan containerwoningen toe in het bestemmingsplan.</li>
         </ul>
 
         <p>
-          <strong>Containerwoningen vergelijken?</strong> Gebruik de filters op deze pagina
-          of bekijk alle <a href="/containerwoning">informatie over containerwoningen</a>.
+          <strong>Containerwoningen vergelijken?</strong> Gebruik de filters op deze pagina,
+          start de <Link href="/configurator" className="text-primary font-medium hover:underline">configurator</Link> of bekijk alle <a href="/containerwoning">informatie over containerwoningen</a>.
         </p>
       </>
     ),
@@ -617,14 +621,14 @@ export const woningtypeSeoContent: Record<string, OccasionsSeoContent> = {
         <h2>Toepassingen</h2>
         <p>
           Woonunits worden breed ingezet: als <strong>tijdelijke woning</strong> tijdens een
-          verbouwing, als <strong>mantelzorgunit</strong> in de tuin, als
+          verbouwing, als <Link href="/mantelzorgwoning" className="text-primary font-medium hover:underline"><strong>mantelzorgunit</strong></Link> in de tuin, als
           extra <strong>werkruimte</strong> of als zelfstandige woning op eigen grond.
           De meeste woonunits zijn binnen 1 tot 2 werkdagen operationeel na plaatsing.
         </p>
 
         <h2>Checklist bij aankoop</h2>
         <ul>
-          <li><strong>Vorig gebruik</strong>:Vraag waar de unit eerder is gebruikt en hoe intensief. Bouwplaatsunits zijn zwaarder belast dan residentiële units.</li>
+          <li><strong>Vorig gebruik</strong>:Vraag waar de unit eerder is gebruikt en hoe intensief. Bouwplaatsunits zijn zwaarder belast dan residentiële units. Lees meer over de <Link href="/kennisbank/mantelzorgwoning-regels" className="text-primary font-medium hover:underline">regelgeving voor woonunits</Link>.</li>
           <li><strong>Isolatie en ventilatie</strong>:Controleer de isolatiewaarden en of er mechanische ventilatie aanwezig is. Niet alle woonunits zijn geschikt voor jaarrond bewoning.</li>
           <li><strong>Elektra en leidingwerk</strong>:Laat de elektrische installatie en het leidingwerk controleren. Vraag naar keuringsrapporten.</li>
           <li><strong>Transport</strong>:Woonunits worden per vrachtwagen of dieplader geleverd. Zorg dat de locatie bereikbaar is voor zwaar transport.</li>
@@ -632,7 +636,7 @@ export const woningtypeSeoContent: Record<string, OccasionsSeoContent> = {
 
         <p>
           <strong>Woonunits vergelijken?</strong> Gebruik de filters hierboven om te filteren
-          op prijs, oppervlakte en locatie, of bekijk alle <a href="/woonunit">informatie
+          op prijs, oppervlakte en locatie, start de <Link href="/configurator" className="text-primary font-medium hover:underline">configurator</Link> of bekijk alle <a href="/woonunit">informatie
           over woonunits</a>.
         </p>
       </>
@@ -677,7 +681,7 @@ export const woningtypeSeoContent: Record<string, OccasionsSeoContent> = {
         <p>
           Er zijn drie hoofdtypen: de <strong>aluminium tuinkamer</strong> (onderhoudsvrij,
           modern), de <strong>houten tuinkamer</strong> (warme uitstraling, meer onderhoud)
-          en de <strong>modulaire tuinkamer</strong> (prefab, snel te plaatsen). Voor
+          en de <Link href="/modulaire-aanbouw" className="text-primary font-medium hover:underline"><strong>modulaire tuinkamer</strong></Link> (prefab, snel te plaatsen). Voor
           jaarrond gebruik is een tuinkamer met HR++ beglazing en goede
           dakisolatie aan te raden.
         </p>
@@ -687,12 +691,12 @@ export const woningtypeSeoContent: Record<string, OccasionsSeoContent> = {
           <li><strong>Afmetingen</strong>:Meet je beschikbare ruimte nauwkeurig op. Tweedehands tuinkamers zijn niet op maat gemaakt en moeten passen bij jouw situatie.</li>
           <li><strong>Beglazing</strong>:Controleer de staat van de ruiten en het type glas. Enkel glas is niet geschikt voor jaarrond gebruik.</li>
           <li><strong>Constructie</strong>:Inspecteer de profielen op vervorming, corrosie (bij aluminium) of houtrot (bij hout).</li>
-          <li><strong>Vergunning</strong>:Een tuinkamer in de achtertuin is vaak vergunningvrij tot 30 m². Controleer de regels bij je gemeente.</li>
+          <li><strong>Vergunning</strong>:Een tuinkamer in de achtertuin is vaak <Link href="/kennisbank/mantelzorgwoning-vergunningsvrij" className="text-primary font-medium hover:underline">vergunningvrij</Link> tot 30 m². Controleer de regels bij je gemeente.</li>
         </ul>
 
         <p>
           <strong>Meer ruimte nodig?</strong> Bekijk het tuinkamer-aanbod via de filters
-          hierboven of ontdek alle mogelijkheden op
+          hierboven, start de <Link href="/configurator" className="text-primary font-medium hover:underline">configurator</Link> of ontdek alle mogelijkheden op
           onze <a href="/tuinkamer">tuinkamer-pagina</a>.
         </p>
       </>
@@ -738,20 +742,20 @@ export const woningtypeSeoContent: Record<string, OccasionsSeoContent> = {
           Een modulaire aanbouw is <strong>3 tot 5 keer sneller gerealiseerd</strong> dan een
           traditionele aanbouw. Waar een traditionele aanbouw 3 tot 6 maanden duurt, staat
           een modulaire aanbouw er binnen enkele weken. Bijkomend voordeel: minder
-          bouwoverlast, geen weken van stof en lawaai in huis.
+          bouwoverlast, geen weken van stof en lawaai in huis. Vergelijk ook een <Link href="/prefab-woning" className="text-primary font-medium hover:underline">prefab woning</Link> als losstaand modulair alternatief.
         </p>
 
         <h2>Waar let je op?</h2>
         <ul>
           <li><strong>Aansluiting op bestaande woning</strong>:De aanbouw moet waterdicht aansluiten op je huidige gevel. Meet de beschikbare ruimte en controleer de hoogte van de dakrand.</li>
           <li><strong>Fundering</strong>:Een modulaire aanbouw vereist een geschikte fundering. Laat vooraf de draagkracht van de grond onderzoeken.</li>
-          <li><strong>Vergunning</strong>:Een aanbouw groter dan 4 meter diep vereist doorgaans een omgevingsvergunning. Informeer bij je gemeente.</li>
+          <li><strong>Vergunning</strong>:Een aanbouw groter dan 4 meter diep vereist doorgaans een <Link href="/kennisbank/mantelzorgwoning-vergunningsvrij" className="text-primary font-medium hover:underline">omgevingsvergunning</Link>. Informeer bij je gemeente.</li>
           <li><strong>Isolatie en ventilatie</strong>:Controleer of de aanbouw voldoet aan de huidige isolatie-eisen voor een comfortabel binnenklimaat.</li>
         </ul>
 
         <p>
           <strong>Een modulaire aanbouw overwegen?</strong> Vergelijk het aanbod via de
-          filters hierboven of ontdek alle mogelijkheden op
+          filters hierboven, start de <Link href="/configurator" className="text-primary font-medium hover:underline">configurator</Link> of ontdek alle mogelijkheden op
           de <a href="/modulaire-aanbouw">modulaire aanbouw-pagina</a>.
         </p>
       </>

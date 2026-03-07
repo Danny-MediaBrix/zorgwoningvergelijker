@@ -74,6 +74,7 @@ export default function WoningtypenGrid() {
           width={400}
           height={500}
           className="w-[280px] xl:w-[340px] object-contain translate-x-[15%] translate-y-[5%]"
+          sizes="(max-width: 1024px) 0px, (max-width: 1280px) 280px, 340px"
         />
       </div>
 
@@ -103,6 +104,7 @@ export default function WoningtypenGrid() {
                   width={640}
                   height={400}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
               </div>
 
@@ -152,11 +154,11 @@ export default function WoningtypenGrid() {
           >
             <div className="overflow-hidden">
               {/* Filter pills */}
-              <div className="flex flex-wrap items-center gap-2 pb-5 pt-1">
+              <div className="flex items-center gap-2 pb-5 pt-1 overflow-x-auto scrollbar-hide md:flex-wrap md:overflow-visible">
                 {/* "Alle" pill */}
                 <button
                   onClick={() => setActiveFilter(null)}
-                  className={`relative inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-[0.8rem] font-semibold transition-all duration-200 ${
+                  className={`relative inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-[0.8rem] font-semibold transition-all duration-200 whitespace-nowrap flex-shrink-0 md:flex-shrink md:whitespace-normal ${
                     activeFilter === null
                       ? "bg-primary text-white shadow-md shadow-primary/20"
                       : "bg-white text-gray-600 border border-gray-200/80 hover:border-primary/25 hover:text-primary shadow-sm"
@@ -171,7 +173,7 @@ export default function WoningtypenGrid() {
                 </button>
 
                 {/* Subtle separator */}
-                <div className="w-px h-5 bg-gray-200/80 mx-0.5" />
+                <div className="w-px h-5 bg-gray-200/80 mx-0.5 flex-shrink-0" />
 
                 {/* Category pills */}
                 {categoryFilters.map((filter) => {
@@ -180,7 +182,7 @@ export default function WoningtypenGrid() {
                     <button
                       key={filter.key}
                       onClick={() => handleFilterClick(filter.key)}
-                      className={`relative inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-[0.8rem] font-semibold transition-all duration-200 ${
+                      className={`relative inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-[0.8rem] font-semibold transition-all duration-200 whitespace-nowrap flex-shrink-0 md:flex-shrink md:whitespace-normal ${
                         isActive
                           ? "bg-primary text-white shadow-md shadow-primary/20"
                           : "bg-white text-gray-600 border border-gray-200/80 hover:border-primary/25 hover:text-primary shadow-sm"
@@ -228,6 +230,7 @@ export default function WoningtypenGrid() {
                               width={400}
                               height={250}
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                              sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                             />
                           </div>
 

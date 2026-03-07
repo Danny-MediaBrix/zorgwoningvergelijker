@@ -42,6 +42,7 @@ export default function CTABanner() {
                 width={600}
                 height={720}
                 className="w-48 md:w-64 lg:w-full lg:max-w-md object-contain lg:-translate-x-8"
+                sizes="(max-width: 768px) 192px, (max-width: 1024px) 256px, 400px"
               />
             </div>
           </ScrollReveal>

@@ -3,8 +3,11 @@ import dynamic from "next/dynamic";
 import HeroSection from "@/components/sections/HeroSection";
 import SocialProofBar from "@/components/sections/SocialProofBar";
 import StepsSection from "@/components/sections/StepsSection";
-import WoningtypenGrid from "@/components/sections/WoningtypenGrid";
 import PrijsIndicatieSection from "@/components/sections/PrijsIndicatieSection";
+
+const WoningtypenGrid = dynamic(
+  () => import("@/components/sections/WoningtypenGrid")
+);
 
 const TestimonialsSection = dynamic(
   () => import("@/components/sections/TestimonialsSection")

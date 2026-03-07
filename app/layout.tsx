@@ -97,6 +97,16 @@ export default function RootLayout({
             __html: JSON.stringify(organizationSchema),
           }}
         />
+        <script
+          src="https://analytics.mediabrix.app/api/script.js"
+          data-site-id="5293f6b01b82"
+          defer
+        />
+        <noscript>
+          <style>{`
+            [style*="opacity"] { opacity: 1 !important; transform: none !important; filter: none !important; }
+          `}</style>
+        </noscript>
       </head>
       <body
         className={`${plusJakarta.variable} ${inter.variable} font-sans antialiased`}
@@ -104,7 +114,7 @@ export default function RootLayout({
       >
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-white focus:text-primary focus:px-4 focus:py-2.5 focus:rounded-xl focus:shadow-lg focus:font-semibold focus:text-body-sm focus:ring-2 focus:ring-primary/20"
+          className="sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:top-4 focus-visible:left-4 focus-visible:z-[100] focus-visible:bg-white focus-visible:text-primary focus-visible:px-4 focus-visible:py-2.5 focus-visible:rounded-xl focus-visible:shadow-lg focus-visible:font-semibold focus-visible:text-body-sm focus-visible:ring-2 focus-visible:ring-primary/20"
         >
           Ga naar inhoud
         </a>

@@ -48,6 +48,8 @@ interface WoningtypePageProps {
   params: Promise<{ woningtype: string }>;
 }
 
+export const revalidate = 86400;
+
 export async function generateStaticParams() {
   return woningtypen.map((wt) => ({
     woningtype: wt.slug,
@@ -356,6 +358,7 @@ export default async function WoningtypePage({
             className="object-cover"
             priority
             quality={85}
+            sizes="100vw"
           />
         )}
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/60 to-black/40" />
@@ -395,6 +398,7 @@ export default async function WoningtypePage({
                 className="w-[40%] mx-auto md:w-[55%] md:mx-auto object-contain"
                 priority
                 quality={90}
+                sizes="(max-width: 768px) 40vw, 55vw"
               />
             </div>
           </div>
@@ -471,9 +475,7 @@ export default async function WoningtypePage({
               {seo?.uitgebreideBeschrijving && (
                 <div className="mb-8 space-y-4">
                   {seo.uitgebreideBeschrijving.split("\n\n").map((alinea, i) => (
-                    <p key={i} className="text-body text-gray-600 leading-relaxed">
-                      {alinea}
-                    </p>
+                    <p key={i} className="text-body text-gray-600 leading-relaxed" dangerouslySetInnerHTML={{ __html: alinea }} />
                   ))}
                 </div>
               )}
@@ -582,9 +584,7 @@ export default async function WoningtypePage({
                   </h2>
                   <div className="space-y-4 mb-10">
                     {seo.vergunningenTekst.split("\n\n").map((alinea, i) => (
-                      <p key={i} className="text-body text-gray-600 leading-relaxed">
-                        {alinea}
-                      </p>
+                      <p key={i} className="text-body text-gray-600 leading-relaxed" dangerouslySetInnerHTML={{ __html: alinea }} />
                     ))}
                     {seo.externeLink && (
                       <p className="text-body text-gray-600 leading-relaxed">
@@ -610,10 +610,13 @@ export default async function WoningtypePage({
               <h2 className="font-semibold text-heading-2 tracking-tight text-dark mb-6">
                 {wt.naam} voor senioren en 50-plussers
               </h2>
-              <p className="text-body-lg text-gray-600 leading-relaxed mb-8">
-                {seo?.seniorenTekst ??
-                  `Steeds meer 50-plussers kiezen voor een ${wt.naam.toLowerCase()} als toekomstbestendige woonoplossing. Of het nu gaat om gelijkvloers wonen, dichter bij familie, of zelfstandig blijven wonen met zorg op maat, een ${wt.naam.toLowerCase()} biedt de flexibiliteit die bij je levensfase past.`}
-              </p>
+              {seo?.seniorenTekst ? (
+                <p className="text-body-lg text-gray-600 leading-relaxed mb-8" dangerouslySetInnerHTML={{ __html: seo.seniorenTekst }} />
+              ) : (
+                <p className="text-body-lg text-gray-600 leading-relaxed mb-8">
+                  Steeds meer 50-plussers kiezen voor een {wt.naam.toLowerCase()} als toekomstbestendige woonoplossing. Of het nu gaat om gelijkvloers wonen, dichter bij familie, of zelfstandig blijven wonen met zorg op maat, een {wt.naam.toLowerCase()} biedt de flexibiliteit die bij je levensfase past.
+                </p>
+              )}
 
               <div className="bg-primary-50/30 rounded-2xl p-6 border border-primary/10 mb-8">
                 <h3 className="font-semibold text-heading-3 tracking-tight text-dark mb-4">
@@ -651,9 +654,7 @@ export default async function WoningtypePage({
                   </h2>
                   <div className="space-y-4">
                     {seo.financieringTekst.split("\n\n").map((alinea, i) => (
-                      <p key={i} className="text-body text-gray-600 leading-relaxed">
-                        {alinea}
-                      </p>
+                      <p key={i} className="text-body text-gray-600 leading-relaxed" dangerouslySetInnerHTML={{ __html: alinea }} />
                     ))}
                   </div>
                 </>
@@ -673,6 +674,7 @@ export default async function WoningtypePage({
                         width={48}
                         height={48}
                         className="w-12 h-12 rounded-xl object-cover"
+                        sizes="48px"
                       />
                     </Link>
                     <div className="flex-1 min-w-0">
@@ -789,7 +791,7 @@ export default async function WoningtypePage({
                             fill
                             className="object-cover"
                             quality={90}
-                            sizes="178px"
+                            sizes="(max-width: 640px) 170px, 178px"
                           />
                           {isHuidig && (
                             <span className="absolute top-1.5 left-1.5 bg-primary text-white text-[0.55rem] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full shadow-sm">

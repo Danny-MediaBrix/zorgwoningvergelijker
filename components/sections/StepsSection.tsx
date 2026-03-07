@@ -66,6 +66,7 @@ export default function StepsSection() {
                         width={832}
                         height={704}
                         className="w-full h-full object-cover"
+                        sizes="208px"
                       />
                     </div>
                   </div>

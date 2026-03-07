@@ -164,6 +164,7 @@ export default function HeroSection() {
                 className="w-[55%] mx-auto md:w-[85%] md:ml-auto md:mr-0 object-contain md:-translate-x-[1%]"
                 priority
                 quality={90}
+                sizes="(max-width: 768px) 55vw, 85vw"
               />
             </HeroReveal>
           </div>
