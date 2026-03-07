@@ -132,9 +132,8 @@ export async function POST(request: NextRequest) {
       createdAt: now,
     });
 
-    // Fire-and-forget: e-mails blokkeren response niet
     const { contact, configuratie, prijsIndicatie } = parsed.data;
-    Promise.allSettled([
+    await Promise.allSettled([
       sendEmail(contact.email, {
         type: "offerte_bevestiging",
         naam: contact.naam,

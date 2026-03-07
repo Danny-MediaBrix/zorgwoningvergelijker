@@ -114,10 +114,9 @@ export async function POST(request: NextRequest) {
 
     const { naam, email, onderwerp } = parsed.data;
 
-    // Fire-and-forget: e-mails blokkeren response niet
     if (process.env.SMTP_HOST) {
       const transporter = getTransporter();
-      Promise.allSettled([
+      await Promise.allSettled([
         transporter.sendMail({
           from: FROM,
           to: PLATFORM_EMAIL,
