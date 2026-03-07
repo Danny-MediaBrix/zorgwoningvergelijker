@@ -104,8 +104,10 @@ export async function POST(request: NextRequest) {
     const parsed = contactSchema.safeParse(body);
 
     if (!parsed.success) {
+      const fieldErrors = parsed.error.flatten().fieldErrors;
+      const messages = Object.values(fieldErrors).flat().filter(Boolean);
       return NextResponse.json(
-        { success: false, error: "Ongeldige gegevens", details: parsed.error.flatten() },
+        { success: false, error: messages[0] || "Ongeldige gegevens" },
         { status: 400 }
       );
     }
