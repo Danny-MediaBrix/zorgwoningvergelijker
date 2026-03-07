@@ -3,6 +3,7 @@ import { z } from "zod";
 import { v4 as uuidv4 } from "uuid";
 import { db } from "@/lib/db";
 import { leads } from "@/lib/db/schema";
+import { sendEmail } from "@/lib/email/send";
 
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
 const RATE_LIMIT_MAX = 5;
@@ -130,6 +131,33 @@ export async function POST(request: NextRequest) {
       bron: "configurator",
       createdAt: now,
     });
+
+    // Fire-and-forget: e-mails blokkeren response niet
+    const { contact, configuratie, prijsIndicatie } = parsed.data;
+    Promise.allSettled([
+      sendEmail(contact.email, {
+        type: "offerte_bevestiging",
+        naam: contact.naam,
+        woningtype: configuratie.woningType || "Onbekend",
+        m2: configuratie.totaalM2,
+        prijsLaag: prijsIndicatie.laag,
+        prijsHoog: prijsIndicatie.hoog,
+      }),
+      sendEmail("info@zorgwoningvergelijker.nl", {
+        type: "offerte_notificatie",
+        naam: contact.naam,
+        email: contact.email,
+        telefoon: contact.telefoon,
+        postcode: contact.postcode,
+        woningtype: configuratie.woningType || "Onbekend",
+        m2: configuratie.totaalM2,
+        budget: contact.budget,
+        oplevertermijn: contact.oplevertermijn,
+        prijsLaag: prijsIndicatie.laag,
+        prijsHoog: prijsIndicatie.hoog,
+        opmerkingen: contact.opmerkingen,
+      }),
+    ]);
 
     return NextResponse.json({ success: true, id }, { status: 201 });
   } catch (error) {

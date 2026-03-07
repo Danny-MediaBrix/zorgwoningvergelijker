@@ -2,9 +2,8 @@
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 import {
-  CheckCircle,
   Send,
   Shield,
   Clock,
@@ -24,7 +23,6 @@ import Button from "@/components/ui/Button";
 import FormInput from "@/components/ui/FormInput";
 import FormTextarea from "@/components/ui/FormTextarea";
 import Dropdown from "@/components/ui/Dropdown";
-import Modal from "@/components/ui/Modal";
 
 // ==================== Label mappings ====================
 
@@ -172,6 +170,7 @@ interface ContactFormData {
 
 export default function StepOverzicht() {
   const store = useConfiguratorStore();
+  const router = useRouter();
   const prijsRange = store.getPrijsRange();
   const voorgeselecteerdeAanbieder = store.voorgeselecteerdeAanbieder;
   const voorgeselecteerdeAanbiederNaam = voorgeselecteerdeAanbieder
@@ -179,7 +178,6 @@ export default function StepOverzicht() {
     : null;
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [formStep, setFormStep] = useState(1);
   const [voorkeursAanbieders, setVoorkeursAanbieders] = useState<string[]>([]);
@@ -287,7 +285,7 @@ export default function StepOverzicht() {
         );
       }
 
-      setShowSuccessModal(true);
+      router.push("/bedankt?type=offerte");
     } catch (err) {
       setSubmitError(
         err instanceof Error
@@ -735,60 +733,6 @@ export default function StepOverzicht() {
         </div>
       </Card>
 
-      {/* Success Modal */}
-      <Modal
-        isOpen={showSuccessModal}
-        onClose={() => setShowSuccessModal(false)}
-        title="Bedankt voor je aanvraag!"
-        size="md"
-      >
-        <div className="py-4">
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ type: "spring", duration: 0.5 }}
-            className="w-16 h-16 rounded-2xl bg-primary-50 flex items-center justify-center mx-auto mb-5"
-          >
-            <CheckCircle className="w-8 h-8 text-primary" />
-          </motion.div>
-          <h3 className="font-heading text-heading-3 text-dark mb-5 text-center">
-            Je offerte-aanvraag is ontvangen
-          </h3>
-
-          <div className="space-y-2.5 mb-8">
-            <div className="flex items-start gap-3 p-3.5 bg-primary-50/60 border border-primary-100/50 rounded-xl">
-              <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-              <p className="text-body-sm text-gray-600">
-                Bevestigingsmail is onderweg naar je inbox
-              </p>
-            </div>
-            <div className="flex items-start gap-3 p-3.5 bg-primary-50/60 border border-primary-100/50 rounded-xl">
-              <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-              <p className="text-body-sm text-gray-600">
-                Een specialist neemt binnen 48 uur contact met je op
-              </p>
-            </div>
-            <div className="flex items-start gap-3 p-3.5 bg-primary-50/60 border border-primary-100/50 rounded-xl">
-              <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-              <p className="text-body-sm text-gray-600">
-                Je ontvangt offertes op maat van geselecteerde aanbieders
-              </p>
-            </div>
-          </div>
-
-          <div className="flex gap-3 justify-center">
-            <Button
-              variant="primary"
-              onClick={() => setShowSuccessModal(false)}
-            >
-              Sluiten
-            </Button>
-            <Button variant="secondary" onClick={() => store.reset()}>
-              Nieuwe configuratie
-            </Button>
-          </div>
-        </div>
-      </Modal>
     </div>
   );
 }

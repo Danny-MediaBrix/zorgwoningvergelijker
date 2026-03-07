@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { getTransporter } from "@/lib/email/transport";
+import { sendEmail } from "@/lib/email/send";
+import { escapeHtml } from "@/lib/email/templates";
 
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
 const RATE_LIMIT_MAX = 5;
@@ -84,15 +86,6 @@ function buildContactEmailHtml(data: z.infer<typeof contactSchema>): string {
   `;
 }
 
-function escapeHtml(str: string): string {
-  return str
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
-}
-
 export async function POST(request: NextRequest) {
   try {
     const ip =
@@ -135,6 +128,9 @@ export async function POST(request: NextRequest) {
     });
 
     console.log(`[Contact] Email sent: ${naam} (${email}) — ${onderwerp}`);
+
+    // Fire-and-forget: bevestigingsmail naar gebruiker
+    sendEmail(email, { type: "contact_bevestiging", naam, onderwerp });
 
     return NextResponse.json({ success: true }, { status: 201 });
   } catch (error) {

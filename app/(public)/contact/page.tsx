@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { MapPin, Mail, Phone, Clock, CheckCircle2, AlertCircle } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { MapPin, Mail, Phone, Clock, AlertCircle } from "lucide-react";
 import Container from "@/components/ui/Container";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import Button from "@/components/ui/Button";
@@ -28,6 +29,7 @@ interface FormData {
 }
 
 export default function ContactPage() {
+  const router = useRouter();
   const [formData, setFormData] = useState<FormData>({
     naam: "",
     email: "",
@@ -36,7 +38,6 @@ export default function ContactPage() {
     bericht: "",
   });
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
 
   const handleChange = (
@@ -60,14 +61,8 @@ export default function ContactPage() {
       const result = await response.json();
 
       if (response.ok && result.success) {
-        setSuccess(true);
-        setFormData({
-          naam: "",
-          email: "",
-          telefoon: "",
-          onderwerp: "",
-          bericht: "",
-        });
+        router.push("/bedankt?type=contact");
+        return;
       } else {
         setError(result.error || "Er is iets misgegaan. Probeer het later opnieuw.");
       }
@@ -177,25 +172,6 @@ export default function ContactPage() {
 
             {/* Contact Form - Right Column */}
             <div>
-              {success ? (
-                <Card variant="outlined" padding="lg" className="rounded-2xl">
-                  <div className="text-center py-8">
-                    <div className="w-16 h-16 rounded-2xl bg-primary-50 flex items-center justify-center mx-auto mb-4">
-                      <CheckCircle2 className="w-8 h-8 text-primary" />
-                    </div>
-                    <h2 className="font-semibold text-heading-2 tracking-tight text-dark mb-2">
-                      Bericht verzonden
-                    </h2>
-                    <p className="text-body text-gray-600 mb-6">
-                      Bedankt voor je bericht. Wij nemen zo snel mogelijk contact met je op,
-                      doorgaans binnen 1 werkdag.
-                    </p>
-                    <Button onClick={() => setSuccess(false)} variant="secondary">
-                      Nieuw bericht versturen
-                    </Button>
-                  </div>
-                </Card>
-              ) : (
                 <Card variant="outlined" padding="lg" className="rounded-2xl">
                   <form onSubmit={handleSubmit} className="space-y-5">
                     {error && (
@@ -269,7 +245,6 @@ export default function ContactPage() {
                     </p>
                   </form>
                 </Card>
-              )}
             </div>
           </div>
         </Container>

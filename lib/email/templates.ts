@@ -35,6 +35,19 @@ function layout(content: string): string {
   `;
 }
 
+export function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function formatPrijs(bedrag: number): string {
+  return new Intl.NumberFormat("nl-NL", { style: "currency", currency: "EUR", minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(bedrag);
+}
+
 export type EmailTemplate =
   | { type: "welkom"; bedrijfsnaam: string }
   | { type: "goedgekeurd"; bedrijfsnaam: string }
@@ -42,7 +55,10 @@ export type EmailTemplate =
   | { type: "betaling_geslaagd"; bedrijfsnaam: string; bedrag: string; omschrijving: string }
   | { type: "betaling_mislukt"; bedrijfsnaam: string; bedrag: string }
   | { type: "lead_ontvangen"; bedrijfsnaam: string; naam: string; email: string; woningtype: string }
-  | { type: "wachtwoord_reset"; resetUrl: string };
+  | { type: "wachtwoord_reset"; resetUrl: string }
+  | { type: "offerte_bevestiging"; naam: string; woningtype: string; m2: number; prijsLaag: number; prijsHoog: number }
+  | { type: "offerte_notificatie"; naam: string; email: string; telefoon: string; postcode: string; woningtype: string; m2: number; budget: string; oplevertermijn: string; prijsLaag: number; prijsHoog: number; opmerkingen?: string }
+  | { type: "contact_bevestiging"; naam: string; onderwerp: string };
 
 export function getEmailContent(template: EmailTemplate): { subject: string; html: string } {
   switch (template.type) {
@@ -171,6 +187,91 @@ export function getEmailContent(template: EmailTemplate): { subject: string; htm
           </p>
           <p style="font-size:13px;line-height:1.6;color:#78716C;">
             Deze link is 1 uur geldig. Als je dit verzoek niet hebt gedaan, kun je deze e-mail negeren.
+          </p>
+        `),
+      };
+
+    case "offerte_bevestiging":
+      return {
+        subject: "Je offerte-aanvraag is ontvangen - Zorgwoningvergelijker.nl",
+        html: layout(`
+          <h1 style="font-size:24px;font-weight:700;margin:0 0 16px;">Bedankt, ${escapeHtml(template.naam)}!</h1>
+          <p style="font-size:15px;line-height:1.6;color:#4B5563;">
+            Je offerte-aanvraag is in goede orde ontvangen. Hieronder een samenvatting:
+          </p>
+          <div style="background-color:#F5F0FA;border-radius:8px;padding:16px;margin:16px 0;">
+            <p style="font-size:14px;color:#251938;margin:0 0 4px;"><strong>Woningtype:</strong> ${escapeHtml(template.woningtype)}</p>
+            <p style="font-size:14px;color:#251938;margin:0 0 4px;"><strong>Oppervlakte:</strong> ${template.m2} m²</p>
+            <p style="font-size:14px;color:#251938;margin:0;"><strong>Prijsindicatie:</strong> ${formatPrijs(template.prijsLaag)} – ${formatPrijs(template.prijsHoog)}</p>
+          </div>
+          <p style="font-size:15px;line-height:1.6;color:#4B5563;">
+            Een specialist neemt binnen <strong>48 uur</strong> contact met je op om je aanvraag te bespreken en je een offerte op maat te bezorgen.
+          </p>
+          <p style="margin:24px 0 0;">
+            <a href="${BASE_URL}" style="display:inline-block;padding:12px 24px;background-color:#583A85;color:#ffffff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;">
+              Terug naar Zorgwoningvergelijker.nl
+            </a>
+          </p>
+        `),
+      };
+
+    case "offerte_notificatie":
+      return {
+        subject: `Nieuwe offerte-aanvraag: ${escapeHtml(template.woningtype)}`,
+        html: layout(`
+          <h1 style="font-size:24px;font-weight:700;margin:0 0 16px;">Nieuwe offerte-aanvraag</h1>
+          <p style="font-size:15px;line-height:1.6;color:#4B5563;">
+            Er is een nieuwe offerte-aanvraag binnengekomen via de configurator.
+          </p>
+          <div style="background-color:#F5F0FA;border-radius:8px;padding:16px;margin:16px 0;">
+            <p style="font-size:13px;font-weight:600;color:#78716C;margin:0 0 8px;text-transform:uppercase;letter-spacing:0.05em;">Contactgegevens</p>
+            <p style="font-size:14px;color:#251938;margin:0 0 4px;"><strong>Naam:</strong> ${escapeHtml(template.naam)}</p>
+            <p style="font-size:14px;color:#251938;margin:0 0 4px;"><strong>E-mail:</strong> <a href="mailto:${escapeHtml(template.email)}" style="color:#583A85;">${escapeHtml(template.email)}</a></p>
+            <p style="font-size:14px;color:#251938;margin:0 0 4px;"><strong>Telefoon:</strong> <a href="tel:${escapeHtml(template.telefoon)}" style="color:#583A85;">${escapeHtml(template.telefoon)}</a></p>
+            <p style="font-size:14px;color:#251938;margin:0;"><strong>Postcode:</strong> ${escapeHtml(template.postcode)}</p>
+          </div>
+          <div style="background-color:#FAFAF9;border:1px solid #E5E7EB;border-radius:8px;padding:16px;margin:16px 0;">
+            <p style="font-size:13px;font-weight:600;color:#78716C;margin:0 0 8px;text-transform:uppercase;letter-spacing:0.05em;">Configuratie</p>
+            <p style="font-size:14px;color:#251938;margin:0 0 4px;"><strong>Woningtype:</strong> ${escapeHtml(template.woningtype)}</p>
+            <p style="font-size:14px;color:#251938;margin:0 0 4px;"><strong>Oppervlakte:</strong> ${template.m2} m²</p>
+            <p style="font-size:14px;color:#251938;margin:0 0 4px;"><strong>Budget:</strong> ${escapeHtml(template.budget || "Niet opgegeven")}</p>
+            <p style="font-size:14px;color:#251938;margin:0 0 4px;"><strong>Oplevertermijn:</strong> ${escapeHtml(template.oplevertermijn || "Niet opgegeven")}</p>
+            <p style="font-size:14px;color:#251938;margin:0;"><strong>Prijsindicatie:</strong> ${formatPrijs(template.prijsLaag)} – ${formatPrijs(template.prijsHoog)}</p>
+          </div>
+          ${template.opmerkingen ? `
+            <div style="background-color:#FAFAF9;border:1px solid #E5E7EB;border-radius:8px;padding:16px;margin:16px 0;">
+              <p style="font-size:13px;font-weight:600;color:#78716C;margin:0 0 8px;text-transform:uppercase;letter-spacing:0.05em;">Opmerkingen</p>
+              <p style="font-size:14px;color:#251938;margin:0;white-space:pre-wrap;">${escapeHtml(template.opmerkingen)}</p>
+            </div>
+          ` : ""}
+          <p style="margin:24px 0 0;">
+            <a href="${BASE_URL}/admin/leads" style="display:inline-block;padding:12px 24px;background-color:#583A85;color:#ffffff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;">
+              Bekijk in admin
+            </a>
+          </p>
+        `),
+      };
+
+    case "contact_bevestiging":
+      return {
+        subject: "Je bericht is ontvangen - Zorgwoningvergelijker.nl",
+        html: layout(`
+          <h1 style="font-size:24px;font-weight:700;margin:0 0 16px;">Bedankt, ${escapeHtml(template.naam)}!</h1>
+          <p style="font-size:15px;line-height:1.6;color:#4B5563;">
+            Je bericht over <strong>'${escapeHtml(template.onderwerp)}'</strong> is in goede orde ontvangen.
+          </p>
+          <p style="font-size:15px;line-height:1.6;color:#4B5563;">
+            We streven ernaar om binnen <strong>1 werkdag</strong> te reageren.
+          </p>
+          <div style="background-color:#F5F0FA;border-radius:8px;padding:16px;margin:16px 0;">
+            <p style="font-size:14px;color:#251938;margin:0 0 4px;"><strong>E-mail:</strong> info@zorgwoningvergelijker.nl</p>
+            <p style="font-size:14px;color:#251938;margin:0 0 4px;"><strong>Telefoon:</strong> 085 - 004 11 59</p>
+            <p style="font-size:14px;color:#251938;margin:0;">Ma-Vr: 09:00 - 17:30 | Za: 10:00 - 14:00</p>
+          </div>
+          <p style="margin:24px 0 0;">
+            <a href="${BASE_URL}" style="display:inline-block;padding:12px 24px;background-color:#583A85;color:#ffffff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;">
+              Terug naar Zorgwoningvergelijker.nl
+            </a>
           </p>
         `),
       };
