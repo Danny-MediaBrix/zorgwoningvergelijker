@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useCallback, useRef } from "react";
 import { useConfiguratorStore } from "@/store/configuratorStore";
 import { getWoningType } from "@/lib/woningtypen";
 import Slider from "@/components/ui/Slider";
@@ -9,17 +9,24 @@ import Card from "@/components/ui/Card";
 import { Ruler, Layers, Move, Info } from "lucide-react";
 
 export default function StepBasiskenmerken() {
-  const {
-    woningType,
-    totaalM2,
-    setTotaalM2,
-    aantalVerdiepingen,
-    setAantalVerdiepingen,
-    buitenBreedte,
-    buitenDiepte,
-    setBuitenAfmetingen,
-    modules,
-  } = useConfiguratorStore();
+  const woningType = useConfiguratorStore((s) => s.woningType);
+  const totaalM2 = useConfiguratorStore((s) => s.totaalM2);
+  const setTotaalM2 = useConfiguratorStore((s) => s.setTotaalM2);
+  const aantalVerdiepingen = useConfiguratorStore((s) => s.aantalVerdiepingen);
+  const setAantalVerdiepingen = useConfiguratorStore((s) => s.setAantalVerdiepingen);
+  const buitenBreedte = useConfiguratorStore((s) => s.buitenBreedte);
+  const buitenDiepte = useConfiguratorStore((s) => s.buitenDiepte);
+  const setBuitenAfmetingen = useConfiguratorStore((s) => s.setBuitenAfmetingen);
+  const modulesLength = useConfiguratorStore((s) => s.modules.length);
+
+  // Throttle slider to prevent overwhelming mobile devices
+  const rafRef = useRef<number | null>(null);
+  const handleSliderChange = useCallback((m2: number) => {
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    rafRef.current = requestAnimationFrame(() => {
+      setTotaalM2(m2);
+    });
+  }, [setTotaalM2]);
 
   const wt = woningType ? getWoningType(woningType) : null;
 
@@ -86,7 +93,7 @@ export default function StepBasiskenmerken() {
           <Slider
             label="Woonoppervlak"
             value={totaalM2}
-            onChange={setTotaalM2}
+            onChange={handleSliderChange}
             min={wt.minM2}
             max={wt.maxM2}
             step={1}
@@ -132,7 +139,7 @@ export default function StepBasiskenmerken() {
               <p className="text-body-sm text-gray-600">
                 Breedte en diepte van de woning (in meters)
               </p>
-              {wt?.supportsModules && modules.length > 1 && (
+              {wt?.supportsModules && modulesLength > 1 && (
                 <div className="flex items-center gap-1.5 mt-1">
                   <Info className="w-3.5 h-3.5 text-primary/60" />
                   <p className="text-caption text-gray-400">

@@ -133,6 +133,7 @@ function createKamer(type: KamerType, m2?: number, naam?: string): Kamer {
 }
 
 function berekenbuitenAfmetingen(m2: number): { breedte: number; diepte: number } {
+  if (m2 <= 0) return { breedte: 3, diepte: 3 };
   const breedte = Math.round(Math.sqrt(m2 * 1.5) * 2) / 2;
   const diepte = Math.round((m2 / breedte) * 2) / 2;
   return { breedte, diepte };

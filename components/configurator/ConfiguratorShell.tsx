@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
@@ -50,20 +50,18 @@ const stepVariants = {
   }),
 };
 
-export default function ConfiguratorShell() {
+function ConfiguratorShellInner() {
   const searchParams = useSearchParams();
-  const {
-    currentStep,
-    maxVisitedStep,
-    setStep,
-    nextStep,
-    prevStep,
-    canProceed,
-    woningType,
-    setWoningType,
-    setVoorgeselecteerdeAanbieder,
-    reset,
-  } = useConfiguratorStore();
+  const currentStep = useConfiguratorStore((s) => s.currentStep);
+  const maxVisitedStep = useConfiguratorStore((s) => s.maxVisitedStep);
+  const woningType = useConfiguratorStore((s) => s.woningType);
+  const setStep = useConfiguratorStore((s) => s.setStep);
+  const nextStep = useConfiguratorStore((s) => s.nextStep);
+  const prevStep = useConfiguratorStore((s) => s.prevStep);
+  const canProceed = useConfiguratorStore((s) => s.canProceed);
+  const setWoningType = useConfiguratorStore((s) => s.setWoningType);
+  const setVoorgeselecteerdeAanbieder = useConfiguratorStore((s) => s.setVoorgeselecteerdeAanbieder);
+  const reset = useConfiguratorStore((s) => s.reset);
 
   const [showResumeBanner, setShowResumeBanner] = useState(false);
 
@@ -72,22 +70,23 @@ export default function ConfiguratorShell() {
 
   // Show resume banner if there's a saved configuration
   useEffect(() => {
-    if (woningType && currentStep > 1) {
+    const s = useConfiguratorStore.getState();
+    if (s.woningType && s.currentStep > 1) {
       setShowResumeBanner(true);
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   // Auto-select woningtype from URL parameter — always override store
   useEffect(() => {
     const typeParam = searchParams.get("type");
     if (typeParam) {
-      const wt = getWoningType(typeParam);
-      if (wt && typeParam !== woningType) {
+      const wtCheck = getWoningType(typeParam);
+      if (wtCheck && typeParam !== useConfiguratorStore.getState().woningType) {
         reset();
         setWoningType(typeParam);
       }
     }
-  }, [searchParams]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [searchParams, reset, setWoningType]);
 
   // Pre-select aanbieder from URL parameter (e.g. ?aanbieder=modubouw-nederland)
   useEffect(() => {
@@ -98,7 +97,7 @@ export default function ConfiguratorShell() {
         setVoorgeselecteerdeAanbieder(aanbiederParam);
       }
     }
-  }, [searchParams]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [searchParams, setVoorgeselecteerdeAanbieder]);
 
   const handleResumeDiscard = () => {
     reset();
@@ -350,5 +349,13 @@ export default function ConfiguratorShell() {
       {/* Bottom spacer for fixed bar */}
       <div className="h-20" />
     </div>
+  );
+}
+
+export default function ConfiguratorShell() {
+  return (
+    <Suspense fallback={null}>
+      <ConfiguratorShellInner />
+    </Suspense>
   );
 }

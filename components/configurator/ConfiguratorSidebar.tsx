@@ -26,8 +26,12 @@ export default function ConfiguratorSidebar({
   const [mobileExpanded, setMobileExpanded] = useState(false);
   const [showPriceInfo, setShowPriceInfo] = useState(false);
 
-  const { woningType, totaalM2, aantalVerdiepingen, kamers, modules, getPrijsRange } =
-    useConfiguratorStore();
+  const woningType = useConfiguratorStore((s) => s.woningType);
+  const totaalM2 = useConfiguratorStore((s) => s.totaalM2);
+  const aantalVerdiepingen = useConfiguratorStore((s) => s.aantalVerdiepingen);
+  const kamers = useConfiguratorStore((s) => s.kamers);
+  const modules = useConfiguratorStore((s) => s.modules);
+  const getPrijsRange = useConfiguratorStore((s) => s.getPrijsRange);
 
   const prijsRange = getPrijsRange();
   const wt = woningType ? getWoningType(woningType) : null;
