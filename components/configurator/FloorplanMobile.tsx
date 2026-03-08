@@ -29,15 +29,13 @@ const KAMER_ICONS: Record<KamerType, React.ElementType> = {
 };
 
 export default function FloorplanMobile() {
-  const {
-    kamers,
-    modules,
-    activeModuleId,
-    woningType,
-    removeKamer,
-    updateKamer,
-    getTotaalKamerM2,
-  } = useConfiguratorStore();
+  const kamers = useConfiguratorStore((s) => s.kamers);
+  const modules = useConfiguratorStore((s) => s.modules);
+  const activeModuleId = useConfiguratorStore((s) => s.activeModuleId);
+  const woningType = useConfiguratorStore((s) => s.woningType);
+  const removeKamer = useConfiguratorStore((s) => s.removeKamer);
+  const updateKamer = useConfiguratorStore((s) => s.updateKamer);
+  const getTotaalKamerM2 = useConfiguratorStore((s) => s.getTotaalKamerM2);
 
   const wt = woningType ? getWoningType(woningType) : null;
   const isMultiModule = wt?.supportsModules && modules.length > 1;
@@ -90,7 +88,6 @@ export default function FloorplanMobile() {
     return (
       <motion.div
         key={kamer.id}
-        layout
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}

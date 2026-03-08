@@ -12,6 +12,7 @@ import { useConfiguratorStore } from "@/store/configuratorStore";
 import { getWoningType } from "@/lib/woningtypen";
 import { KamerType, KAMER_LABELS, KAMER_KLEUREN, KAMER_BORDER_KLEUREN } from "@/lib/types";
 import { formatM2 } from "@/lib/utils";
+import { useMediaQuery } from "@/lib/useMediaQuery";
 import Button from "@/components/ui/Button";
 import Modal from "@/components/ui/Modal";
 import FloorplanMobile from "./FloorplanMobile";
@@ -46,20 +47,20 @@ export default function StepPlattegrond() {
   const [justAdded, setJustAdded] = useState<KamerType | null>(null);
   const [showTooltip, setShowTooltip] = useState(true);
 
-  const {
-    woningType,
-    kamers,
-    totaalM2,
-    modules,
-    activeModuleId,
-    addKamer,
-    loadPreset,
-    getTotaalKamerM2,
-    setActiveModule,
-    addModule,
-    removeModule,
-    setBuitenAfmetingen,
-  } = useConfiguratorStore();
+  const isDesktop = useMediaQuery("(min-width: 768px)");
+
+  const woningType = useConfiguratorStore((s) => s.woningType);
+  const kamers = useConfiguratorStore((s) => s.kamers);
+  const totaalM2 = useConfiguratorStore((s) => s.totaalM2);
+  const modules = useConfiguratorStore((s) => s.modules);
+  const activeModuleId = useConfiguratorStore((s) => s.activeModuleId);
+  const addKamer = useConfiguratorStore((s) => s.addKamer);
+  const loadPreset = useConfiguratorStore((s) => s.loadPreset);
+  const getTotaalKamerM2 = useConfiguratorStore((s) => s.getTotaalKamerM2);
+  const setActiveModule = useConfiguratorStore((s) => s.setActiveModule);
+  const addModule = useConfiguratorStore((s) => s.addModule);
+  const removeModule = useConfiguratorStore((s) => s.removeModule);
+  const setBuitenAfmetingen = useConfiguratorStore((s) => s.setBuitenAfmetingen);
 
   const wt = woningType ? getWoningType(woningType) : null;
   const isMultiModule = wt?.supportsModules && modules.length > 1;
@@ -304,41 +305,41 @@ export default function StepPlattegrond() {
 
         {/* Right — canvas / mobile */}
         <div className="flex-1 min-w-0">
-          {/* Desktop: Canvas floor plan */}
-          <div className="hidden md:block">
-            <FloorplanCanvas />
+          {isDesktop ? (
+            <>
+              {/* Desktop: Canvas floor plan */}
+              <FloorplanCanvas />
 
-            {/* Module thumbnails (if multi-module, show other modules) */}
-            {isMultiModule && modules.length > 1 && (
-              <div className="mt-4 flex gap-3 overflow-x-auto pb-2">
-                {modules
-                  .filter((m) => m.id !== activeModuleId)
-                  .map((mod) => (
-                    <button
-                      key={mod.id}
-                      type="button"
-                      onClick={() => setActiveModule(mod.id)}
-                      className="flex-shrink-0 rounded-2xl border border-gray-200/80 hover:border-primary/30 hover:shadow-card transition-all overflow-hidden bg-white"
-                    >
-                      <div className="p-2 bg-[#FAF9F6]">
-                        <FloorplanCanvas moduleId={mod.id} readOnly compact />
-                      </div>
-                      <div className="px-3 py-2 text-center">
-                        <p className="text-body-sm font-medium text-gray-700">{mod.naam}</p>
-                        <p className="text-caption text-gray-600">
-                          {formatM2(Math.round(mod.kamers.reduce((s, k) => s + k.m2, 0) * 10) / 10)}
-                        </p>
-                      </div>
-                    </button>
-                  ))}
-              </div>
-            )}
-          </div>
-
-          {/* Mobile: Room list */}
-          <div className="md:hidden">
+              {/* Module thumbnails (if multi-module, show other modules) */}
+              {isMultiModule && modules.length > 1 && (
+                <div className="mt-4 flex gap-3 overflow-x-auto pb-2">
+                  {modules
+                    .filter((m) => m.id !== activeModuleId)
+                    .map((mod) => (
+                      <button
+                        key={mod.id}
+                        type="button"
+                        onClick={() => setActiveModule(mod.id)}
+                        className="flex-shrink-0 rounded-2xl border border-gray-200/80 hover:border-primary/30 hover:shadow-card transition-all overflow-hidden bg-white"
+                      >
+                        <div className="p-2 bg-[#FAF9F6]">
+                          <FloorplanCanvas moduleId={mod.id} readOnly compact />
+                        </div>
+                        <div className="px-3 py-2 text-center">
+                          <p className="text-body-sm font-medium text-gray-700">{mod.naam}</p>
+                          <p className="text-caption text-gray-600">
+                            {formatM2(Math.round(mod.kamers.reduce((s, k) => s + k.m2, 0) * 10) / 10)}
+                          </p>
+                        </div>
+                      </button>
+                    ))}
+                </div>
+              )}
+            </>
+          ) : (
+            /* Mobile: Room list */
             <FloorplanMobile />
-          </div>
+          )}
         </div>
       </div>
 
