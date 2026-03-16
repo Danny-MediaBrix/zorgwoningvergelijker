@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import {
@@ -23,6 +23,7 @@ import Button from "@/components/ui/Button";
 import FormInput from "@/components/ui/FormInput";
 import FormTextarea from "@/components/ui/FormTextarea";
 import Dropdown from "@/components/ui/Dropdown";
+import FloorplanCanvas, { type FloorplanCanvasHandle } from "@/components/configurator/FloorplanCanvas";
 
 // ==================== Label mappings ====================
 
@@ -182,6 +183,7 @@ export default function StepOverzicht() {
   const [formStep, setFormStep] = useState(1);
   const [voorkeursAanbieders, setVoorkeursAanbieders] = useState<string[]>([]);
   const [geenVoorkeur, setGeenVoorkeur] = useState(true);
+  const canvasRef = useRef<FloorplanCanvasHandle>(null);
 
   const beschikbareAanbieders = store.woningType
     ? getAanbiedersVoorType(store.woningType)
@@ -240,6 +242,9 @@ export default function StepOverzicht() {
     setSubmitError(null);
 
     try {
+      // Capture plattegrond screenshot
+      const plattegrondBase64 = canvasRef.current?.exportAsDataUrl() || null;
+
       const response = await fetch("/api/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -249,6 +254,7 @@ export default function StepOverzicht() {
             totaalM2: store.totaalM2,
             aantalVerdiepingen: store.aantalVerdiepingen,
             kamers: store.kamers,
+            modules: store.modules,
             buitenBreedte: store.buitenBreedte,
             buitenDiepte: store.buitenDiepte,
             dakType: store.dakType,
@@ -276,6 +282,7 @@ export default function StepOverzicht() {
             opmerkingen: data.opmerkingen || "",
           },
           prijsIndicatie: prijsRange,
+          plattegrondBase64,
         }),
       });
 
@@ -561,6 +568,13 @@ export default function StepOverzicht() {
           </div>
         </div>
       </Card>
+
+      {/* Hidden FloorplanCanvas for screenshot export */}
+      {store.kamers.length > 0 && (
+        <div className="fixed -left-[9999px] top-0" aria-hidden="true">
+          <FloorplanCanvas ref={canvasRef} readOnly />
+        </div>
+      )}
 
       {/* ===== CONFIGURATION SUMMARY ===== */}
       <Card padding="md" className="mb-8">

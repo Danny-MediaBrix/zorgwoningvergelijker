@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback, useEffect, useMemo } from "react";
+import { useState, useRef, useCallback, useEffect, useMemo, forwardRef, useImperativeHandle } from "react";
 import { Stage, Layer, Rect, Text, Group, Line, Circle } from "react-konva";
 import { useConfiguratorStore } from "@/store/configuratorStore";
 import { KAMER_LABELS, KAMER_BORDER_KLEUREN, KamerType, Kamer } from "@/lib/types";
@@ -52,17 +52,21 @@ function getOverlappingIds(kamers: Kamer[], scale: number): Set<string> {
   return ids;
 }
 
+export interface FloorplanCanvasHandle {
+  exportAsDataUrl: () => string | null;
+}
+
 interface FloorplanCanvasProps {
   moduleId?: string;
   readOnly?: boolean;
   compact?: boolean;
 }
 
-export default function FloorplanCanvas({
+const FloorplanCanvas = forwardRef<FloorplanCanvasHandle, FloorplanCanvasProps>(function FloorplanCanvas({
   moduleId,
   readOnly = false,
   compact = false,
-}: FloorplanCanvasProps) {
+}, ref) {
   const {
     kamers: allKamers,
     modules,
@@ -98,6 +102,17 @@ export default function FloorplanCanvas({
   const stageRef = useRef<Konva.Stage>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState(800);
+
+  useImperativeHandle(ref, () => ({
+    exportAsDataUrl: () => {
+      if (!stageRef.current) return null;
+      try {
+        return stageRef.current.toDataURL({ pixelRatio: 2 });
+      } catch {
+        return null;
+      }
+    },
+  }));
 
   // First-time hint check
   useEffect(() => {
@@ -858,7 +873,9 @@ export default function FloorplanCanvas({
       )}
     </div>
   );
-}
+});
+
+export default FloorplanCanvas;
 
 // Simple icon characters for room watermarks
 function getIconChar(type: KamerType): string {

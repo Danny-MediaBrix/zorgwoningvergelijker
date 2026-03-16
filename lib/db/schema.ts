@@ -161,6 +161,7 @@ export const leads = sqliteTable("leads", {
   woningtype: text("woningtype"),
   bericht: text("bericht"),
   bron: text("bron"), // 'configurator', 'aanbiederspagina'
+  plattegrondUrl: text("plattegrond_url"),
   gefactureerd: integer("gefactureerd").default(0),
   createdAt: text("created_at").notNull(),
 }, (table) => [

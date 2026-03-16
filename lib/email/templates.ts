@@ -57,7 +57,21 @@ export type EmailTemplate =
   | { type: "lead_ontvangen"; bedrijfsnaam: string; naam: string; email: string; woningtype: string }
   | { type: "wachtwoord_reset"; resetUrl: string }
   | { type: "offerte_bevestiging"; naam: string; woningtype: string; m2: number; prijsLaag: number; prijsHoog: number }
-  | { type: "offerte_notificatie"; naam: string; email: string; telefoon: string; postcode: string; woningtype: string; m2: number; budget: string; oplevertermijn: string; prijsLaag: number; prijsHoog: number; opmerkingen?: string }
+  | {
+      type: "offerte_notificatie";
+      naam: string; email: string; telefoon: string; postcode: string;
+      woningtype: string; m2: number;
+      aantalVerdiepingen: number; buitenBreedte: number; buitenDiepte: number;
+      dakType: string | null; gevelType: string | null;
+      kozijnType: string | null; glasType: string;
+      funderingType: string | null; verwarmingType: string | null;
+      isolatieNiveau: string; zonnepanelen: number; vloerverwarming: boolean;
+      keukenNiveau: string; badkamerNiveau: string;
+      kamers: { naam: string; type: string; m2: number; breedte: number; diepte: number }[];
+      budget: string; oplevertermijn: string; heeftKavel: string;
+      prijsLaag: number; prijsHoog: number;
+      opmerkingen?: string; plattegrondUrl?: string;
+    }
   | { type: "contact_bevestiging"; naam: string; onderwerp: string };
 
 export function getEmailContent(template: EmailTemplate): { subject: string; html: string } {
@@ -215,7 +229,29 @@ export function getEmailContent(template: EmailTemplate): { subject: string; htm
         `),
       };
 
-    case "offerte_notificatie":
+    case "offerte_notificatie": {
+      const heeftKavelLabel = template.heeftKavel === "ja" ? "Ja" : template.heeftKavel === "nee" ? "Nee" : "Onbekend";
+
+      const kamersHtml = template.kamers.length > 0
+        ? `<table width="100%" cellpadding="0" cellspacing="0" style="font-size:13px;border-collapse:collapse;margin-top:8px;">
+            <tr style="background-color:#F5F0FA;">
+              <td style="padding:6px 10px;font-weight:600;color:#583A85;border-bottom:1px solid #E5E7EB;">Kamer</td>
+              <td style="padding:6px 10px;font-weight:600;color:#583A85;border-bottom:1px solid #E5E7EB;text-align:right;">Afmeting</td>
+              <td style="padding:6px 10px;font-weight:600;color:#583A85;border-bottom:1px solid #E5E7EB;text-align:right;">m²</td>
+            </tr>
+            ${template.kamers.map((k) => `
+              <tr>
+                <td style="padding:5px 10px;border-bottom:1px solid #F3F4F6;color:#251938;">${escapeHtml(k.naam)}</td>
+                <td style="padding:5px 10px;border-bottom:1px solid #F3F4F6;color:#4B5563;text-align:right;">${k.breedte} × ${k.diepte} m</td>
+                <td style="padding:5px 10px;border-bottom:1px solid #F3F4F6;color:#4B5563;text-align:right;">${k.m2} m²</td>
+              </tr>
+            `).join("")}
+          </table>`
+        : '<p style="font-size:14px;color:#78716C;margin:8px 0 0;">Geen kamers samengesteld</p>';
+
+      const detailRow = (label: string, value: string | null | undefined) =>
+        value ? `<p style="font-size:14px;color:#251938;margin:0 0 4px;"><strong>${label}:</strong> ${escapeHtml(value)}</p>` : "";
+
       return {
         subject: `Nieuwe offerte-aanvraag: ${escapeHtml(template.woningtype)}`,
         html: layout(`
@@ -223,21 +259,65 @@ export function getEmailContent(template: EmailTemplate): { subject: string; htm
           <p style="font-size:15px;line-height:1.6;color:#4B5563;">
             Er is een nieuwe offerte-aanvraag binnengekomen via de configurator.
           </p>
+
+          <!-- Contactgegevens -->
           <div style="background-color:#F5F0FA;border-radius:8px;padding:16px;margin:16px 0;">
             <p style="font-size:13px;font-weight:600;color:#78716C;margin:0 0 8px;text-transform:uppercase;letter-spacing:0.05em;">Contactgegevens</p>
             <p style="font-size:14px;color:#251938;margin:0 0 4px;"><strong>Naam:</strong> ${escapeHtml(template.naam)}</p>
             <p style="font-size:14px;color:#251938;margin:0 0 4px;"><strong>E-mail:</strong> <a href="mailto:${escapeHtml(template.email)}" style="color:#583A85;">${escapeHtml(template.email)}</a></p>
             <p style="font-size:14px;color:#251938;margin:0 0 4px;"><strong>Telefoon:</strong> <a href="tel:${escapeHtml(template.telefoon)}" style="color:#583A85;">${escapeHtml(template.telefoon)}</a></p>
-            <p style="font-size:14px;color:#251938;margin:0;"><strong>Postcode:</strong> ${escapeHtml(template.postcode)}</p>
-          </div>
-          <div style="background-color:#FAFAF9;border:1px solid #E5E7EB;border-radius:8px;padding:16px;margin:16px 0;">
-            <p style="font-size:13px;font-weight:600;color:#78716C;margin:0 0 8px;text-transform:uppercase;letter-spacing:0.05em;">Configuratie</p>
-            <p style="font-size:14px;color:#251938;margin:0 0 4px;"><strong>Woningtype:</strong> ${escapeHtml(template.woningtype)}</p>
-            <p style="font-size:14px;color:#251938;margin:0 0 4px;"><strong>Oppervlakte:</strong> ${template.m2} m²</p>
+            <p style="font-size:14px;color:#251938;margin:0 0 4px;"><strong>Postcode:</strong> ${escapeHtml(template.postcode)}</p>
             <p style="font-size:14px;color:#251938;margin:0 0 4px;"><strong>Budget:</strong> ${escapeHtml(template.budget || "Niet opgegeven")}</p>
             <p style="font-size:14px;color:#251938;margin:0 0 4px;"><strong>Oplevertermijn:</strong> ${escapeHtml(template.oplevertermijn || "Niet opgegeven")}</p>
-            <p style="font-size:14px;color:#251938;margin:0;"><strong>Prijsindicatie:</strong> ${formatPrijs(template.prijsLaag)} – ${formatPrijs(template.prijsHoog)}</p>
+            <p style="font-size:14px;color:#251938;margin:0;"><strong>Heeft kavel:</strong> ${heeftKavelLabel}</p>
           </div>
+
+          <!-- Basiskenmerken -->
+          <div style="background-color:#FAFAF9;border:1px solid #E5E7EB;border-radius:8px;padding:16px;margin:16px 0;">
+            <p style="font-size:13px;font-weight:600;color:#78716C;margin:0 0 8px;text-transform:uppercase;letter-spacing:0.05em;">Basiskenmerken</p>
+            <p style="font-size:14px;color:#251938;margin:0 0 4px;"><strong>Woningtype:</strong> ${escapeHtml(template.woningtype)}</p>
+            <p style="font-size:14px;color:#251938;margin:0 0 4px;"><strong>Oppervlakte:</strong> ${template.m2} m²</p>
+            <p style="font-size:14px;color:#251938;margin:0 0 4px;"><strong>Verdiepingen:</strong> ${template.aantalVerdiepingen}</p>
+            <p style="font-size:14px;color:#251938;margin:0;"><strong>Buitenafmetingen:</strong> ${template.buitenBreedte} × ${template.buitenDiepte} m</p>
+          </div>
+
+          <!-- Plattegrond + Kamers -->
+          <div style="background-color:#FAFAF9;border:1px solid #E5E7EB;border-radius:8px;padding:16px;margin:16px 0;">
+            <p style="font-size:13px;font-weight:600;color:#78716C;margin:0 0 8px;text-transform:uppercase;letter-spacing:0.05em;">Plattegrond &amp; Kamers</p>
+            ${template.plattegrondUrl
+              ? `<img src="${template.plattegrondUrl}" alt="Plattegrond" style="max-width:100%;height:auto;border-radius:8px;border:1px solid #E5E7EB;margin-bottom:12px;" />`
+              : '<p style="font-size:14px;color:#78716C;margin:0 0 8px;">Geen plattegrond samengesteld</p>'
+            }
+            ${kamersHtml}
+          </div>
+
+          <!-- Afwerking -->
+          <div style="background-color:#FAFAF9;border:1px solid #E5E7EB;border-radius:8px;padding:16px;margin:16px 0;">
+            <p style="font-size:13px;font-weight:600;color:#78716C;margin:0 0 8px;text-transform:uppercase;letter-spacing:0.05em;">Afwerking</p>
+            <p style="font-size:12px;font-weight:600;color:#583A85;margin:8px 0 4px;">Exterieur</p>
+            ${detailRow("Daktype", template.dakType)}
+            ${detailRow("Geveltype", template.gevelType)}
+            ${detailRow("Kozijnen", template.kozijnType)}
+            <p style="font-size:14px;color:#251938;margin:0 0 4px;"><strong>Beglazing:</strong> ${escapeHtml(template.glasType)}</p>
+            ${detailRow("Fundering", template.funderingType)}
+
+            <p style="font-size:12px;font-weight:600;color:#583A85;margin:12px 0 4px;">Installaties</p>
+            ${detailRow("Verwarming", template.verwarmingType)}
+            <p style="font-size:14px;color:#251938;margin:0 0 4px;"><strong>Isolatie:</strong> ${escapeHtml(template.isolatieNiveau)}</p>
+            <p style="font-size:14px;color:#251938;margin:0 0 4px;"><strong>Zonnepanelen:</strong> ${template.zonnepanelen > 0 ? `${template.zonnepanelen} panelen` : "Geen"}</p>
+            <p style="font-size:14px;color:#251938;margin:0 0 4px;"><strong>Vloerverwarming:</strong> ${template.vloerverwarming ? "Ja" : "Nee"}</p>
+
+            <p style="font-size:12px;font-weight:600;color:#583A85;margin:12px 0 4px;">Interieur</p>
+            <p style="font-size:14px;color:#251938;margin:0 0 4px;"><strong>Keuken:</strong> ${escapeHtml(template.keukenNiveau)}</p>
+            <p style="font-size:14px;color:#251938;margin:0;"><strong>Badkamer:</strong> ${escapeHtml(template.badkamerNiveau)}</p>
+          </div>
+
+          <!-- Prijsindicatie -->
+          <div style="background-color:#F5F0FA;border-radius:8px;padding:16px;margin:16px 0;">
+            <p style="font-size:13px;font-weight:600;color:#78716C;margin:0 0 8px;text-transform:uppercase;letter-spacing:0.05em;">Prijsindicatie</p>
+            <p style="font-size:20px;font-weight:700;color:#583A85;margin:0;">${formatPrijs(template.prijsLaag)} – ${formatPrijs(template.prijsHoog)}</p>
+          </div>
+
           ${template.opmerkingen ? `
             <div style="background-color:#FAFAF9;border:1px solid #E5E7EB;border-radius:8px;padding:16px;margin:16px 0;">
               <p style="font-size:13px;font-weight:600;color:#78716C;margin:0 0 8px;text-transform:uppercase;letter-spacing:0.05em;">Opmerkingen</p>
@@ -251,6 +331,7 @@ export function getEmailContent(template: EmailTemplate): { subject: string; htm
           </p>
         `),
       };
+    }
 
     case "contact_bevestiging":
       return {

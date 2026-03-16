@@ -13,6 +13,7 @@ interface Lead {
   woningtype: string | null;
   bericht: string | null;
   bron: string | null;
+  plattegrondUrl: string | null;
   gefactureerd: number | null;
   createdAt: string;
 }
@@ -219,6 +220,20 @@ function LeadRow({ lead }: { lead: Lead }) {
                 </div>
               )}
             </div>
+
+            {/* Plattegrond */}
+            {lead.plattegrondUrl && (
+              <div className="md:col-span-2 space-y-2">
+                <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Plattegrond</h4>
+                <div className="bg-white rounded-xl border border-gray-100 p-3">
+                  <img
+                    src={lead.plattegrondUrl}
+                    alt="Plattegrond"
+                    className="w-full max-w-lg rounded-lg border border-gray-200"
+                  />
+                </div>
+              </div>
+            )}
 
             {/* Configuratie info */}
             {parsed?.configuratie && (

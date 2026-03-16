@@ -22,6 +22,7 @@ export async function GET() {
         woningtype: leads.woningtype,
         bericht: leads.bericht,
         bron: leads.bron,
+        plattegrondUrl: leads.plattegrondUrl,
         gefactureerd: leads.gefactureerd,
         createdAt: leads.createdAt,
       })
