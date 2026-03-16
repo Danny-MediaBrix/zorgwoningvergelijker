@@ -18,6 +18,7 @@ interface Lead {
 }
 
 interface ParsedBericht {
+  // Configurator leads
   configuratie?: {
     woningType?: string;
     totaalM2?: number;
@@ -44,6 +45,9 @@ interface ParsedBericht {
     kavelGrootte?: number;
     opmerkingen?: string;
   };
+  // Contactformulier leads
+  onderwerp?: string;
+  bericht?: string;
 }
 
 function parseBericht(bericht: string | null): ParsedBericht | null {
@@ -75,8 +79,8 @@ function formatPrice(n: number) {
 }
 
 function BronBadge({ bron }: { bron: string | null }) {
-  const label = bron === "configurator" ? "Configurator" : bron === "aanbiederspagina" ? "Aanbieder" : bron || "Onbekend";
-  const color = bron === "configurator" ? "bg-primary-50 text-primary" : "bg-gray-100 text-gray-600";
+  const label = bron === "configurator" ? "Configurator" : bron === "contact" ? "Contactformulier" : bron === "aanbiederspagina" ? "Aanbieder" : bron || "Onbekend";
+  const color = bron === "configurator" ? "bg-primary-50 text-primary" : bron === "contact" ? "bg-accent-50 text-accent" : "bg-gray-100 text-gray-600";
   return <span className={`inline-block text-xs font-medium px-2 py-0.5 rounded-md ${color}`}>{label}</span>;
 }
 
@@ -185,6 +189,22 @@ function LeadRow({ lead }: { lead: Lead }) {
                   <p className="text-xs font-medium text-gray-500 mb-1">Opmerkingen</p>
                   <p className="text-sm text-gray-700 bg-white rounded-lg p-3 border border-gray-100">
                     {parsed.contact.opmerkingen}
+                  </p>
+                </div>
+              )}
+
+              {/* Contactformulier bericht */}
+              {parsed?.onderwerp && (
+                <div className="pt-2">
+                  <p className="text-xs font-medium text-gray-500 mb-1">Onderwerp</p>
+                  <p className="text-sm text-gray-700 font-medium">{parsed.onderwerp}</p>
+                </div>
+              )}
+              {parsed?.bericht && (
+                <div className="pt-2">
+                  <p className="text-xs font-medium text-gray-500 mb-1">Bericht</p>
+                  <p className="text-sm text-gray-700 bg-white rounded-lg p-3 border border-gray-100 whitespace-pre-wrap">
+                    {parsed.bericht}
                   </p>
                 </div>
               )}

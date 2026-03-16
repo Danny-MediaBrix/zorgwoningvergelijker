@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
+import { v4 as uuidv4 } from "uuid";
+import { db } from "@/lib/db";
+import { leads } from "@/lib/db/schema";
 import { getTransporter } from "@/lib/email/transport";
 import { sendEmail } from "@/lib/email/send";
 import { escapeHtml } from "@/lib/email/templates";
@@ -112,7 +115,21 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { naam, email, onderwerp } = parsed.data;
+    const { naam, email, telefoon, onderwerp, bericht } = parsed.data;
+
+    // Opslaan als lead in database
+    const id = uuidv4();
+    await db.insert(leads).values({
+      id,
+      aanbiederId: null,
+      naam,
+      email,
+      telefoon,
+      woningtype: null,
+      bericht: JSON.stringify({ onderwerp, bericht }),
+      bron: "contact",
+      createdAt: new Date().toISOString(),
+    });
 
     if (process.env.SMTP_HOST) {
       const transporter = getTransporter();
