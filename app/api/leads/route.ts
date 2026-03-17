@@ -146,18 +146,33 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    await db.insert(leads).values({
-      id,
-      aanbiederId: null,
-      naam: contact.naam,
-      email: contact.email,
-      telefoon: contact.telefoon,
-      woningtype: configuratie.woningType,
-      bericht,
-      bron: "configurator",
-      plattegrondUrl,
-      createdAt: now,
-    });
+    try {
+      await db.insert(leads).values({
+        id,
+        aanbiederId: null,
+        naam: contact.naam,
+        email: contact.email,
+        telefoon: contact.telefoon,
+        woningtype: configuratie.woningType,
+        bericht,
+        bron: "configurator",
+        plattegrondUrl,
+        createdAt: now,
+      });
+    } catch {
+      // Fallback: plattegrond_url column may not exist yet
+      await db.insert(leads).values({
+        id,
+        aanbiederId: null,
+        naam: contact.naam,
+        email: contact.email,
+        telefoon: contact.telefoon,
+        woningtype: configuratie.woningType,
+        bericht,
+        bron: "configurator",
+        createdAt: now,
+      });
+    }
 
     await Promise.allSettled([
       sendEmail(contact.email, {

@@ -11,24 +11,47 @@ export async function GET() {
       return NextResponse.json({ error: "Niet geautoriseerd" }, { status: 401 });
     }
 
-    const rows = await db
-      .select({
-        id: leads.id,
-        aanbiederId: leads.aanbiederId,
-        bedrijfsnaam: aanbieders.bedrijfsnaam,
-        naam: leads.naam,
-        email: leads.email,
-        telefoon: leads.telefoon,
-        woningtype: leads.woningtype,
-        bericht: leads.bericht,
-        bron: leads.bron,
-        plattegrondUrl: leads.plattegrondUrl,
-        gefactureerd: leads.gefactureerd,
-        createdAt: leads.createdAt,
-      })
-      .from(leads)
-      .leftJoin(aanbieders, eq(leads.aanbiederId, aanbieders.id))
-      .orderBy(desc(leads.createdAt));
+    let rows;
+    try {
+      rows = await db
+        .select({
+          id: leads.id,
+          aanbiederId: leads.aanbiederId,
+          bedrijfsnaam: aanbieders.bedrijfsnaam,
+          naam: leads.naam,
+          email: leads.email,
+          telefoon: leads.telefoon,
+          woningtype: leads.woningtype,
+          bericht: leads.bericht,
+          bron: leads.bron,
+          plattegrondUrl: leads.plattegrondUrl,
+          gefactureerd: leads.gefactureerd,
+          createdAt: leads.createdAt,
+        })
+        .from(leads)
+        .leftJoin(aanbieders, eq(leads.aanbiederId, aanbieders.id))
+        .orderBy(desc(leads.createdAt));
+    } catch {
+      // Fallback: plattegrond_url column may not exist yet
+      rows = (await db
+        .select({
+          id: leads.id,
+          aanbiederId: leads.aanbiederId,
+          bedrijfsnaam: aanbieders.bedrijfsnaam,
+          naam: leads.naam,
+          email: leads.email,
+          telefoon: leads.telefoon,
+          woningtype: leads.woningtype,
+          bericht: leads.bericht,
+          bron: leads.bron,
+          gefactureerd: leads.gefactureerd,
+          createdAt: leads.createdAt,
+        })
+        .from(leads)
+        .leftJoin(aanbieders, eq(leads.aanbiederId, aanbieders.id))
+        .orderBy(desc(leads.createdAt))
+      ).map((r) => ({ ...r, plattegrondUrl: null }));
+    }
 
     return NextResponse.json({ leads: rows });
   } catch (error) {
