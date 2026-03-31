@@ -1,5 +1,6 @@
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import ExitIntentPopup from "@/components/ExitIntentPopup";
 
 export default function PublicLayout({
   children,
@@ -17,6 +18,7 @@ export default function PublicLayout({
       <Header />
       <main id="main">{children}</main>
       <Footer />
+      <ExitIntentPopup />
     </>
   );
 }
