@@ -34,19 +34,23 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: validationError }, { status: 400 });
     }
 
+    console.log("Upload: token present?", !!process.env.BLOB_READ_WRITE_TOKEN);
+    console.log("Upload: file size", file.size, "type", file.type, "folder", folder);
+
     const url = await uploadFile(
       file,
       folder as "logos" | "certificaten" | "portfolio" | "occasions"
     );
 
+    console.log("Upload success:", url);
     return NextResponse.json({ url });
   } catch (error) {
-    console.error("Upload error:", error);
+    console.error("Upload error details:", error);
 
-    const message =
-      error instanceof Error && error.message.includes("token")
-        ? "Upload service niet beschikbaar. Neem contact op met support."
-        : "Er ging iets mis bij het uploaden. Probeer het opnieuw.";
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    const message = errorMessage.includes("token") || errorMessage.includes("denied") || errorMessage.includes("authorized")
+      ? "Upload service niet beschikbaar. Controleer de BLOB_READ_WRITE_TOKEN."
+      : `Upload mislukt: ${errorMessage}`;
 
     return NextResponse.json({ error: message }, { status: 500 });
   }
