@@ -42,9 +42,12 @@ export async function POST(request: Request) {
     return NextResponse.json({ url });
   } catch (error) {
     console.error("Upload error:", error);
-    return NextResponse.json(
-      { error: "Er ging iets mis bij het uploaden." },
-      { status: 500 }
-    );
+
+    const message =
+      error instanceof Error && error.message.includes("token")
+        ? "Upload service niet beschikbaar. Neem contact op met support."
+        : "Er ging iets mis bij het uploaden. Probeer het opnieuw.";
+
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

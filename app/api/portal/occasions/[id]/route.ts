@@ -3,6 +3,7 @@ import { db } from "@/lib/db";
 import { aanbiedersOccasions } from "@/lib/db/schema";
 import { eq, and } from "drizzle-orm";
 import { validateSession } from "@/lib/auth/session";
+import { deleteFile } from "@/lib/upload";
 
 export async function GET(
   _request: Request,
@@ -111,6 +112,29 @@ export async function DELETE(
     }
 
     const { id } = await params;
+
+    // Haal occasion op om images te verwijderen uit Blob storage
+    const existing = await db
+      .select()
+      .from(aanbiedersOccasions)
+      .where(
+        and(
+          eq(aanbiedersOccasions.id, id),
+          eq(aanbiedersOccasions.aanbiederId, user.aanbieder.id)
+        )
+      )
+      .limit(1);
+
+    if (existing.length === 0) {
+      return NextResponse.json({ error: "Niet gevonden." }, { status: 404 });
+    }
+
+    // Verwijder afbeeldingen uit Vercel Blob
+    const occasion = existing[0];
+    if (occasion.images) {
+      const images: string[] = JSON.parse(occasion.images);
+      await Promise.all(images.map((url) => deleteFile(url)));
+    }
 
     await db
       .delete(aanbiedersOccasions)

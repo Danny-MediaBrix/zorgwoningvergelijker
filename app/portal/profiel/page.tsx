@@ -113,11 +113,16 @@ export default function ProfielPage() {
       }
 
       // Logo URL opslaan in profiel
-      await fetch("/api/portal/profiel", {
+      const saveRes = await fetch("/api/portal/profiel", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ logoUrl: data.url }),
       });
+
+      if (!saveRes.ok) {
+        setMessage({ type: "error", text: "Logo geüpload maar opslaan mislukt. Probeer opnieuw." });
+        return;
+      }
 
       setProfiel((prev) => prev ? { ...prev, logoUrl: data.url } : prev);
       setMessage({ type: "success", text: "Logo geüpload." });
