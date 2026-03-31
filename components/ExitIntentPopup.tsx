@@ -61,21 +61,22 @@ export default function ExitIntentPopup() {
 
     let triggered = false;
 
-    function handleMouseLeave(e: MouseEvent) {
+    function handleMouseOut(e: MouseEvent) {
       if (triggered) return;
-      if (e.clientY <= 0) {
+      // Trigger als muis het venster verlaat via de bovenkant
+      if (e.clientY <= 0 || (!e.relatedTarget && e.clientY < 50)) {
         triggered = true;
         setShow(true);
       }
     }
 
     const timer = setTimeout(() => {
-      document.addEventListener("mouseleave", handleMouseLeave);
+      document.documentElement.addEventListener("mouseout", handleMouseOut);
     }, 5000);
 
     return () => {
       clearTimeout(timer);
-      document.removeEventListener("mouseleave", handleMouseLeave);
+      document.documentElement.removeEventListener("mouseout", handleMouseOut);
     };
   }, [pathname]);
 
