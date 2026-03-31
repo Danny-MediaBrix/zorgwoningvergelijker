@@ -129,6 +129,7 @@ export default function ExitIntentPopup() {
             heeftKavel: "onbekend",
           },
           prijsIndicatie: { laag: 0, hoog: 0 },
+          bron: "exit-popup",
         }),
       });
 

@@ -84,6 +84,7 @@ const leadSchema = z.object({
     hoog: z.number(),
   }),
   plattegrondBase64: z.string().nullable().optional(),
+  bron: z.enum(["configurator", "exit-popup", "aanbiederspagina"]).optional(),
 });
 
 export async function POST(request: NextRequest) {
@@ -155,7 +156,7 @@ export async function POST(request: NextRequest) {
         telefoon: contact.telefoon,
         woningtype: configuratie.woningType,
         bericht,
-        bron: "configurator",
+        bron: parsed.data.bron || "configurator",
         plattegrondUrl,
         createdAt: now,
       });
@@ -169,7 +170,7 @@ export async function POST(request: NextRequest) {
         telefoon: contact.telefoon,
         woningtype: configuratie.woningType,
         bericht,
-        bron: "configurator",
+        bron: parsed.data.bron || "configurator",
         createdAt: now,
       });
     }
