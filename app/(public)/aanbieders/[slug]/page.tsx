@@ -49,6 +49,7 @@ export async function generateMetadata({
     alternates: {
       canonical: `https://zorgwoningvergelijker.nl/aanbieders/${slug}`,
     },
+    keywords: [aanbieder.naam, `${aanbieder.naam} reviews`, "modulaire woning aanbieder", ...aanbieder.specialisaties.slice(0, 3)],
   };
 }
 

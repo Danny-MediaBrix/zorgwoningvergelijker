@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://zorgwoningvergelijker.nl/aanbieders",
   },
+  keywords: ["modulaire woning aanbieders", "tiny house bouwer", "mantelzorgwoning leverancier", "prefab woning aanbieder vergelijken"],
 };
 
 export default async function AanbiedersPage() {

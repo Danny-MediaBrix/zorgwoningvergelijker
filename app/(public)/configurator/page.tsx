@@ -1,27 +1,56 @@
-"use client";
+import type { Metadata } from "next";
+import ConfiguratorClient from "./ConfiguratorClient";
 
-import dynamic from "next/dynamic";
+export const metadata: Metadata = {
+  title: "Gratis Offerte Aanvragen | Woningconfigurator",
+  description:
+    "Ontvang gratis en vrijblijvend offertes voor je modulaire woning. Kies je woningtype, bepaal de grootte en ontvang binnen 48 uur een offerte op maat.",
+  alternates: {
+    canonical: "https://zorgwoningvergelijker.nl/configurator",
+  },
+  keywords: [
+    "modulaire woning offerte",
+    "gratis offerte aanvragen",
+    "woningconfigurator",
+    "tiny house offerte",
+    "mantelzorgwoning offerte",
+  ],
+};
 
-const ConfiguratorShell = dynamic(
-  () => import("@/components/configurator/ConfiguratorShell"),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-body text-gray-600">Configurator laden...</p>
-          <noscript>
-            <p className="text-body text-gray-600 mt-4">
-              De configurator vereist JavaScript. Schakel JavaScript in om door te gaan.
-            </p>
-          </noscript>
-        </div>
-      </div>
-    ),
-  }
-);
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Woningconfigurator & Offerte Service",
+  description:
+    "Gratis en vrijblijvende offerte-service voor modulaire woningen in Nederland. Configureer je woning en ontvang binnen 48 uur offertes van gecertificeerde aanbieders.",
+  provider: {
+    "@type": "Organization",
+    name: "Zorgwoningvergelijker.nl",
+    url: "https://zorgwoningvergelijker.nl",
+  },
+  areaServed: {
+    "@type": "Country",
+    name: "Nederland",
+  },
+  serviceType: "Offerte aanvraag modulaire woningen",
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "EUR",
+    description: "Gratis en vrijblijvend",
+  },
+};
 
 export default function ConfiguratorPage() {
-  return <ConfiguratorShell />;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(serviceSchema),
+        }}
+      />
+      <ConfiguratorClient />
+    </>
+  );
 }

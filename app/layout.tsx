@@ -81,6 +81,15 @@ const organizationSchema = {
     contactType: "customer service",
     availableLanguage: "Dutch",
   },
+  areaServed: {
+    "@type": "Country",
+    name: "Nederland",
+    "@id": "https://en.wikipedia.org/wiki/Netherlands",
+  },
+  logo: {
+    "@type": "ImageObject",
+    url: "https://zorgwoningvergelijker.nl/icon.svg",
+  },
 };
 
 export default function RootLayout({

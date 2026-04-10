@@ -1609,6 +1609,7 @@ export async function generateMetadata({ params }: ArtikelPageProps): Promise<Me
         images: [{ url: artikel.featuredImage, width: 1200, height: 675, alt: artikel.featuredImageAlt || artikel.titel }],
       }),
     },
+    keywords: [artikel.categorie.toLowerCase(), artikel.titel.toLowerCase(), "modulaire woning", "zorgwoning"],
   };
 }
 
@@ -1633,6 +1634,15 @@ export default async function ArtikelPage({ params }: ArtikelPageProps) {
     "@type": "BlogPosting",
     headline: artikel.titel,
     description: artikel.beschrijving,
+    ...(artikel.featuredImage && {
+      image: {
+        "@type": "ImageObject",
+        url: `https://zorgwoningvergelijker.nl${artikel.featuredImage}`,
+        width: 1200,
+        height: 675,
+        caption: artikel.featuredImageAlt || artikel.titel,
+      },
+    }),
     datePublished: artikel.gepubliceerd,
     dateModified: artikel.bijgewerkt,
     author: {

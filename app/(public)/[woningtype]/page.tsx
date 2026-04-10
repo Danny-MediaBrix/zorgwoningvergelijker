@@ -151,6 +151,10 @@ export default async function WoningtypePage({
   const productSchema = {
     "@context": "https://schema.org",
     "@type": "Product",
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://zorgwoningvergelijker.nl/${woningtype}`,
+    },
     name: wt.naam,
     description: wt.beschrijving,
     brand: {

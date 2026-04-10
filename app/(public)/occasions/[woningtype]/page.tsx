@@ -30,6 +30,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     alternates: {
       canonical: `https://zorgwoningvergelijker.nl/occasions/${slug}`,
     },
+    keywords: [`tweedehands ${naam.toLowerCase()}`, `${naam.toLowerCase()} occasion`, `gebruikte ${naam.toLowerCase()}`, "tweedehands modulaire woning"],
   };
 }
 

@@ -15,6 +15,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://zorgwoningvergelijker.nl/occasions",
   },
+  keywords: ["tweedehands modulaire woning", "occasions tiny house", "tweedehands mantelzorgwoning", "gebruikte chalet", "modulaire woning occasion"],
 };
 
 const seoContent: OccasionsSeoContent = {
