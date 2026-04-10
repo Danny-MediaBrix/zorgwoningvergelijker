@@ -7,7 +7,7 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 
 const stats = [
   { image: "/images/aanbieders-icoon.png", alt: "Icoon gecertificeerde aanbieders van modulaire woningen", value: 53, suffix: "", label: "Gecertificeerde aanbieders" },
-  { image: "/images/geconfigureerd-icoon.png", alt: "Icoon aantal geconfigureerde woningen via de woningconfigurator", value: 1247, suffix: "", label: "Woningen geconfigureerd" },
+  { image: "/images/geconfigureerd-icoon.png", alt: "Icoon aantal offertes aangevraagd via Zorgwoningvergelijker.nl", value: 1247, suffix: "", label: "Offertes aangevraagd" },
   { image: "/images/beoordeling-icoon.png", alt: "Icoon gemiddelde klantbeoordeling van Zorgwoningvergelijker.nl", value: 4.8, suffix: "/5", label: "Gemiddelde beoordeling", decimal: true },
   { image: "/images/gebruikers-icoon.png", alt: "Icoon tevreden gebruikers die een modulaire woning hebben gevonden", value: 3500, suffix: "+", label: "Tevreden gebruikers" },
   { image: "/images/bespaard-icoon.png", alt: "Icoon gemiddeld bespaarde kosten door woningen te vergelijken", value: 2400, suffix: "", label: "Gemiddeld bespaard", prefix: "€" },

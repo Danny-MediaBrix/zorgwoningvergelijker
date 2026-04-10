@@ -169,7 +169,7 @@ export default function PrijsIndicatieSection() {
 
                 {/* CTA */}
                 <Button as="link" href={`/configurator?type=${selectedType}`} variant="primary" size="lg" iconRight={<CTAArrow />} fullWidth className="mt-auto">
-                  Configureer je {wt?.naam.toLowerCase() || "woning"}
+                  Vraag offerte aan
                 </Button>
               </div>
             </div>

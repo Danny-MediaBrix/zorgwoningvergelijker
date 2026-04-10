@@ -1,39 +1,30 @@
 "use client";
 
-import { useEffect, useState, useCallback, Suspense } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, FastForward, SkipForward, RotateCcw, X, Check } from "lucide-react";
+import { ChevronLeft, ChevronRight, RotateCcw, X } from "lucide-react";
 import { useConfiguratorStore } from "@/store/configuratorStore";
 import { getWoningType } from "@/lib/woningtypen";
 import { getAanbieder } from "@/lib/aanbieders";
 import Container from "@/components/ui/Container";
 import ProgressBar from "@/components/ui/ProgressBar";
 import Button from "@/components/ui/Button";
-import { formatPrice } from "@/lib/utils";
 import ConfiguratorSidebar from "./ConfiguratorSidebar";
-import StepWoningtype from "./StepWoningtype";
-import StepBasiskenmerken from "./StepBasiskenmerken";
-import StepPlattegrond from "./StepPlattegrond";
-import StepExterieur from "./StepExterieur";
-import StepInstallaties from "./StepInstallaties";
-import StepInterieur from "./StepInterieur";
+import StepConfiguratie from "./StepConfiguratie";
+import StepVerfijnen from "./StepVerfijnen";
+import StepDetails from "./StepDetails";
 import StepOverzicht from "./StepOverzicht";
 
-const STEPS = [
-  { label: "Woningtype", shortLabel: "Type" },
-  { label: "Basis", shortLabel: "Basis" },
-  { label: "Plattegrond", shortLabel: "Plan" },
-  { label: "Exterieur", shortLabel: "Ext." },
-  { label: "Installaties", shortLabel: "Inst." },
-  { label: "Interieur", shortLabel: "Int." },
+// Steps shown in progress bar (only visible from step 2+)
+const PROGRESS_STEPS = [
+  { label: "Offerte", shortLabel: "Offerte" },
+  { label: "Verfijnen", shortLabel: "Extra" },
+  { label: "Details", shortLabel: "Details" },
   { label: "Overzicht", shortLabel: "Klaar" },
 ];
-
-// Steps 3-6 are optional and can be skipped
-const OPTIONAL_STEPS = [3, 4, 5, 6];
 
 const stepVariants = {
   enter: (direction: number) => ({
@@ -55,6 +46,7 @@ function ConfiguratorShellInner() {
   const currentStep = useConfiguratorStore((s) => s.currentStep);
   const maxVisitedStep = useConfiguratorStore((s) => s.maxVisitedStep);
   const woningType = useConfiguratorStore((s) => s.woningType);
+  const isLeadCaptured = useConfiguratorStore((s) => s.isLeadCaptured);
   const setStep = useConfiguratorStore((s) => s.setStep);
   const nextStep = useConfiguratorStore((s) => s.nextStep);
   const prevStep = useConfiguratorStore((s) => s.prevStep);
@@ -66,17 +58,23 @@ function ConfiguratorShellInner() {
   const [showResumeBanner, setShowResumeBanner] = useState(false);
 
   const wt = woningType ? getWoningType(woningType) : null;
-  const showFloatingBar = currentStep > 1 || !!wt;
 
-  // Show resume banner if there's a saved configuration
+  // Show progress bar from step 2 onwards
+  const showProgressBar = currentStep >= 2;
+  // Show floating nav on step 3 (details)
+  const showFloatingBar = currentStep === 3;
+  // Show sidebar on steps 3 and 4 (details + overzicht)
+  const showSidebar = currentStep >= 3;
+
+  // Show resume banner if there's a saved configuration with lead captured
   useEffect(() => {
     const s = useConfiguratorStore.getState();
-    if (s.woningType && s.currentStep > 1) {
+    if (s.isLeadCaptured && s.currentStep > 2) {
       setShowResumeBanner(true);
     }
   }, []);
 
-  // Auto-select woningtype from URL parameter — always override store
+  // Auto-select woningtype from URL parameter
   useEffect(() => {
     const typeParam = searchParams.get("type");
     if (typeParam) {
@@ -88,7 +86,7 @@ function ConfiguratorShellInner() {
     }
   }, [searchParams, reset, setWoningType]);
 
-  // Pre-select aanbieder from URL parameter (e.g. ?aanbieder=modubouw-nederland)
+  // Pre-select aanbieder from URL parameter
   useEffect(() => {
     const aanbiederParam = searchParams.get("aanbieder");
     if (aanbiederParam) {
@@ -108,36 +106,24 @@ function ConfiguratorShellInner() {
     setShowResumeBanner(false);
   };
 
-  const isOptionalStep = OPTIONAL_STEPS.includes(currentStep);
-
-  const handleSkipToOverzicht = () => {
-    setStep(7);
-  };
-
   const renderStep = () => {
     switch (currentStep) {
       case 1:
-        return <StepWoningtype />;
+        return <StepConfiguratie />;
       case 2:
-        return <StepBasiskenmerken />;
+        return <StepVerfijnen />;
       case 3:
-        return <StepPlattegrond />;
+        return <StepDetails />;
       case 4:
-        return <StepExterieur />;
-      case 5:
-        return <StepInstallaties />;
-      case 6:
-        return <StepInterieur />;
-      case 7:
         return <StepOverzicht />;
       default:
-        return <StepWoningtype />;
+        return <StepConfiguratie />;
     }
   };
 
   return (
     <div className="min-h-screen bg-page">
-      {/* Progress bar header with logo */}
+      {/* Header with logo + optional progress bar */}
       <div className="bg-white border-b border-gray-200 sticky top-0 z-30">
         <Container className="py-3">
           <div className="flex items-center gap-5">
@@ -148,25 +134,28 @@ function ConfiguratorShellInner() {
             >
               <Image
                 src="/images/zorgwoningvergelijker-logo.svg"
-                alt="Zorgwoningvergelijker.nl logo - terug naar homepage"
+                alt="Zorgwoningvergelijker.nl logo"
                 width={120}
                 height={75}
                 className="h-11 w-auto transition-opacity duration-200 group-hover:opacity-80"
                 priority
               />
             </Link>
-            <div className="flex-1 min-w-0">
-              <ProgressBar
-                steps={STEPS}
-                currentStep={currentStep}
-                maxVisitedStep={maxVisitedStep}
-                onStepClick={(step) => {
-                  if (step <= maxVisitedStep) {
-                    setStep(step);
-                  }
-                }}
-              />
-            </div>
+            {showProgressBar && (
+              <div className="flex-1 min-w-0">
+                <ProgressBar
+                  steps={PROGRESS_STEPS}
+                  currentStep={currentStep}
+                  maxVisitedStep={maxVisitedStep}
+                  onStepClick={(step) => {
+                    if (step === 1 && isLeadCaptured) return;
+                    if (step <= maxVisitedStep) {
+                      setStep(step);
+                    }
+                  }}
+                />
+              </div>
+            )}
           </div>
         </Container>
       </div>
@@ -203,33 +192,10 @@ function ConfiguratorShellInner() {
       )}
 
       {/* Main content area */}
-      <Container className="py-10">
+      <Container className={currentStep === 1 ? "py-6 sm:py-10" : "py-10"}>
         <div className="flex flex-col lg:flex-row gap-10">
-          {/* Left: Step content (70%) */}
-          <div className="w-full lg:w-[70%]">
-            {/* Quick route banner — shown after step 2, on optional steps */}
-            {currentStep === 2 && canProceed() && (
-              <div className="mb-8 p-5 bg-accent-50/80 border border-accent-100/60 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                <div>
-                  <p className="text-body-sm font-semibold text-gray-800">
-                    Snelle offerte nodig?
-                  </p>
-                  <p className="text-caption text-gray-600 mt-0.5">
-                    Sla de detailstappen over en vraag direct een offerte aan op basis van type en oppervlak.
-                  </p>
-                </div>
-                <Button
-                  variant="accent"
-                  size="sm"
-                  onClick={handleSkipToOverzicht}
-                  iconRight={<FastForward className="w-4 h-4" />}
-                  className="whitespace-nowrap flex-shrink-0"
-                >
-                  Direct naar offerte
-                </Button>
-              </div>
-            )}
-
+          {/* Step content */}
+          <div className={showSidebar ? "w-full lg:w-[70%]" : "w-full"}>
             <AnimatePresence mode="wait" custom={1}>
               <motion.div
                 key={currentStep}
@@ -243,19 +209,20 @@ function ConfiguratorShellInner() {
                 {renderStep()}
               </motion.div>
             </AnimatePresence>
-
           </div>
 
-          {/* Right: Sidebar (30%) - desktop */}
-          <div className="hidden lg:block w-[30%]">
-            <div className="sticky top-24">
-              <ConfiguratorSidebar />
+          {/* Sidebar (desktop only, steps 3-4) */}
+          {showSidebar && (
+            <div className="hidden lg:block w-[30%]">
+              <div className="sticky top-24">
+                <ConfiguratorSidebar />
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </Container>
 
-      {/* Floating navigation bar — all steps */}
+      {/* Floating nav bar — step 3 only */}
       <AnimatePresence>
         {showFloatingBar && (
           <motion.div
@@ -267,87 +234,31 @@ function ConfiguratorShellInner() {
           >
             <Container className="py-3.5">
               <div className="flex items-center justify-between gap-4">
-                {/* Left: Vorige + step info */}
                 <div className="flex items-center gap-3 min-w-0">
-                  {currentStep > 1 && (
-                    <Button
-                      variant="ghost"
-                      onClick={prevStep}
-                      icon={<ChevronLeft className="w-5 h-5" />}
-                    >
-                      <span className="hidden sm:inline">Vorige</span>
-                    </Button>
-                  )}
-
-                  {/* Step 1: woningtype info */}
-                  {currentStep === 1 && wt && (
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-primary-50 flex items-center justify-center flex-shrink-0">
-                        <Check className="w-5 h-5 text-primary" />
-                      </div>
-                      <div className="min-w-0">
-                        <p className="text-body-sm font-semibold text-dark truncate">
-                          {wt.naam} gekozen
-                        </p>
-                        <p className="text-caption text-gray-600">
-                          Vanaf {formatPrice(wt.prijsVanaf)}
-                        </p>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Steps 2-7: step badge + label */}
-                  {currentStep > 1 && (
-                    <div className="hidden sm:flex items-center gap-2.5">
-                      <span className="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center flex-shrink-0">
-                        <span className="text-body-sm font-bold text-primary">{currentStep}</span>
-                      </span>
-                      <span className="text-body-sm font-semibold text-dark truncate">
-                        {STEPS[currentStep - 1].label}
-                      </span>
-                    </div>
-                  )}
+                  <Button
+                    variant="ghost"
+                    onClick={prevStep}
+                    icon={<ChevronLeft className="w-5 h-5" />}
+                  >
+                    <span className="hidden sm:inline">Vorige</span>
+                  </Button>
                 </div>
-
-                {/* Right: Sla over + Volgende */}
-                <div className="flex items-center gap-3 flex-shrink-0">
-                  {isOptionalStep && (
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={nextStep}
-                      iconRight={<SkipForward className="w-4 h-4" />}
-                    >
-                      <span className="hidden sm:inline">Sla over</span>
-                    </Button>
-                  )}
-                  {currentStep < 7 && (
-                    <Button
-                      variant="primary"
-                      size="lg"
-                      onClick={nextStep}
-                      disabled={!canProceed()}
-                      iconRight={<ChevronRight className="w-5 h-5" />}
-                    >
-                      {currentStep === 6 ? "Naar overzicht" : "Volgende"}
-                    </Button>
-                  )}
-                </div>
+                <Button
+                  variant="primary"
+                  size="lg"
+                  onClick={nextStep}
+                  iconRight={<ChevronRight className="w-5 h-5" />}
+                >
+                  Naar overzicht
+                </Button>
               </div>
             </Container>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Mobile: Sticky bottom sidebar — hidden when floating bar is showing */}
-      {!showFloatingBar && (
-        <div className="lg:hidden fixed bottom-0 left-0 right-0 z-20">
-          <ConfiguratorSidebar mobile />
-        </div>
-      )}
-
       {/* Bottom spacer for fixed bar */}
-      <div className="h-20" />
+      {showFloatingBar && <div className="h-20" />}
     </div>
   );
 }

@@ -46,6 +46,8 @@ interface ParsedBericht {
     kavelGrootte?: number;
     opmerkingen?: string;
   };
+  // Verfijnd flag (set by PATCH endpoint)
+  isVerfijnd?: boolean;
   // Contactformulier leads
   onderwerp?: string;
   bericht?: string;
@@ -116,6 +118,9 @@ function LeadRow({ lead }: { lead: Lead }) {
           </div>
           <div className="flex items-center gap-3 flex-shrink-0">
             <BronBadge bron={lead.bron} />
+            {parsed?.isVerfijnd && (
+              <span className="inline-block text-xs font-medium px-2 py-0.5 rounded-md bg-green-50 text-green-700">Verfijnd</span>
+            )}
             <span className="text-xs text-gray-400 hidden md:inline">{formatDate(lead.createdAt)}</span>
             {expanded ? (
               <ChevronUp className="w-4 h-4 text-gray-400" />
@@ -175,8 +180,8 @@ function LeadRow({ lead }: { lead: Lead }) {
                   {parsed.contact.doel && (
                     <p className="text-xs text-gray-600"><span className="font-medium">Doel:</span> {parsed.contact.doel}</p>
                   )}
-                  {parsed.contact.heeftKavel && (
-                    <p className="text-xs text-gray-600"><span className="font-medium">Heeft kavel:</span> {parsed.contact.heeftKavel}</p>
+                  {parsed.contact.heeftKavel && parsed.contact.heeftKavel !== "onbekend" && (
+                    <p className="text-xs text-gray-600"><span className="font-medium">Heeft kavel:</span> {parsed.contact.heeftKavel === "ja" ? "Ja" : "Nee"}</p>
                   )}
                   {parsed.contact.kavelGrootte && (
                     <p className="text-xs text-gray-600"><span className="font-medium">Kavelgrootte:</span> {parsed.contact.kavelGrootte} m²</p>

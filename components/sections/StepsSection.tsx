@@ -7,9 +7,9 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 const steps = [
   {
     image: "/images/wim-configureert.jpg",
-    alt: "Stap 1: configureer je modulaire woning online met de interactieve woningconfigurator",
-    title: "Configureer",
-    description: "Stel je woning samen met onze interactieve tool. Kies type, grootte, indeling en afwerking.",
+    alt: "Stap 1: vertel ons over je droomwoning en ontvang gratis offertes",
+    title: "Vertel je wensen",
+    description: "Kies je woningtype en grootte. Vul je gegevens in en ontvang direct een offerte op maat.",
   },
   {
     image: "/images/wim-vergelijkt.jpg",
@@ -83,7 +83,7 @@ export default function StepsSection() {
         <ScrollReveal delay={0.5}>
           <div className="text-center mt-14">
             <Button as="link" href="/configurator" variant="primary" size="lg" iconRight={<CTAArrow />}>
-              Start je configuratie
+              Ontvang gratis offertes
             </Button>
           </div>
         </ScrollReveal>

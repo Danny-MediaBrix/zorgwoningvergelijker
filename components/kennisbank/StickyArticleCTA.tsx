@@ -77,7 +77,7 @@ export default function StickyArticleCTA() {
           href="/configurator"
           className="group flex items-center justify-center gap-2 w-full bg-accent text-white font-semibold text-body-sm px-4 py-2.5 rounded-xl shadow-md shadow-accent/15 hover:shadow-lg hover:shadow-primary/20 hover:-translate-y-[1px] active:translate-y-0 active:scale-[0.97] transition-all duration-200 ease-premium"
         >
-          <span>Start configurator</span>
+          <span>Vraag offerte aan</span>
           <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
         </Link>
 

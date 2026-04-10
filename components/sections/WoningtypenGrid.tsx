@@ -267,7 +267,7 @@ export default function WoningtypenGrid() {
         {/* Bottom CTA */}
         <div className="text-center mt-8">
           <Button as="link" href="/configurator" variant="primary" size="lg" iconRight={<CTAArrow />}>
-            Direct configureren
+            Ontvang gratis offertes
           </Button>
         </div>
       </Container>

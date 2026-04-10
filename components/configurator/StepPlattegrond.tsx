@@ -42,7 +42,7 @@ const KAMER_TYPE_OPTIONS: { type: KamerType; icon: React.ElementType; defaultM2:
   { type: "hal", icon: DoorOpen, defaultM2: 4 },
 ];
 
-export default function StepPlattegrond() {
+export default function StepPlattegrond({ embedded = false }: { embedded?: boolean } = {}) {
   const [showResetModal, setShowResetModal] = useState(false);
   const [justAdded, setJustAdded] = useState<KamerType | null>(null);
   const [showTooltip, setShowTooltip] = useState(true);
@@ -69,6 +69,20 @@ export default function StepPlattegrond() {
   const beschikbaarM2 = totaalM2 - totaalKamerM2;
   const percentage = Math.min(100, (totaalKamerM2 / totaalM2) * 100);
 
+  // Hooks must be called before any early return (React rules of hooks)
+  const handleAddKamer = useCallback((type: KamerType) => {
+    addKamer(type);
+    setJustAdded(type);
+    setTimeout(() => setJustAdded(null), 800);
+  }, [addKamer]);
+
+  const handleResetPreset = useCallback(() => {
+    if (woningType) {
+      loadPreset(woningType, true);
+      setShowResetModal(false);
+    }
+  }, [woningType, loadPreset]);
+
   if (!wt) {
     return (
       <div className="text-center py-12">
@@ -78,19 +92,6 @@ export default function StepPlattegrond() {
       </div>
     );
   }
-
-  const handleAddKamer = useCallback((type: KamerType) => {
-    addKamer(type);
-    setJustAdded(type);
-    setTimeout(() => setJustAdded(null), 800);
-  }, [addKamer]);
-
-  const handleResetPreset = () => {
-    if (woningType) {
-      loadPreset(woningType, true);
-      setShowResetModal(false);
-    }
-  };
 
   // Status message for m² bar
   const getStatusMessage = () => {
@@ -113,21 +114,23 @@ export default function StepPlattegrond() {
 
   return (
     <div>
-      {/* Header */}
-      <div className="mb-6">
-        <div className="flex items-center gap-3 mb-2">
-          <div className="w-10 h-10 rounded-xl bg-primary-50 flex items-center justify-center">
-            <LayoutGrid className="w-5 h-5 text-primary" />
+      {/* Header (hidden when embedded in StepDetails) */}
+      {!embedded && (
+        <div className="mb-6">
+          <div className="flex items-center gap-3 mb-2">
+            <div className="w-10 h-10 rounded-xl bg-primary-50 flex items-center justify-center">
+              <LayoutGrid className="w-5 h-5 text-primary" />
+            </div>
+            <h1 className="font-heading text-heading-1 text-dark tracking-tight">
+              Je plattegrond samenstellen
+            </h1>
           </div>
-          <h1 className="font-heading text-heading-1 text-dark tracking-tight">
-            Je plattegrond samenstellen
-          </h1>
+          <p className="text-body-lg text-gray-600 max-w-xl">
+            Sleep kamers naar de gewenste plek en pas de afmetingen aan.
+            Net als het inrichten van je eigen huis.
+          </p>
         </div>
-        <p className="text-body-lg text-gray-600 max-w-xl">
-          Sleep kamers naar de gewenste plek en pas de afmetingen aan.
-          Net als het inrichten van je eigen huis.
-        </p>
-      </div>
+      )}
 
       {/* Module Tab Bar (multi-module only) */}
       {wt.supportsModules && (

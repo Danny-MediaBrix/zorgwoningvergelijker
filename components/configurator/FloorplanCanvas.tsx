@@ -5,7 +5,7 @@ import { Stage, Layer, Rect, Text, Group, Line, Circle } from "react-konva";
 import { useConfiguratorStore } from "@/store/configuratorStore";
 import { KAMER_LABELS, KAMER_BORDER_KLEUREN, KamerType, Kamer } from "@/lib/types";
 import { formatM2 } from "@/lib/utils";
-import { X, Move, LayoutGrid } from "lucide-react";
+import { X, Move, LayoutGrid, Trash2 } from "lucide-react";
 import type Konva from "konva";
 
 const GRID_STEP = 0.5; // meters
@@ -210,6 +210,46 @@ const FloorplanCanvas = forwardRef<FloorplanCanvasHandle, FloorplanCanvasProps>(
     [outerW, outerH]
   );
 
+  // Check if a room at (x,y) with (w,h) overlaps any other room (excluding itself)
+  const hasOverlap = useCallback(
+    (id: string, x: number, y: number, w: number, h: number): boolean => {
+      for (const other of kamers) {
+        if (other.id === id) continue;
+        const ow = other.breedte * SCALE;
+        const oh = other.diepte * SCALE;
+        if (x < other.x + ow && x + w > other.x && y < other.y + oh && y + h > other.y) {
+          return true;
+        }
+      }
+      return false;
+    },
+    [kamers, SCALE]
+  );
+
+  // Find nearest non-overlapping snapped position, or return null if none found
+  const findNonOverlappingPosition = useCallback(
+    (id: string, snappedX: number, snappedY: number, w: number, h: number): { x: number; y: number } | null => {
+      // Try the snapped position first
+      const clamped = clampPosition(snappedX, snappedY, w, h);
+      if (!hasOverlap(id, clamped.x, clamped.y, w, h)) return clamped;
+
+      // Search nearby grid positions in expanding rings (up to 5 grid steps)
+      for (let radius = 1; radius <= 5; radius++) {
+        for (let dx = -radius; dx <= radius; dx++) {
+          for (let dy = -radius; dy <= radius; dy++) {
+            if (Math.abs(dx) !== radius && Math.abs(dy) !== radius) continue; // only ring edges
+            const tryX = snappedX + dx * GRID_PX;
+            const tryY = snappedY + dy * GRID_PX;
+            const c = clampPosition(tryX, tryY, w, h);
+            if (!hasOverlap(id, c.x, c.y, w, h)) return c;
+          }
+        }
+      }
+      return null; // no valid position found
+    },
+    [clampPosition, hasOverlap, GRID_PX]
+  );
+
   // Drag start: push undo
   const handleDragStart = useCallback(
     () => {
@@ -219,7 +259,7 @@ const FloorplanCanvas = forwardRef<FloorplanCanvasHandle, FloorplanCanvasProps>(
     [readOnly, pushUndo]
   );
 
-  // Drag end: snap and clamp to walls (overlap is allowed, shown visually)
+  // Drag end: snap, clamp, and prevent overlaps
   const handleDragEnd = useCallback(
     (id: string, e: Konva.KonvaEventObject<DragEvent>) => {
       if (readOnly) return;
@@ -232,13 +272,16 @@ const FloorplanCanvas = forwardRef<FloorplanCanvasHandle, FloorplanCanvasProps>(
       const snappedY = snapToGrid(rawY);
       const roomW = kamer.breedte * SCALE;
       const roomH = kamer.diepte * SCALE;
-      const { x, y } = clampPosition(snappedX, snappedY, roomW, roomH);
+
+      const result = findNonOverlappingPosition(id, snappedX, snappedY, roomW, roomH);
+      // If no non-overlapping position found, revert to original position
+      const { x, y } = result || { x: kamer.x, y: kamer.y };
 
       e.target.x(x + offsetX);
       e.target.y(y + offsetY);
       updateKamer(id, { x, y });
     },
-    [kamers, clampPosition, updateKamer, offsetX, offsetY, snapToGrid, SCALE, readOnly]
+    [kamers, findNonOverlappingPosition, updateKamer, offsetX, offsetY, snapToGrid, SCALE, readOnly]
   );
 
   // Drag bound: clamp to walls in real-time
@@ -843,7 +886,7 @@ const FloorplanCanvas = forwardRef<FloorplanCanvasHandle, FloorplanCanvasProps>(
         )}
       </div>
 
-      {/* Selected room info card (replaces legend) */}
+      {/* Selected room info card with delete button */}
       {!compact && !readOnly && selectedKamer && (
         <div className="mt-3 bg-white rounded-xl border border-gray-200/80 shadow-sm px-4 py-3 flex items-center gap-3">
           <div
@@ -861,6 +904,18 @@ const FloorplanCanvas = forwardRef<FloorplanCanvasHandle, FloorplanCanvasProps>(
               {selectedKamer.breedte} × {selectedKamer.diepte} m &middot; {formatM2(selectedKamer.m2)}
             </p>
           </div>
+          <button
+            type="button"
+            onClick={() => {
+              removeKamer(selectedKamer.id);
+              setSelectedId(null);
+            }}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-red-500 hover:text-red-600 hover:bg-red-50 border border-red-200 transition-colors flex-shrink-0 text-caption font-medium"
+            aria-label={`Verwijder ${selectedKamer.naam}`}
+          >
+            <Trash2 className="w-3.5 h-3.5" />
+            Verwijder
+          </button>
           <button
             type="button"
             onClick={() => setSelectedId(null)}

@@ -31,7 +31,7 @@ export default function StickyMobileCTA() {
           <div className="text-caption text-gray-600">Gratis & vrijblijvend</div>
         </div>
         <Button as="link" href="/configurator" variant="accent" size="sm" iconRight={<CTAArrow size="sm" />} className="flex-shrink-0">
-          Start
+          Offerte
         </Button>
       </div>
     </div>

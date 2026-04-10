@@ -51,7 +51,7 @@ export default function Footer() {
 
               {/* Mini CTA */}
               <Button as="link" href="/configurator" variant="primary" size="sm" iconRight={<CTAArrow size="sm" />} className="mb-8">
-                Start configurator
+                Vraag offerte aan
               </Button>
 
               {/* Social */}

@@ -55,7 +55,7 @@ const woningCategories = [
 
 const navLinks = [
   { label: "Hoe werkt het?", href: "/hoe-werkt-het" },
-  { label: "Configurator", href: "/configurator" },
+  { label: "Gratis offerte", href: "/configurator" },
   { label: "Kennisbank", href: "/kennisbank" },
   { label: "Over ons", href: "/over-ons" },
   { label: "Contact", href: "/contact" },
@@ -285,7 +285,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               <div className="h-px bg-gray-100 mx-5 my-1" />
 
               {navLinks
-                .filter((link) => link.label !== "Configurator")
+                .filter((link) => link.label !== "Gratis offerte")
                 .map((link) => (
                   <Link
                     key={link.href}

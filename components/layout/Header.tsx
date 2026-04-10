@@ -55,7 +55,7 @@ const woningtypen = [
 
 const navLinks = [
   { name: "Hoe werkt het?", href: "/hoe-werkt-het" },
-  { name: "Configurator", href: "/configurator" },
+  { name: "Gratis offerte", href: "/configurator" },
   { name: "Kennisbank", href: "/kennisbank" },
 ];
 

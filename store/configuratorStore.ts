@@ -27,15 +27,18 @@ interface ConfiguratorStore {
   nextStep: () => void;
   prevStep: () => void;
 
-  // Step 1: Woningtype
+  // Step 1: Woningtype + Basis + Contact (merged)
   woningType: string | null;
   setWoningType: (slug: string) => void;
-
-  // Step 2: Basiskenmerken
   totaalM2: number;
   setTotaalM2: (m2: number) => void;
   aantalVerdiepingen: number;
   setAantalVerdiepingen: (n: number) => void;
+
+  // Lead tracking
+  leadId: string | null;
+  isLeadCaptured: boolean;
+  setLeadCaptured: (id: string) => void;
 
   // Step 3: Kamers + Modules
   kamers: Kamer[];
@@ -180,7 +183,8 @@ function syncKamersFromModules(modules: Module[]): Kamer[] {
   return modules.flatMap((m) => m.kamers);
 }
 
-/** Try to find a non-overlapping position within the walls. Returns true if found. */
+/** Try to find a non-overlapping position within the walls. Returns true if found.
+ *  Uses meter-based collision to avoid scale mismatches between store and canvas. */
 function findOpenPosition(
   newKamer: Kamer,
   existingKamers: Kamer[],
@@ -188,21 +192,27 @@ function findOpenPosition(
   outerDiepte: number,
 ): boolean {
   const SCALE = 40;
-  const roomW = newKamer.breedte * SCALE;
-  const roomH = newKamer.diepte * SCALE;
-  const maxX = outerBreedte * SCALE;
-  const maxY = outerDiepte * SCALE;
-  const step = SCALE * 0.5;
-  for (let y = 0; y <= maxY - roomH; y += step) {
-    for (let x = 0; x <= maxX - roomW; x += step) {
+  const GAP_M = 0.1; // small gap between rooms in meters so they're visually distinct
+  const step = 0.5; // search step in meters (matches grid)
+  const rw = newKamer.breedte;
+  const rh = newKamer.diepte;
+
+  for (let ym = 0; ym <= outerDiepte - rh; ym += step) {
+    for (let xm = 0; xm <= outerBreedte - rw; xm += step) {
       const overlaps = existingKamers.some((other) => {
-        const ow = other.breedte * SCALE;
-        const oh = other.diepte * SCALE;
-        return x < other.x + ow && x + roomW > other.x && y < other.y + oh && y + roomH > other.y;
+        // Compare in meters to avoid pixel-scale mismatches
+        const oxm = other.x / SCALE;
+        const oym = other.y / SCALE;
+        return (
+          xm < oxm + other.breedte + GAP_M &&
+          xm + rw + GAP_M > oxm &&
+          ym < oym + other.diepte + GAP_M &&
+          ym + rh + GAP_M > oym
+        );
       });
       if (!overlaps) {
-        newKamer.x = x;
-        newKamer.y = y;
+        newKamer.x = xm * SCALE;
+        newKamer.y = ym * SCALE;
         return true;
       }
     }
@@ -241,6 +251,8 @@ const initialState = {
   badkamerNiveau: "basis" as AfwerkingNiveau,
   voorgeselecteerdeAanbieder: null as string | null,
   undoStack: [] as Array<{ kamers: Kamer[]; modules: Module[] }>,
+  leadId: null as string | null,
+  isLeadCaptured: false,
 };
 
 export const useConfiguratorStore = create<ConfiguratorStore>()(
@@ -250,19 +262,28 @@ export const useConfiguratorStore = create<ConfiguratorStore>()(
 
   // Navigation
   setStep: (step) =>
-    set((s) => ({
-      currentStep: step,
-      maxVisitedStep: Math.max(s.maxVisitedStep, step),
-    })),
+    set((s) => {
+      // Don't allow going back to step 1 after lead is captured
+      if (step === 1 && s.isLeadCaptured) return {};
+      return {
+        currentStep: step,
+        maxVisitedStep: Math.max(s.maxVisitedStep, step),
+      };
+    }),
   nextStep: () =>
     set((s) => ({
       currentStep: s.currentStep + 1,
       maxVisitedStep: Math.max(s.maxVisitedStep, s.currentStep + 1),
     })),
   prevStep: () =>
-    set((s) => ({
-      currentStep: Math.max(1, s.currentStep - 1),
-    })),
+    set((s) => {
+      const prev = Math.max(1, s.currentStep - 1);
+      if (prev === 1 && s.isLeadCaptured) return {};
+      return { currentStep: prev };
+    }),
+
+  // Lead tracking
+  setLeadCaptured: (id) => set({ leadId: id, isLeadCaptured: true }),
 
   // Step 1
   setWoningType: (slug) => {
@@ -461,16 +482,14 @@ export const useConfiguratorStore = create<ConfiguratorStore>()(
     const s = get();
     switch (s.currentStep) {
       case 1:
-        return s.woningType !== null;
+        // Merged step: woningtype + basis (contact validated in form)
+        return s.woningType !== null && s.totaalM2 > 0;
       case 2:
-        return s.totaalM2 > 0;
+        return true; // Verfijnen decision screen
       case 3:
+        return true; // Details (combined plattegrond/exterieur/installaties/interieur)
       case 4:
-      case 5:
-      case 6:
-        return true;
-      case 7:
-        return true;
+        return true; // Overzicht
       default:
         return false;
     }
@@ -610,11 +629,11 @@ export const useConfiguratorStore = create<ConfiguratorStore>()(
     }),
     {
       name: "zwv-configurator",
-      version: 2,
+      version: 4,
       migrate: (persistedState: unknown, version: number) => {
         const state = persistedState as Record<string, unknown>;
         if (version < 2) {
-          // Migrate: wrap existing kamers in a single module
+          // Migrate v1→v2: wrap existing kamers in a single module
           const kamers = (state.kamers as Kamer[]) || [];
           const moduleId = generateId();
           state.modules = [{
@@ -625,6 +644,22 @@ export const useConfiguratorStore = create<ConfiguratorStore>()(
             buitenDiepte: (state.buitenDiepte as number) || 6.5,
           }];
           state.activeModuleId = moduleId;
+        }
+        if (version < 3) {
+          // Migrate v2→v3: add lead tracking fields
+          state.leadId = state.leadId ?? null;
+          state.isLeadCaptured = state.isLeadCaptured ?? false;
+        }
+        if (version < 4) {
+          // Migrate v3→v4: 7 steps → 4 steps
+          const step = (state.currentStep as number) || 1;
+          if (step <= 2) state.currentStep = 1;
+          else if (step <= 6) state.currentStep = 3;
+          else state.currentStep = 4;
+          const maxStep = (state.maxVisitedStep as number) || 1;
+          if (maxStep <= 2) state.maxVisitedStep = 1;
+          else if (maxStep <= 6) state.maxVisitedStep = 3;
+          else state.maxVisitedStep = 4;
         }
         return state as unknown as ConfiguratorStore;
       },
@@ -651,6 +686,8 @@ export const useConfiguratorStore = create<ConfiguratorStore>()(
         keukenNiveau: state.keukenNiveau,
         badkamerNiveau: state.badkamerNiveau,
         voorgeselecteerdeAanbieder: state.voorgeselecteerdeAanbieder,
+        leadId: state.leadId,
+        isLeadCaptured: state.isLeadCaptured,
       }),
     }
   )

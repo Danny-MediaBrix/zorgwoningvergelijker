@@ -8,13 +8,14 @@ interface Step {
   shortLabel?: string;
 }
 
-const OPTIONAL_STEPS = [3, 4, 5, 6];
+const OPTIONAL_STEPS = [3]; // Step 3 (Details) is optional in 4-step flow
 
 interface ProgressBarProps {
   steps: Step[];
   currentStep: number;
   maxVisitedStep: number;
   onStepClick?: (step: number) => void;
+  disabledSteps?: number[];
 }
 
 export default function ProgressBar({
@@ -22,6 +23,7 @@ export default function ProgressBar({
   currentStep,
   maxVisitedStep,
   onStepClick,
+  disabledSteps = [],
 }: ProgressBarProps) {
   return (
     <nav className="w-full" aria-label="Configurator voortgang">

@@ -267,9 +267,9 @@ export function getEmailContent(template: EmailTemplate): { subject: string; htm
             <p style="font-size:14px;color:#251938;margin:0 0 4px;"><strong>E-mail:</strong> <a href="mailto:${escapeHtml(template.email)}" style="color:#583A85;">${escapeHtml(template.email)}</a></p>
             <p style="font-size:14px;color:#251938;margin:0 0 4px;"><strong>Telefoon:</strong> <a href="tel:${escapeHtml(template.telefoon)}" style="color:#583A85;">${escapeHtml(template.telefoon)}</a></p>
             <p style="font-size:14px;color:#251938;margin:0 0 4px;"><strong>Postcode:</strong> ${escapeHtml(template.postcode)}</p>
-            <p style="font-size:14px;color:#251938;margin:0 0 4px;"><strong>Budget:</strong> ${escapeHtml(template.budget || "Niet opgegeven")}</p>
-            <p style="font-size:14px;color:#251938;margin:0 0 4px;"><strong>Oplevertermijn:</strong> ${escapeHtml(template.oplevertermijn || "Niet opgegeven")}</p>
-            <p style="font-size:14px;color:#251938;margin:0;"><strong>Heeft kavel:</strong> ${heeftKavelLabel}</p>
+            ${template.budget ? `<p style="font-size:14px;color:#251938;margin:0 0 4px;"><strong>Budget:</strong> ${escapeHtml(template.budget)}</p>` : ""}
+            ${template.oplevertermijn ? `<p style="font-size:14px;color:#251938;margin:0 0 4px;"><strong>Oplevertermijn:</strong> ${escapeHtml(template.oplevertermijn)}</p>` : ""}
+            ${template.heeftKavel !== "onbekend" ? `<p style="font-size:14px;color:#251938;margin:0;"><strong>Heeft kavel:</strong> ${heeftKavelLabel}</p>` : ""}
           </div>
 
           <!-- Basiskenmerken -->
