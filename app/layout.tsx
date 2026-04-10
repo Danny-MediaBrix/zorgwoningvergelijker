@@ -84,7 +84,6 @@ const organizationSchema = {
   areaServed: {
     "@type": "Country",
     name: "Nederland",
-    "@id": "https://en.wikipedia.org/wiki/Netherlands",
   },
   logo: {
     "@type": "ImageObject",
