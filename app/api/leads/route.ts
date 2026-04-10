@@ -225,9 +225,14 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ success: true, id }, { status: 201 });
   } catch (error) {
-    console.error("Fout bij opslaan lead:", error);
+    const message = error instanceof Error ? error.message : String(error);
+    console.error("Fout bij opslaan lead:", message, error);
     return NextResponse.json(
-      { success: false, error: "Er is een serverfout opgetreden" },
+      {
+        success: false,
+        error: "Er is een serverfout opgetreden",
+        ...(process.env.NODE_ENV === "development" && { debug: message }),
+      },
       { status: 500 }
     );
   }
