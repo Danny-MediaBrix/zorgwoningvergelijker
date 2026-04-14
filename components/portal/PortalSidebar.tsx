@@ -13,6 +13,7 @@ import {
   FileText,
   LogOut,
   Crown,
+  FileSignature,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { SessionUser } from "@/lib/auth";
@@ -26,6 +27,7 @@ const navItems = [
   { label: "Abonnement", href: "/portal/abonnement", icon: Crown },
   { label: "Occasions", href: "/portal/occasions", icon: FileText },
   { label: "Betalingen", href: "/portal/betalingen", icon: CreditCard },
+  { label: "Documenten", href: "/portal/documenten", icon: FileSignature },
 ];
 
 export default function PortalSidebar({ user }: { user: SessionUser }) {

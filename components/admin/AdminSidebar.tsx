@@ -11,6 +11,7 @@ import {
   CreditCard,
   Mail,
   LogOut,
+  FileSignature,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { SessionUser } from "@/lib/auth";
@@ -21,6 +22,7 @@ const navItems = [
   { label: "Occasions", href: "/admin/occasions", icon: FileText },
   { label: "Betalingen", href: "/admin/betalingen", icon: CreditCard },
   { label: "Leads", href: "/admin/leads", icon: Mail },
+  { label: "Documenten", href: "/admin/documenten", icon: FileSignature },
   { label: "Instellingen", href: "/admin/instellingen", icon: Settings },
 ];
 

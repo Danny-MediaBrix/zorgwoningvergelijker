@@ -236,3 +236,59 @@ export const platformSettings = sqliteTable("platform_settings", {
   value: text("value").notNull(),
   updatedAt: text("updated_at").notNull(),
 });
+
+// ─── Document Signing ────────────────────────────────────────────────
+
+export const signedDocuments = sqliteTable("signed_documents", {
+  id: text("id").primaryKey(),
+  documentUid: text("document_uid").notNull(),
+  title: text("title").notNull(),
+  documentType: text("document_type").notNull().$type<"contract" | "addendum" | "verwerkersovereenkomst" | "overig">(),
+  version: integer("version").notNull().default(1),
+  status: text("status").notNull().$type<"draft" | "pending_signature" | "signed" | "expired" | "revoked">().default("draft"),
+  aanbiederId: text("aanbieder_id").notNull().references(() => aanbieders.id, { onDelete: "cascade" }),
+  createdByUserId: text("created_by_user_id").notNull().references(() => users.id),
+  templateId: text("template_id"),
+  templateVariables: text("template_variables"), // JSON stringified
+  documentHashPresign: text("document_hash_presign"),
+  documentHashPostsign: text("document_hash_postsign"),
+  signedAt: text("signed_at"),
+  signerFullName: text("signer_full_name"),
+  signerRole: text("signer_role"),
+  draftFileUrl: text("draft_file_url"),
+  signedFileUrl: text("signed_file_url"),
+  expiresAt: text("expires_at"),
+  retentionUntil: text("retention_until"),
+  createdAt: text("created_at").notNull(),
+  updatedAt: text("updated_at").notNull(),
+}, (table) => [
+  uniqueIndex("idx_signed_documents_uid").on(table.documentUid),
+  index("idx_signed_documents_aanbieder").on(table.aanbiederId),
+  index("idx_signed_documents_status").on(table.status),
+]);
+
+export const signingEvents = sqliteTable("signing_events", {
+  id: text("id").primaryKey(),
+  eventUid: text("event_uid").notNull(),
+  documentId: text("document_id").notNull().references(() => signedDocuments.id, { onDelete: "cascade" }),
+  action: text("action").notNull().$type<
+    "created" | "sent_for_signature" | "viewed" | "downloaded" |
+    "signature_started" | "signed" | "signature_failed" |
+    "expired" | "revoked" | "verified" | "verification_failed"
+  >(),
+  actorType: text("actor_type").notNull().$type<"aanbieder" | "admin" | "system">(),
+  actorId: text("actor_id"),
+  actorEmail: text("actor_email"),
+  actorDisplayName: text("actor_display_name"),
+  ipAddress: text("ip_address"),
+  userAgent: text("user_agent"),
+  sessionId: text("session_id"),
+  documentHashAtEvent: text("document_hash_at_event"),
+  metadata: text("metadata"), // JSON stringified
+  occurredAt: text("occurred_at").notNull(),
+  createdAt: text("created_at").notNull(),
+}, (table) => [
+  uniqueIndex("idx_signing_events_uid").on(table.eventUid),
+  index("idx_signing_events_document").on(table.documentId),
+  index("idx_signing_events_occurred").on(table.occurredAt),
+]);

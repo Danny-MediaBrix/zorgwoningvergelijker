@@ -72,7 +72,9 @@ export type EmailTemplate =
       prijsLaag: number; prijsHoog: number;
       opmerkingen?: string; plattegrondUrl?: string;
     }
-  | { type: "contact_bevestiging"; naam: string; onderwerp: string };
+  | { type: "contact_bevestiging"; naam: string; onderwerp: string }
+  | { type: "document_ter_ondertekening"; bedrijfsnaam: string; documentTitle: string; signingUrl: string }
+  | { type: "document_ondertekend"; bedrijfsnaam: string; documentTitle: string; signerFullName: string; signedAt: string; verificationUrl: string };
 
 export function getEmailContent(template: EmailTemplate): { subject: string; html: string } {
   switch (template.type) {
@@ -352,6 +354,52 @@ export function getEmailContent(template: EmailTemplate): { subject: string; htm
           <p style="margin:24px 0 0;">
             <a href="${BASE_URL}" style="display:inline-block;padding:12px 24px;background-color:#583A85;color:#ffffff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;">
               Terug naar Zorgwoningvergelijker.nl
+            </a>
+          </p>
+        `),
+      };
+
+    case "document_ter_ondertekening":
+      return {
+        subject: `Document ter ondertekening - ${escapeHtml(template.documentTitle)}`,
+        html: layout(`
+          <h1 style="font-size:24px;font-weight:700;margin:0 0 16px;">Document ter ondertekening</h1>
+          <p style="font-size:15px;line-height:1.6;color:#4B5563;">
+            Beste ${escapeHtml(template.bedrijfsnaam)}, er staat een document klaar dat je aandacht vereist.
+          </p>
+          <div style="background-color:#F5F0FA;border-radius:8px;padding:16px;margin:16px 0;">
+            <p style="font-size:14px;color:#251938;margin:0;"><strong>Document:</strong> ${escapeHtml(template.documentTitle)}</p>
+          </div>
+          <p style="font-size:15px;line-height:1.6;color:#4B5563;">
+            Je kunt het document inzien en ondertekenen via je portal. Neem het document goed door voordat je ondertekent.
+          </p>
+          <p style="margin:24px 0 0;">
+            <a href="${template.signingUrl}" style="display:inline-block;padding:12px 24px;background-color:#583A85;color:#ffffff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;">
+              Document bekijken en ondertekenen
+            </a>
+          </p>
+        `),
+      };
+
+    case "document_ondertekend":
+      return {
+        subject: `Document ondertekend - ${escapeHtml(template.documentTitle)}`,
+        html: layout(`
+          <h1 style="font-size:24px;font-weight:700;margin:0 0 16px;">Document ondertekend</h1>
+          <p style="font-size:15px;line-height:1.6;color:#4B5563;">
+            Beste ${escapeHtml(template.bedrijfsnaam)}, het document is succesvol ondertekend.
+          </p>
+          <div style="background-color:#F0FDF4;border:1px solid #BBF7D0;border-radius:8px;padding:16px;margin:16px 0;">
+            <p style="font-size:14px;color:#166534;margin:0 0 4px;"><strong>Document:</strong> ${escapeHtml(template.documentTitle)}</p>
+            <p style="font-size:14px;color:#166534;margin:0 0 4px;"><strong>Ondertekend door:</strong> ${escapeHtml(template.signerFullName)}</p>
+            <p style="font-size:14px;color:#166534;margin:0;"><strong>Datum:</strong> ${escapeHtml(template.signedAt)}</p>
+          </div>
+          <p style="font-size:15px;line-height:1.6;color:#4B5563;">
+            Je kunt het ondertekende document downloaden vanuit je portal. De integriteit van het document kan op elk moment geverifieerd worden.
+          </p>
+          <p style="margin:24px 0 0;">
+            <a href="${template.verificationUrl}" style="display:inline-block;padding:12px 24px;background-color:#583A85;color:#ffffff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;">
+              Document verifiëren
             </a>
           </p>
         `),

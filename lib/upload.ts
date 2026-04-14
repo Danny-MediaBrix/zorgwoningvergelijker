@@ -15,7 +15,7 @@ const ALLOWED_DOCUMENT_TYPES = [
   "application/pdf",
 ];
 
-type UploadFolder = "logos" | "certificaten" | "portfolio" | "occasions";
+type UploadFolder = "logos" | "certificaten" | "portfolio" | "occasions" | "signing-drafts" | "signing-signed";
 
 export function validateFile(
   file: File,
@@ -50,6 +50,22 @@ export async function uploadFile(
   const blob = await put(filename, file, {
     access: "public",
     addRandomSuffix: true,
+  });
+
+  return blob.url;
+}
+
+export async function uploadBuffer(
+  buffer: Uint8Array,
+  filename: string,
+  folder: UploadFolder
+): Promise<string> {
+  const path = `${folder}/${Date.now()}-${filename.replace(/[^a-zA-Z0-9._-]/g, "")}`;
+
+  const blob = await put(path, Buffer.from(buffer), {
+    access: "public",
+    addRandomSuffix: true,
+    contentType: "application/pdf",
   });
 
   return blob.url;

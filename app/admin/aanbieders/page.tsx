@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Loader2, CheckCircle2, XCircle, Clock } from "lucide-react";
+import Image from "next/image";
+import { Loader2, CheckCircle2, XCircle, Clock, Building2 } from "lucide-react";
 
 type AanbiederRow = {
   id: string;
@@ -10,8 +11,10 @@ type AanbiederRow = {
   bedrijfsnaam: string;
   vestigingsplaats: string | null;
   status: string;
+  logoUrl: string | null;
   email: string;
   createdAt: string;
+  approvedAt: string | null;
 };
 
 const statusConfig: Record<string, { label: string; icon: typeof Clock; cls: string }> = {
@@ -108,9 +111,24 @@ export default function AdminAanbiedersPage() {
                     <td className="px-4 py-3">
                       <Link
                         href={`/admin/aanbieders/${a.id}`}
-                        className="text-sm font-medium text-primary hover:underline"
+                        className="flex items-center gap-3 group"
                       >
-                        {a.bedrijfsnaam}
+                        {a.logoUrl ? (
+                          <Image
+                            src={a.logoUrl}
+                            alt={a.bedrijfsnaam}
+                            width={32}
+                            height={32}
+                            className="w-8 h-8 rounded-md border border-gray-200 object-contain bg-white flex-shrink-0"
+                          />
+                        ) : (
+                          <div className="w-8 h-8 rounded-md border border-gray-200 bg-gray-50 flex items-center justify-center flex-shrink-0">
+                            <Building2 className="w-4 h-4 text-gray-300" />
+                          </div>
+                        )}
+                        <span className="text-sm font-medium text-primary group-hover:underline">
+                          {a.bedrijfsnaam}
+                        </span>
                       </Link>
                     </td>
                     <td className="px-4 py-3 text-sm text-muted">{a.email}</td>
