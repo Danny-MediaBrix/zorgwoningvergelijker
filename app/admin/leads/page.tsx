@@ -137,6 +137,11 @@ function DispatchModal({
       const data = await res.json();
       if (!res.ok) throw new Error(data.error);
       setResult({ sent: data.sent, total: data.total });
+      // Show warning if some emails failed
+      if (data.sent === 0 && data.total > 0) {
+        const failedErrors = data.results?.filter((r: { success: boolean }) => !r.success).map((r: { error?: string }) => r.error).filter(Boolean);
+        setError(`Geen e-mails verstuurd. ${failedErrors?.length ? failedErrors[0] : "Controleer de SMTP-instellingen."}`);
+      }
       onSent();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Er ging iets mis.");

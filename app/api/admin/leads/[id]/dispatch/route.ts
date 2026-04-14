@@ -92,43 +92,53 @@ export async function POST(
     }
 
     const now = new Date().toISOString();
-    const results: { aanbiederId: string; bedrijfsnaam: string; success: boolean }[] = [];
+    const results: { aanbiederId: string; bedrijfsnaam: string; success: boolean; error?: string | null }[] = [];
 
     // Send email to each aanbieder individually
     for (const aanbieder of selectedAanbieders) {
       const email = aanbieder.contactEmail || userEmailMap.get(aanbieder.userId);
       if (!email) continue;
 
-      const success = await sendEmail(email, {
-        type: "lead_doorgestuurd",
-        bedrijfsnaam: aanbieder.bedrijfsnaam,
-        leadNaam: lead.naam,
-        leadEmail: lead.email,
-        leadTelefoon: lead.telefoon,
-        leadWoningtype: lead.woningtype,
-        leadPostcode: parsed?.contact?.postcode || null,
-        leadBudget: parsed?.contact?.budget || null,
-        leadOplevertermijn: parsed?.contact?.oplevertermijn || null,
-        leadHeeftKavel: parsed?.contact?.heeftKavel || null,
-        leadOpmerkingen: parsed?.contact?.opmerkingen || null,
-        configuratie: parsed?.configuratie || null,
-        prijsIndicatie: parsed?.prijsIndicatie || null,
-        plattegrondUrl: lead.plattegrondUrl,
-      }, { cc: INFO_EMAIL });
+      let success = false;
+      let emailError: string | null = null;
+      try {
+        success = await sendEmail(email, {
+          type: "lead_doorgestuurd",
+          bedrijfsnaam: aanbieder.bedrijfsnaam,
+          leadNaam: lead.naam,
+          leadEmail: lead.email,
+          leadTelefoon: lead.telefoon,
+          leadWoningtype: lead.woningtype,
+          leadPostcode: parsed?.contact?.postcode || null,
+          leadBudget: parsed?.contact?.budget || null,
+          leadOplevertermijn: parsed?.contact?.oplevertermijn || null,
+          leadHeeftKavel: parsed?.contact?.heeftKavel || null,
+          leadOpmerkingen: parsed?.contact?.opmerkingen || null,
+          configuratie: parsed?.configuratie || null,
+          prijsIndicatie: parsed?.prijsIndicatie || null,
+          plattegrondUrl: lead.plattegrondUrl,
+        }, { cc: INFO_EMAIL });
+      } catch (err) {
+        emailError = err instanceof Error ? err.message : "Onbekende fout";
+        console.error(`Lead dispatch email failed for ${aanbieder.bedrijfsnaam}:`, err);
+      }
 
-      // Track dispatch
-      await db.insert(leadDispatches).values({
-        id: uuidv4(),
-        leadId: lead.id,
-        aanbiederId: aanbieder.id,
-        sentByUserId: user.id,
-        sentAt: now,
-      });
+      // Only track dispatch if email was sent successfully
+      if (success) {
+        await db.insert(leadDispatches).values({
+          id: uuidv4(),
+          leadId: lead.id,
+          aanbiederId: aanbieder.id,
+          sentByUserId: user.id,
+          sentAt: now,
+        });
+      }
 
       results.push({
         aanbiederId: aanbieder.id,
         bedrijfsnaam: aanbieder.bedrijfsnaam,
         success,
+        error: emailError,
       });
     }
 
