@@ -3,6 +3,7 @@ export type ContractVariables = {
   contactpersoon: string;
   kvkNummer?: string;
   vestigingsplaats?: string;
+  platformKvk?: string;
   datum: string; // geformatteerde datum, bijv. "14 april 2026"
 };
 
@@ -23,7 +24,7 @@ export function getContractAanbiederContent(vars: ContractVariables): DocumentSe
     {
       heading: "Artikel 1 — Partijen",
       paragraphs: [
-        "1.1 Zorgwoningvergelijker.nl, hierna te noemen 'het Platform', vertegenwoordigd door haar beheerder.",
+        `1.1 Zorgwoningvergelijker.nl, eenmanszaak${vars.platformKvk ? `, KvK-nummer ${vars.platformKvk}` : ""}, hierna te noemen 'het Platform', vertegenwoordigd door haar eigenaar.`,
         `1.2 ${vars.bedrijfsnaam}${vars.kvkNummer ? `, KvK-nummer ${vars.kvkNummer}` : ""}${vars.vestigingsplaats ? `, gevestigd te ${vars.vestigingsplaats}` : ""}, vertegenwoordigd door ${vars.contactpersoon}, hierna te noemen 'de Aanbieder'.`,
       ],
     },
@@ -38,27 +39,28 @@ export function getContractAanbiederContent(vars: ContractVariables): DocumentSe
     {
       heading: "Artikel 3 — Verplichtingen van het Platform",
       paragraphs: [
-        "3.1 Het Platform draagt zorg voor een professionele presentatie van de Aanbieder op de website.",
-        "3.2 Het Platform levert leads (offerteaanvragen) door aan de Aanbieder via e-mail en het aanbiedersportaal.",
-        "3.3 Het Platform behandelt alle bedrijfsinformatie van de Aanbieder vertrouwelijk.",
-        "3.4 Het Platform spant zich in om kwalitatief verkeer naar de website te genereren, maar garandeert geen minimum aantal leads.",
+        "3.1 Het Platform levert leads (offerteaanvragen) door aan de Aanbieder per e-mail.",
+        "3.2 Het Platform behandelt alle bedrijfsinformatie van de Aanbieder vertrouwelijk.",
+        "3.3 Het Platform spant zich in om kwalitatief verkeer naar de website te genereren, maar garandeert geen minimum aantal leads.",
       ],
     },
     {
       heading: "Artikel 4 — Verplichtingen van de Aanbieder",
       paragraphs: [
-        "4.1 De Aanbieder zorgt ervoor dat de verstrekte bedrijfsinformatie, prijzen en specificaties actueel en correct zijn.",
-        "4.2 De Aanbieder reageert binnen 48 uur op ontvangen leads.",
-        "4.3 De Aanbieder houdt zich aan alle toepasselijke wet- en regelgeving.",
-        "4.4 De Aanbieder meldt wijzigingen in bedrijfsgegevens, prijzen of beschikbaarheid tijdig aan het Platform.",
+        "4.1 De Aanbieder zorgt ervoor dat de verstrekte bedrijfsinformatie actueel en correct is.",
+        "4.2 De Aanbieder reageert binnen twee (2) werkdagen op ontvangen leads.",
+        "4.3 Indien de Aanbieder structureel niet binnen de in artikel 4.2 genoemde termijn reageert, stuurt het Platform een schriftelijke waarschuwing. Bij herhaling na deze waarschuwing is het Platform gerechtigd de levering van leads tijdelijk op te schorten totdat de Aanbieder aantoont weer aan de reactietermijn te kunnen voldoen.",
+        "4.4 De Aanbieder houdt zich aan alle toepasselijke wet- en regelgeving.",
+        "4.5 De Aanbieder meldt wijzigingen in bedrijfsgegevens, prijzen of beschikbaarheid tijdig aan het Platform.",
       ],
     },
     {
       heading: "Artikel 5 — Kosten en betaling",
       paragraphs: [
-        "5.1 De kosten voor deelname aan het Platform worden apart overeengekomen en gefactureerd volgens het gekozen abonnement.",
-        "5.2 Betaling geschiedt via automatische incasso (SEPA) of iDEAL, zoals ingesteld in het aanbiedersportaal.",
-        "5.3 Bij niet-tijdige betaling behoudt het Platform zich het recht voor om de zichtbaarheid van de Aanbieder tijdelijk op te schorten.",
+        "5.1 De Aanbieder is aan het Platform een vergoeding verschuldigd van € 30,- (dertig euro) exclusief btw per doorgestuurde lead.",
+        "5.2 Het Platform factureert maandelijks achteraf op basis van het aantal doorgestuurde leads in de betreffende kalendermaand.",
+        "5.3 Betaling dient te geschieden binnen veertien (14) dagen na factuurdatum.",
+        "5.4 Bij niet-tijdige betaling stuurt het Platform een betalingsherinnering. Indien betaling ook na de herinnering uitblijft, is de Aanbieder de wettelijke handelsrente (art. 6:119a BW) verschuldigd over het openstaande bedrag. Het Platform is in dat geval tevens gerechtigd de dienstverlening, waaronder de levering van leads en de zichtbaarheid van de Aanbieder op het Platform, op te schorten tot het openstaande bedrag volledig is voldaan.",
       ],
     },
     {
