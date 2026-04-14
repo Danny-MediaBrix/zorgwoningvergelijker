@@ -99,6 +99,7 @@ export async function POST(
       const email = aanbieder.contactEmail || userEmailMap.get(aanbieder.userId);
       if (!email) continue;
 
+      console.log(`[Dispatch] Sending lead to ${aanbieder.bedrijfsnaam} (${email})`);
       let success = false;
       let emailError: string | null = null;
       try {
@@ -118,9 +119,10 @@ export async function POST(
           prijsIndicatie: parsed?.prijsIndicatie || null,
           plattegrondUrl: lead.plattegrondUrl,
         }, { cc: INFO_EMAIL });
+        console.log(`[Dispatch] Email result for ${aanbieder.bedrijfsnaam}: ${success}`);
       } catch (err) {
         emailError = err instanceof Error ? err.message : "Onbekende fout";
-        console.error(`Lead dispatch email failed for ${aanbieder.bedrijfsnaam}:`, err);
+        console.error(`[Dispatch] Email FAILED for ${aanbieder.bedrijfsnaam}:`, err);
       }
 
       // Only track dispatch if email was sent successfully
@@ -143,11 +145,15 @@ export async function POST(
     }
 
     const successCount = results.filter((r) => r.success).length;
+    const failedCount = results.length - successCount;
+
+    console.log(`[Dispatch] Complete: ${successCount}/${results.length} sent, ${failedCount} failed`);
 
     return NextResponse.json({
-      success: true,
+      success: successCount > 0,
       sent: successCount,
       total: results.length,
+      failed: failedCount,
       results,
     });
   } catch (error) {
