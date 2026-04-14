@@ -237,6 +237,19 @@ export const platformSettings = sqliteTable("platform_settings", {
   updatedAt: text("updated_at").notNull(),
 });
 
+// ─── Lead Dispatches (tracking welke aanbieders leads ontvangen) ─────
+
+export const leadDispatches = sqliteTable("lead_dispatches", {
+  id: text("id").primaryKey(),
+  leadId: text("lead_id").notNull().references(() => leads.id, { onDelete: "cascade" }),
+  aanbiederId: text("aanbieder_id").notNull().references(() => aanbieders.id, { onDelete: "cascade" }),
+  sentByUserId: text("sent_by_user_id").notNull().references(() => users.id),
+  sentAt: text("sent_at").notNull(),
+}, (table) => [
+  index("idx_lead_dispatches_lead").on(table.leadId),
+  index("idx_lead_dispatches_aanbieder").on(table.aanbiederId),
+]);
+
 // ─── Document Signing ────────────────────────────────────────────────
 
 export const signedDocuments = sqliteTable("signed_documents", {

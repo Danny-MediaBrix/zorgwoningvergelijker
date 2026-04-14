@@ -5,7 +5,8 @@ const FROM = process.env.SMTP_FROM || "Zorgwoningvergelijker.nl <noreply@zorgwon
 
 export async function sendEmail(
   to: string,
-  template: EmailTemplate
+  template: EmailTemplate,
+  options?: { cc?: string | string[] }
 ): Promise<boolean> {
   try {
     if (!process.env.SMTP_HOST) {
@@ -19,6 +20,7 @@ export async function sendEmail(
     await transporter.sendMail({
       from: FROM,
       to,
+      cc: options?.cc,
       subject,
       html,
     });

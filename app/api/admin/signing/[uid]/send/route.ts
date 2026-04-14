@@ -73,7 +73,7 @@ export async function PUT(
           bedrijfsnaam: aanbieder.bedrijfsnaam,
           documentTitle: doc.title,
           signingUrl,
-        });
+        }, { cc: "info@zorgwoningvergelijker.nl" });
       }
     }
 

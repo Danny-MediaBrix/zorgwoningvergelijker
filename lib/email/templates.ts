@@ -74,7 +74,36 @@ export type EmailTemplate =
     }
   | { type: "contact_bevestiging"; naam: string; onderwerp: string }
   | { type: "document_ter_ondertekening"; bedrijfsnaam: string; documentTitle: string; signingUrl: string }
-  | { type: "document_ondertekend"; bedrijfsnaam: string; documentTitle: string; signerFullName: string; signedAt: string; verificationUrl: string };
+  | { type: "document_ondertekend"; bedrijfsnaam: string; documentTitle: string; signerFullName: string; signedAt: string; verificationUrl: string }
+  | {
+      type: "lead_doorgestuurd";
+      bedrijfsnaam: string;
+      leadNaam: string;
+      leadEmail: string;
+      leadTelefoon: string | null;
+      leadWoningtype: string | null;
+      leadPostcode: string | null;
+      leadBudget: string | null;
+      leadOplevertermijn: string | null;
+      leadHeeftKavel: string | null;
+      leadOpmerkingen: string | null;
+      configuratie: {
+        totaalM2?: number;
+        aantalVerdiepingen?: number;
+        buitenBreedte?: number;
+        buitenDiepte?: number;
+        dakType?: string | null;
+        gevelType?: string | null;
+        verwarmingType?: string | null;
+        zonnepanelen?: number;
+        vloerverwarming?: boolean;
+        keukenNiveau?: string;
+        badkamerNiveau?: string;
+        kamers?: { naam: string; m2: number }[];
+      } | null;
+      prijsIndicatie: { laag: number; hoog: number } | null;
+      plattegrondUrl: string | null;
+    };
 
 export function getEmailContent(template: EmailTemplate): { subject: string; html: string } {
   switch (template.type) {
@@ -361,22 +390,33 @@ export function getEmailContent(template: EmailTemplate): { subject: string; htm
 
     case "document_ter_ondertekening":
       return {
-        subject: `Document ter ondertekening - ${escapeHtml(template.documentTitle)}`,
+        subject: `Samenwerkingsovereenkomst ter ondertekening — Zorgwoningvergelijker.nl`,
         html: layout(`
-          <h1 style="font-size:24px;font-weight:700;margin:0 0 16px;">Document ter ondertekening</h1>
+          <h1 style="font-size:24px;font-weight:700;margin:0 0 16px;">Welkom bij Zorgwoningvergelijker.nl!</h1>
           <p style="font-size:15px;line-height:1.6;color:#4B5563;">
-            Beste ${escapeHtml(template.bedrijfsnaam)}, er staat een document klaar dat je aandacht vereist.
+            Beste ${escapeHtml(template.bedrijfsnaam)},
+          </p>
+          <p style="font-size:15px;line-height:1.6;color:#4B5563;">
+            Wat leuk dat je aan de slag gaat als aanbieder op Zorgwoningvergelijker.nl! Om de samenwerking officieel te maken, hebben we een samenwerkingsovereenkomst voor je klaargezet.
           </p>
           <div style="background-color:#F5F0FA;border-radius:8px;padding:16px;margin:16px 0;">
             <p style="font-size:14px;color:#251938;margin:0;"><strong>Document:</strong> ${escapeHtml(template.documentTitle)}</p>
           </div>
           <p style="font-size:15px;line-height:1.6;color:#4B5563;">
-            Je kunt het document inzien en ondertekenen via je portal. Neem het document goed door voordat je ondertekent.
+            In deze overeenkomst lees je hoe de samenwerking werkt: hoe je leads ontvangt, wat de kosten zijn en wat we van elkaar mogen verwachten. Neem het document op je gemak door.
           </p>
-          <p style="margin:24px 0 0;">
-            <a href="${template.signingUrl}" style="display:inline-block;padding:12px 24px;background-color:#583A85;color:#ffffff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;">
+          <p style="font-size:15px;line-height:1.6;color:#4B5563;">
+            Je kunt het document inzien en digitaal ondertekenen via onderstaande knop. Dit duurt slechts een paar minuten.
+          </p>
+          <p style="margin:24px 0;">
+            <a href="${template.signingUrl}" style="display:inline-block;padding:14px 28px;background-color:#583A85;color:#ffffff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;">
               Document bekijken en ondertekenen
             </a>
+          </p>
+          <p style="font-size:14px;line-height:1.6;color:#78716C;">
+            Heb je vragen over het document of de samenwerking? Neem gerust contact met ons op via
+            <a href="mailto:info@zorgwoningvergelijker.nl" style="color:#583A85;">info@zorgwoningvergelijker.nl</a>
+            of bel ons op 085 - 004 11 59.
           </p>
         `),
       };
@@ -404,5 +444,100 @@ export function getEmailContent(template: EmailTemplate): { subject: string; htm
           </p>
         `),
       };
+
+    case "lead_doorgestuurd": {
+      const detailRow = (label: string, value: string | number | null | undefined) =>
+        value != null && value !== "" ? `<p style="font-size:14px;color:#251938;margin:0 0 4px;"><strong>${label}:</strong> ${escapeHtml(String(value))}</p>` : "";
+
+      const kamersHtml = template.configuratie?.kamers && template.configuratie.kamers.length > 0
+        ? `<table width="100%" cellpadding="0" cellspacing="0" style="font-size:13px;border-collapse:collapse;margin-top:8px;">
+            <tr style="background-color:#F5F0FA;">
+              <td style="padding:6px 10px;font-weight:600;color:#583A85;border-bottom:1px solid #E5E7EB;">Kamer</td>
+              <td style="padding:6px 10px;font-weight:600;color:#583A85;border-bottom:1px solid #E5E7EB;text-align:right;">m²</td>
+            </tr>
+            ${template.configuratie.kamers.map((k) => `
+              <tr>
+                <td style="padding:5px 10px;border-bottom:1px solid #F3F4F6;color:#251938;">${escapeHtml(k.naam)}</td>
+                <td style="padding:5px 10px;border-bottom:1px solid #F3F4F6;color:#4B5563;text-align:right;">${k.m2} m²</td>
+              </tr>
+            `).join("")}
+          </table>`
+        : "";
+
+      return {
+        subject: `Nieuwe lead: ${escapeHtml(template.leadNaam)} — ${escapeHtml(template.leadWoningtype || "Offerteaanvraag")}`,
+        html: layout(`
+          <h1 style="font-size:24px;font-weight:700;margin:0 0 16px;">Nieuwe offerteaanvraag!</h1>
+          <p style="font-size:15px;line-height:1.6;color:#4B5563;">
+            Beste ${escapeHtml(template.bedrijfsnaam)}, er is een nieuwe offerteaanvraag binnengekomen via Zorgwoningvergelijker.nl. Hieronder vind je alle details.
+          </p>
+
+          <!-- Contactgegevens -->
+          <div style="background-color:#F5F0FA;border-radius:8px;padding:16px;margin:16px 0;">
+            <p style="font-size:13px;font-weight:600;color:#78716C;margin:0 0 8px;text-transform:uppercase;letter-spacing:0.05em;">Contactgegevens</p>
+            <p style="font-size:14px;color:#251938;margin:0 0 4px;"><strong>Naam:</strong> ${escapeHtml(template.leadNaam)}</p>
+            <p style="font-size:14px;color:#251938;margin:0 0 4px;"><strong>E-mail:</strong> <a href="mailto:${escapeHtml(template.leadEmail)}" style="color:#583A85;">${escapeHtml(template.leadEmail)}</a></p>
+            ${template.leadTelefoon ? `<p style="font-size:14px;color:#251938;margin:0 0 4px;"><strong>Telefoon:</strong> <a href="tel:${escapeHtml(template.leadTelefoon)}" style="color:#583A85;">${escapeHtml(template.leadTelefoon)}</a></p>` : ""}
+            ${detailRow("Postcode", template.leadPostcode)}
+          </div>
+
+          <!-- Wensen -->
+          <div style="background-color:#FAFAF9;border:1px solid #E5E7EB;border-radius:8px;padding:16px;margin:16px 0;">
+            <p style="font-size:13px;font-weight:600;color:#78716C;margin:0 0 8px;text-transform:uppercase;letter-spacing:0.05em;">Wensen</p>
+            ${detailRow("Woningtype", template.leadWoningtype)}
+            ${detailRow("Budget", template.leadBudget)}
+            ${detailRow("Oplevertermijn", template.leadOplevertermijn)}
+            ${template.leadHeeftKavel && template.leadHeeftKavel !== "onbekend" ? detailRow("Heeft kavel", template.leadHeeftKavel === "ja" ? "Ja" : "Nee") : ""}
+          </div>
+
+          ${template.configuratie ? `
+            <!-- Configuratie -->
+            <div style="background-color:#FAFAF9;border:1px solid #E5E7EB;border-radius:8px;padding:16px;margin:16px 0;">
+              <p style="font-size:13px;font-weight:600;color:#78716C;margin:0 0 8px;text-transform:uppercase;letter-spacing:0.05em;">Configuratie</p>
+              ${detailRow("Oppervlakte", template.configuratie.totaalM2 ? `${template.configuratie.totaalM2} m²` : null)}
+              ${detailRow("Verdiepingen", template.configuratie.aantalVerdiepingen)}
+              ${template.configuratie.buitenBreedte && template.configuratie.buitenDiepte ? detailRow("Buitenafmetingen", `${template.configuratie.buitenBreedte} × ${template.configuratie.buitenDiepte} m`) : ""}
+              ${detailRow("Daktype", template.configuratie.dakType)}
+              ${detailRow("Geveltype", template.configuratie.gevelType)}
+              ${detailRow("Verwarming", template.configuratie.verwarmingType)}
+              ${template.configuratie.zonnepanelen && template.configuratie.zonnepanelen > 0 ? detailRow("Zonnepanelen", `${template.configuratie.zonnepanelen} panelen`) : ""}
+              ${template.configuratie.vloerverwarming ? detailRow("Vloerverwarming", "Ja") : ""}
+              ${template.configuratie.keukenNiveau && template.configuratie.keukenNiveau !== "standaard" ? detailRow("Keuken", template.configuratie.keukenNiveau) : ""}
+              ${template.configuratie.badkamerNiveau && template.configuratie.badkamerNiveau !== "standaard" ? detailRow("Badkamer", template.configuratie.badkamerNiveau) : ""}
+              ${kamersHtml}
+            </div>
+          ` : ""}
+
+          ${template.prijsIndicatie && template.prijsIndicatie.laag > 0 ? `
+            <!-- Prijsindicatie -->
+            <div style="background-color:#F5F0FA;border-radius:8px;padding:16px;margin:16px 0;">
+              <p style="font-size:13px;font-weight:600;color:#78716C;margin:0 0 8px;text-transform:uppercase;letter-spacing:0.05em;">Prijsindicatie</p>
+              <p style="font-size:20px;font-weight:700;color:#583A85;margin:0;">${formatPrijs(template.prijsIndicatie.laag)} – ${formatPrijs(template.prijsIndicatie.hoog)}</p>
+            </div>
+          ` : ""}
+
+          ${template.plattegrondUrl ? `
+            <!-- Plattegrond -->
+            <div style="background-color:#FAFAF9;border:1px solid #E5E7EB;border-radius:8px;padding:16px;margin:16px 0;">
+              <p style="font-size:13px;font-weight:600;color:#78716C;margin:0 0 8px;text-transform:uppercase;letter-spacing:0.05em;">Plattegrond</p>
+              <img src="${template.plattegrondUrl}" alt="Plattegrond" style="max-width:100%;height:auto;border-radius:8px;border:1px solid #E5E7EB;" />
+            </div>
+          ` : ""}
+
+          ${template.leadOpmerkingen ? `
+            <div style="background-color:#FAFAF9;border:1px solid #E5E7EB;border-radius:8px;padding:16px;margin:16px 0;">
+              <p style="font-size:13px;font-weight:600;color:#78716C;margin:0 0 8px;text-transform:uppercase;letter-spacing:0.05em;">Opmerkingen</p>
+              <p style="font-size:14px;color:#251938;margin:0;white-space:pre-wrap;">${escapeHtml(template.leadOpmerkingen)}</p>
+            </div>
+          ` : ""}
+
+          <div style="background-color:#FEF3C7;border:1px solid #FDE68A;border-radius:8px;padding:16px;margin:16px 0;">
+            <p style="font-size:14px;color:#92400E;margin:0;">
+              <strong>Reageer binnen 2 werkdagen</strong> op deze lead. Neem direct contact op met ${escapeHtml(template.leadNaam)} via e-mail of telefoon.
+            </p>
+          </div>
+        `),
+      };
+    }
   }
 }
