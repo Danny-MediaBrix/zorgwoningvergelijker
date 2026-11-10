@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { MapPin, Mail, Phone, Clock, AlertCircle } from "lucide-react";
 import Container from "@/components/ui/Container";
@@ -19,6 +19,20 @@ const onderwerpOpties = [
   { value: "klacht", label: "Klacht of feedback" },
   { value: "anders", label: "Anders" },
 ];
+
+// Moet gelijk zijn aan HONEYPOT_FIELD en MIN_FILL_MS in lib/spam-guard.ts.
+const HONEYPOT_FIELD = "kenmerk";
+const MIN_FILL_MS = 3_000;
+
+async function fetchFormToken(): Promise<string | null> {
+  try {
+    const response = await fetch("/api/contact/token", { cache: "no-store" });
+    const result = await response.json();
+    return typeof result.token === "string" ? result.token : null;
+  } catch {
+    return null;
+  }
+}
 
 interface FormData {
   naam: string;
@@ -39,6 +53,23 @@ export default function ContactPage() {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [honeypot, setHoneypot] = useState("");
+  const formToken = useRef<string | null>(null);
+
+  useEffect(() => {
+    fetchFormToken().then((token) => {
+      formToken.current = token;
+    });
+  }, []);
+
+  // Lukte het ophalen bij het laden niet, dan nu alsnog, en de minimale invultijd afwachten.
+  const ensureFormToken = async (): Promise<string | null> => {
+    if (formToken.current) return formToken.current;
+    const token = await fetchFormToken();
+    if (token) await new Promise((resolve) => setTimeout(resolve, MIN_FILL_MS + 200));
+    formToken.current = token;
+    return token;
+  };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -52,10 +83,11 @@ export default function ContactPage() {
     setError("");
 
     try {
+      const token = await ensureFormToken();
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, formToken: token, [HONEYPOT_FIELD]: honeypot }),
       });
 
       const result = await response.json();
@@ -180,6 +212,20 @@ export default function ContactPage() {
                         <p className="text-body-sm text-red-700">{error}</p>
                       </div>
                     )}
+
+                    {/* Honeypot: onzichtbaar voor bezoekers en schermlezers, bots vullen het in. */}
+                    <div aria-hidden="true" className="absolute -left-[10000px] top-auto w-px h-px overflow-hidden">
+                      <label htmlFor={HONEYPOT_FIELD}>Laat dit veld leeg</label>
+                      <input
+                        id={HONEYPOT_FIELD}
+                        name={HONEYPOT_FIELD}
+                        type="text"
+                        tabIndex={-1}
+                        autoComplete="off"
+                        value={honeypot}
+                        onChange={(e) => setHoneypot(e.target.value)}
+                      />
+                    </div>
 
                     <FormInput
                       label="Naam"

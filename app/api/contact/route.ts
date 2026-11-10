@@ -6,6 +6,7 @@ import { leads } from "@/lib/db/schema";
 import { getTransporter } from "@/lib/email/transport";
 import { sendEmail } from "@/lib/email/send";
 import { escapeHtml } from "@/lib/email/templates";
+import { checkFormToken, honeypotFilled, looksLikeGibberish } from "@/lib/spam-guard";
 
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
 const RATE_LIMIT_MAX = 5;
@@ -104,6 +105,32 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
+
+    // Spambescherming. Zonder geldig formuliertoken is het geen bezoeker van de pagina.
+    const tokenCheck = checkFormToken(body?.formToken);
+    if (tokenCheck === "ontbreekt" || tokenCheck === "ongeldig" || tokenCheck === "verlopen") {
+      console.warn(`[Contact] Geweigerd: formuliertoken ${tokenCheck} (${ip})`);
+      return NextResponse.json(
+        { success: false, error: "De pagina is verlopen. Vernieuw de pagina en verstuur het formulier opnieuw." },
+        { status: 400 }
+      );
+    }
+
+    // Bots krijgen dezelfde bevestiging als een mens, zodat ze zich niet aanpassen.
+    // Er wordt niets opgeslagen en niemand gemaild.
+    const spamReason =
+      tokenCheck === "te-snel"
+        ? "te snel verstuurd"
+        : honeypotFilled(body)
+          ? "honeypot ingevuld"
+          : looksLikeGibberish(String(body?.naam ?? ""), String(body?.bericht ?? ""))
+            ? "onzintekst"
+            : null;
+    if (spamReason) {
+      console.warn(`[Contact] Spam geweerd: ${spamReason} (${ip})`);
+      return NextResponse.json({ success: true }, { status: 201 });
+    }
+
     const parsed = contactSchema.safeParse(body);
 
     if (!parsed.success) {
